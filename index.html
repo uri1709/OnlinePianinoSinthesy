@@ -503,7 +503,7 @@
                     <div style="padding: 20px">
                         <div>
                             <button
-                                onclick="objPianino.updateSongFromEditor()"
+                                onclick=""
                                 style="
                                     flex: 1;
                                     padding: 12px;
@@ -947,7 +947,11 @@
             var objPianino = {
                 keyWidth: 0,
                 notes: [],
+
                 countNotes: 85,
+
+                cvsWidth: 0,
+                cvsHeight: 0,
 
                 ctx: null,
                 cvs: null,
@@ -1069,6 +1073,9 @@
                 init() {
                     this.cvs = document.getElementById("visual-canvas");
                     this.cvsCtx = this.cvs.getContext("2d");
+
+                    this.initCtxWidthHeight();
+
                     this.updateSongData();
                     this.initBPM();
                     this.rebuild();
@@ -1185,9 +1192,9 @@
                     kb.innerHTML = "";
 
                     // Обновляем ширину холста под контейнер
-                    const container = this.cvs.parentElement;
-                    this.cvs.width = container.clientWidth;
-                    this.cvs.height = container.clientHeight;
+                    // const container = this.cvs.parentElement;
+                    this.cvs.width = this.cvsWidth;
+                    this.cvs.height = this.cvsHeight;
 
                     // Считаем количество белых клавиш для сетки
                     const whiteNotesCount = this.notes.filter(
@@ -1349,14 +1356,14 @@
                         // Координата X линии — это номер белой клавиши умноженный на динамическую ширину
                         const x = i * this.keyWidth;
                         this.cvsCtx.moveTo(x, 0);
-                        this.cvsCtx.lineTo(x, this.cvs.height);
+                        this.cvsCtx.lineTo(x, this.cvsHeight);
                     }
                     this.cvsCtx.stroke();
                 },
                 drawHorizontalTact() {
                     const ctx = this.cvsCtx;
-                    const w = this.cvs.width;
-                    const h = this.cvs.height;
+                    const w = this.cvsWidth;
+                    const h = this.cvsHeight;
 
                     // Параметры такта
                     const beatsPerTact = 4;
@@ -1408,7 +1415,7 @@
 
                 drawSubstrate() {
                     const ctx = this.cvsCtx;
-                    const h = this.cvs.height;
+                    const h = this.cvsHeight;
                     const whiteKeys = this.notes.filter((n) => n.isWhite);
 
                     whiteKeys.forEach((n, i) => {
@@ -1444,6 +1451,7 @@
                     ctx.restore();
                 },
 
+                /*render*/
                 animate() {
                     const ctx = this.cvsCtx;
                     if (!ctx) return;
@@ -1462,8 +1470,8 @@
                         this.fpsNextUpdate = now + 500;
                     }
 
-                    const h = this.cvs.height,
-                        w = this.cvs.width;
+                    const h = this.cvsHeight,
+                        w = this.cvsWidth;
                     const kb = document.getElementById("piano-keyboard");
                     if (!kb) return;
 
@@ -1478,7 +1486,23 @@
                     let blocked = false;
 
                     // 2. ОТРИСОВКА НОТ (Всегда, даже на паузе)
-                    this.songData.forEach((m) => {
+
+                    // Определяем временное «окно» видимости
+                    const visibleStartTime = this.currentPosition;
+                    const visibleEndTime =
+                        this.currentPosition +
+                        this.cvsHeight / this.pixelsPerQuarter;
+
+                    // Фильтруем массив нот перед отрисовкой
+                    const visibleNotes = this.songData.filter((m) => {
+                        return (
+                            m.absStart + m.length > visibleStartTime &&
+                            m.absStart < visibleEndTime
+                        );
+                    });
+
+                    // this.songData.forEach((m) => {
+                    visibleNotes.forEach((m) => {
                         if (!this.activeInstruments.has(m.idInstrument)) return;
                         const el = document.getElementById("k-" + m.idx);
                         if (!el) return;
@@ -1753,10 +1777,18 @@
                     this.isPlaying = true;
                 },
 
-                resize() {
+                initCtxWidthHeight() {
                     const container = this.cvs.parentElement;
-                    this.cvs.width = container.clientWidth;
-                    this.cvs.height = container.clientHeight;
+                    // Get the container's width and height
+                    this.cvsWidth = container.clientWidth;
+                    this.cvsHeight = container.clientHeight;
+                    // Set the canvas width and height
+                    this.cvs.width = this.cvsWidth;
+                    this.cvs.height = this.cvsHeight;
+                },
+
+                resize() {
+                    this.initCtxWidthHeight();
 
                     this.renderKb();
                 },
