@@ -1,0 +1,1796 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Piano Studio Pro v8.9.9 (Extended)</title>
+        <style>
+            body {
+                font-family: "Segoe UI", sans-serif;
+                background: #0a0a0a;
+                color: #eee;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+            .tabs {
+                display: flex;
+                background: #1a1a1a;
+                padding: 5px 10px 0;
+                gap: 5px;
+                border-bottom: 1px solid #333;
+            }
+            .tab-btn {
+                padding: 10px 20px;
+                cursor: pointer;
+                background: #252525;
+                color: #888;
+                border-radius: 5px 5px 0 0;
+                border: none;
+                outline: none;
+                transition: 0.2s;
+            }
+            .tab-btn.active {
+                background: #3498db;
+                color: white;
+                font-weight: bold;
+            }
+
+            #song-control-bar {
+                background: #111;
+                padding: 10px 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid #333;
+            }
+            .learning-label {
+                background: #222;
+                padding: 5px 15px;
+                border-radius: 20px;
+                border: 1px solid #444;
+                cursor: pointer;
+                font-size: 0.85rem;
+                color: #0f0;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            #progress-container {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                background: #222;
+                cursor: pointer;
+                z-index: 110;
+            }
+            #progress-fill {
+                width: 0%;
+                height: 100%;
+                background: #3498db;
+                transition: width 0.1s linear;
+            }
+
+            #visualizer-container {
+                flex: 1; /* Растягивает область с нотами на всё свободное место */
+                position: relative;
+                width: 100%;
+                background: #050505;
+                overflow: hidden;
+            }
+
+            #visual-canvas {
+                width: 100%;
+                height: 100%; /* Холст внутри должен заполнять весь растянутый контейнер */
+                display: block;
+            }
+
+            /* В блоке #piano-keyboard */
+            #piano-keyboard {
+                display: flex;
+                width: 100%;
+
+                /* 15vw означает 15% от ширины экрана. 
+                    Если ширина станет меньше в 2 раза, высота тоже станет меньше в 2 раза. */
+                height: 15vw; /* Высота теперь 15% от ширины экрана */
+
+                /* Уберите или сильно уменьшите min-height, чтобы она не блокировала сжатие */
+                min-height: 50px; /* Минимальный порог, чтобы клавиши не исчезли */
+                max-height: 200px; /* Максимальный порог для огромных мониторов */
+
+                background: #000;
+                position: relative;
+                overflow: hidden;
+
+                /* Запрещаем клавиатуре забирать лишнее место у нот */
+                flex-shrink: 0;
+                flex-grow: 0;
+            }
+            .key {
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: center;
+                position: relative;
+                transition: 0.05s;
+                user-select: none;
+                flex-shrink: 0;
+            }
+            .white-key {
+                flex: 1 1 0; /* Равномерно заполняют всё пространство */
+                min-width: 0; /* Позволяет сжиматься меньше содержимого */
+                /* height: 100%; */
+                height: 100%; /* Занимает всю высоту родителя (#piano-keyboard) */
+
+                background: #fff;
+                color: #000; /* Явно задаем черный цвет текста */
+                border: 1px solid #999;
+                box-sizing: border-box;
+                position: relative;
+
+                /* Уменьшаем шрифт для низких клавиш */
+                font-size: 9px;
+                /* Прижимаем текст максимально к низу */
+                padding-bottom: 2px;
+            }
+            .white-key.active {
+                background: #3498db !important;
+                transform: translateY(2px);
+            }
+            .black-key-wrapper {
+                width: 0; /* Обертка не занимает места в потоке */
+                position: relative;
+                z-index: 10;
+            }
+            .black-key {
+                position: absolute;
+                /* Ширина черной клавиши в процентах от белой или фиксированная */
+                width: 24px;
+                height: 60%; /* Черные клавиши всегда составляют 60% от высоты белых */
+                background: #222;
+                color: #fff; /* Белый текст на черном фоне */
+
+                /* Центрируем точно по линии стыка белых клавиш */
+                transform: translateX(-50%);
+                border-radius: 0 0 3px 3px;
+                border: 1px solid #000;
+
+                font-size: 0;
+            }
+            .black-key.active {
+                background: #e74c3c !important;
+                /* transform: translateY(2px); */
+            }
+            .hint {
+                font-size: 0.6rem;
+                margin-bottom: 8px;
+                font-weight: bold;
+                pointer-events: none;
+                opacity: 0.8;
+            }
+            #settings-tab {
+                padding: 30px;
+            }
+            .setting-item {
+                margin-bottom: 20px;
+                background: #1a1a1a;
+                padding: 15px;
+                border-radius: 8px;
+                border: 1px solid #333;
+            }
+            .inst-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                background: #1a1a1a;
+                padding: 12px;
+                border-radius: 6px;
+                margin-bottom: 8px;
+                border: 1px solid #333;
+            }
+            .color-previews {
+                display: flex;
+                gap: 4px;
+                align-items: center;
+            }
+            .color-preview {
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            .piano-container {
+                width: calc(100% - 20px); /* Отступы по 10px с каждой стороны */
+                max-width: 1600px;
+                margin: 0 auto;
+                overflow-x: auto; /* Если клавиши всё равно не влезут, появится прокрутка */
+                padding: 20px 0;
+            }
+
+            .controls {
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+                margin-bottom: 20px;
+                background: #1a1a1a; /* Темный фон как на фото */
+                padding: 20px;
+            }
+
+            .ctrl-btn {
+                width: 60px;
+                height: 60px;
+                background: #222;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                /* Эффект объема (неоморфизм) */
+                box-shadow:
+                    4px 4px 8px #111,
+                    -1px -1px 2px #333;
+                transition: all 0.2s ease;
+            }
+
+            .ctrl-btn:active {
+                box-shadow:
+                    inset 2px 2px 5px #111,
+                    inset -1px -1px 2px #333;
+                transform: scale(0.95);
+            }
+
+            /* Иконки (простые фигуры на CSS) */
+            .icon-play {
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 10px 0 10px 18px;
+                border-color: transparent transparent transparent #ccc;
+                margin-left: 4px;
+            }
+
+            .icon-pause {
+                width: 14px;
+                height: 18px;
+                border-left: 5px solid #ccc;
+                border-right: 5px solid #ccc;
+            }
+
+            .icon-stop {
+                width: 16px;
+                height: 16px;
+                background: #ccc;
+            }
+
+            #piano-tab {
+                display: flex;
+                flex-direction: column;
+                height: calc(
+                    100vh - 45px
+                ); /* Высота всей области за вычетом вкладок */
+            }
+
+            #visualizer-container {
+                flex-grow: 1; /* Визуализатор растягивается и занимает всё свободное место */
+                position: relative;
+                overflow: hidden;
+            }
+
+            /**/
+            /* 1. Скрываем ВСЕ вкладки по умолчанию */
+            .tab-content {
+                display: none !important;
+                height: calc(100vh - 50px);
+                overflow: hidden;
+            }
+
+            /* 2. Показываем активную вкладку (универсально) */
+            .tab-content.active {
+                display: block !important;
+            }
+
+            /* 3. Только для ПИАНИНО уточняем режим отображения, когда оно активно */
+            #piano-tab.active {
+                display: flex !important;
+                flex-direction: column;
+            }
+            /**/
+
+            .editor-layout {
+                display: flex;
+                width: 100%;
+                height: 100%; /* Занимает всю высоту вкладки */
+                gap: 20px; /* Отступ между колонками */
+                padding: 15px;
+                box-sizing: border-box;
+            }
+
+            .editor-column {
+                flex: 1; /* Каждая колонка берет по 50% */
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+
+            #json-editor {
+                flex-grow: 1; /* Растягиваем текстовое поле на всю высоту колонки */
+                width: 100%;
+                resize: none; /* Убираем ручное изменение размера */
+                background: #1e1e1e;
+                color: #d4d4d4;
+                font-family: monospace;
+                padding: 10px;
+                border: 1px solid #444;
+                margin-bottom: 10px;
+            }
+
+            .right-col {
+                background: #252525;
+                padding: 15px;
+                border-radius: 4px;
+            }
+
+            .editor-layout {
+                display: flex;
+                height: 100%;
+                gap: 15px;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+
+            .editor-column {
+                flex: 1; /* Все три колонки равны по ширине */
+                display: flex;
+                flex-direction: column;
+                overflow: hidden; /* Чтобы таблица не раздувала колонку */
+            }
+
+            .table-wrapper {
+                flex-grow: 1;
+                overflow-y: auto; /* Скролл только для таблицы */
+                background: #1e1e1e;
+                border: 1px solid #444;
+            }
+
+            #midi-instruments-table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 13px;
+            }
+
+            #midi-instruments-table th,
+            #midi-instruments-table td {
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid #333;
+            }
+
+            #midi-instruments-table th {
+                background: #333;
+                position: sticky; /* Шапка всегда сверху при скролле */
+                top: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="tabs">
+            <button
+                class="tab-btn active"
+                onclick="objPianino.switchTab('piano-tab', this)"
+            >
+                ПИАНИНО
+            </button>
+            <button
+                class="tab-btn"
+                onclick="objPianino.switchTab('editor-tab', this)"
+            >
+                РЕДАКТОР
+            </button>
+            <button
+                class="tab-btn"
+                onclick="objPianino.switchTab('settings-tab', this)"
+            >
+                НАСТРОЙКИ
+            </button>
+        </div>
+
+        <div id="piano-tab" class="tab-content active" style="overflow: hidden">
+            <div class="controls">
+                <div
+                    class="setting-item"
+                    style="
+                        display: flex;
+                        align-items: left;
+                        gap: 10px;
+                        background: none;
+                        border: none;
+                        margin: 0;
+                    "
+                >
+                    <label>Tab играет с: </label>
+                    <select
+                        id="octave-offset-select"
+                        onchange="objPianino.setOctaveOffset(this.value)"
+                        style="
+                            padding: 5px;
+                            background: #333;
+                            color: #fff;
+                            border: 1px solid #555;
+                        "
+                    >
+                        <option value="0" selected>Первая</option>
+                        <option value="12">Вторая</option>
+                        <option value="24">Третья</option>
+                        <option value="36">Четвертая</option>
+                        <option value="48">Пятая</option>
+                        <option value="60">Шестая</option>
+                    </select>
+                    <label style="font-size: 0.8rem; color: #888">BPM:</label>
+                    <input
+                        type="number"
+                        id="bpm-input"
+                        value="60"
+                        min="20"
+                        max="300"
+                        onchange="objPianino.onchangeBPM(this.value)"
+                        style="
+                            width: 50px;
+                            background: #333;
+                            color: #fff;
+                            border: 1px solid #555;
+                            padding: 5px;
+                            border-radius: 4px;
+                        "
+                    />
+
+                    <label
+                        ><input
+                            type="checkbox"
+                            id="learn-mode-check"
+                            onchange="objPianino.learningMode = this.checked"
+                        />🎓 ОБУЧЕНИЕ</label
+                    >
+
+                    <label>Sustain (сек):</label>
+                    <input
+                        type="number"
+                        id="sus-val"
+                        value="1.0"
+                        step="0.1"
+                        style="width: 60px"
+                        onchange="objPianino.susTime = this.value"
+                    />
+                </div>
+                <button
+                    class="ctrl-btn"
+                    id="playBtn"
+                    onclick="objPianino.start()"
+                >
+                    <i class="icon-play"></i>
+                </button>
+                <button
+                    class="ctrl-btn"
+                    id="pauseBtn"
+                    onclick="objPianino.pause()"
+                >
+                    <i class="icon-pause"></i>
+                </button>
+                <button
+                    class="ctrl-btn"
+                    id="stopBtn"
+                    onclick="objPianino.stop()"
+                >
+                    <i class="icon-stop"></i>
+                </button>
+            </div>
+            <div id="visualizer-container">
+                <canvas id="visual-canvas"></canvas>
+                <div id="progress-container" onclick="objPianino.seek(event)">
+                    <div id="progress-fill"></div>
+                </div>
+            </div>
+            <div id="piano-keyboard"></div>
+        </div>
+
+        <div id="editor-tab" class="tab-content">
+            <div class="editor-layout">
+                <!-- 1 колонка: Редактор нот -->
+                <div class="editor-column left-col">
+                    <div style="padding: 20px">
+                        <div>
+                            <button
+                                onclick="objPianino.updateSongFromEditor()"
+                                style="
+                                    flex: 1;
+                                    padding: 12px;
+                                    background: #27ae60;
+                                    color: #fff;
+                                    border: none;
+                                    cursor: pointer;
+                                    font-weight: bold;
+                                    border-radius: 4px;
+                                "
+                            >
+                                ПРИМЕНИТЬ JSON
+                            </button>
+                            <input
+                                type="file"
+                                id="midi-input"
+                                accept=".mid, .midi"
+                                style="display: none"
+                                onchange="objPianino.importMidi(this)"
+                            />
+                            <button
+                                onclick="
+                                    document
+                                        .getElementById('midi-input')
+                                        .click()
+                                "
+                                style="
+                                    flex: 1;
+                                    padding: 12px;
+                                    background: #3498db;
+                                    color: #fff;
+                                    border: none;
+                                    cursor: pointer;
+                                    font-weight: bold;
+                                    border-radius: 4px;
+                                "
+                            >
+                                ЗАГРУЗИТЬ MIDI
+                            </button>
+
+                            <textarea
+                                id="editor-area"
+                                style="
+                                    width: 100%;
+                                    height: 60vh;
+                                    background: #000;
+                                    color: #0f0;
+                                    font-family: monospace;
+                                    padding: 10px;
+                                    border: 1px solid #444;
+                                "
+                                placeholder="JSON данные нот..."
+                            ></textarea>
+                        </div>
+                    </div>
+                </div>
+                <!-- 2 колонка: Инструменты управления -->
+                <div class="editor-column middle-col">
+                    <h2 style="color: #3498db">Инструменты и Цвета</h2>
+                    <div id="instruments-list"></div>
+                </div>
+
+                <!-- 3 колонка: Список MIDI инструментов -->
+                <div class="editor-column right-col">
+                    <h3>Список всех инструментов MIDI</h3>
+                    <div class="table-wrapper">
+                        <table id="midi-instruments-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Название</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tools-container">
+                                <!-- Сюда JS вставит данные -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="settings-tab" class="tab-content">
+            <div style="padding: 0 30px">
+                <h2 style="color: #3498db">Настройки клавиатуры</h2>
+            </div>
+        </div>
+
+        <script>
+            const MIDI_INSTRUMENTS = [
+                "Acoustic Grand Piano",
+                "Bright Acoustic Piano",
+                "Electric Grand Piano",
+                "Honky-tonk Piano",
+                "Electric Piano 1",
+                "Electric Piano 2",
+                "Harpsichord",
+                "Clavi",
+                "Celesta",
+                "Glockenspiel",
+                "Music Box",
+                "Vibraphone",
+                "Marimba",
+                "Xylophone",
+                "Tubular Bells",
+                "Dulcimer",
+                "Drawbar Organ",
+                "Percussive Organ",
+                "Rock Organ",
+                "Church Organ",
+                "Reed Organ",
+                "Accordion",
+                "Harmonica",
+                "Tango Accordion",
+                "Acoustic Guitar (nylon)",
+                "Acoustic Guitar (steel)",
+                "Electric Guitar (jazz)",
+                "Electric Guitar (clean)",
+                "Electric Guitar (muted)",
+                "Overdriven Guitar",
+                "Distortion Guitar",
+                "Guitar harmonics",
+                "Acoustic Bass",
+                "Electric Bass (finger)",
+                "Electric Bass (pick)",
+                "Fretless Bass",
+                "Slap Bass 1",
+                "Slap Bass 2",
+                "Synth Bass 1",
+                "Synth Bass 2",
+                "Violin",
+                "Viola",
+                "Cello",
+                "Contrabass",
+                "Tremolo Strings",
+                "Pizzicato Strings",
+                "Orchestral Harp",
+                "Timpani",
+                "String Ensemble 1",
+                "String Ensemble 2",
+                "SynthStrings 1",
+                "SynthStrings 2",
+                "Choir Aahs",
+                "Voice Oohs",
+                "Synth Voice",
+                "Orchestra Hit",
+                "Trumpet",
+                "Trombone",
+                "Tuba",
+                "Muted Trumpet",
+                "French Horn",
+                "Brass Section",
+                "SynthBrass 1",
+                "SynthBrass 2",
+                "Soprano Sax",
+                "Alto Sax",
+                "Tenor Sax",
+                "Baritone Sax",
+                "Oboe",
+                "English Horn",
+                "Bassoon",
+                "Clarinet",
+                "Piccolo",
+                "Flute",
+                "Recorder",
+                "Pan Flute",
+                "Blown Bottle",
+                "Shakuhachi",
+                "Whistle",
+                "Ocarina",
+                "Lead 1 (square)",
+                "Lead 2 (sawtooth)",
+                "Lead 3 (calliope)",
+                "Lead 4 (chiff)",
+                "Lead 5 (charang)",
+                "Lead 6 (voice)",
+                "Lead 7 (fifths)",
+                "Lead 8 (bass + lead)",
+                "Pad 1 (new age)",
+                "Pad 2 (warm)",
+                "Pad 3 (polysynth)",
+                "Pad 4 (choir)",
+                "Pad 5 (bowed)",
+                "Pad 6 (metallic)",
+                "Pad 7 (halo)",
+                "Pad 8 (sweep)",
+                "FX 1 (rain)",
+                "FX 2 (soundtrack)",
+                "FX 3 (crystal)",
+                "FX 4 (atmosphere)",
+                "FX 5 (brightness)",
+                "FX 6 (goblins)",
+                "FX 7 (echoes)",
+                "FX 8 (sci-fi)",
+                "Sitar",
+                "Banjo",
+                "Shamisen",
+                "Koto",
+                "Kalimba",
+                "Bag pipe",
+                "Fiddle",
+                "Shanai",
+                "Tinkle Bell",
+                "Agogo",
+                "Steel Drums",
+                "Woodblock",
+                "Taiko Drum",
+                "Melodic Tom",
+                "Synth Drum",
+                "Reverse Cymbal",
+                "Guitar Fret Noise",
+                "Breath Noise",
+                "Seashore",
+                "Bird Tweet",
+                "Telephone Ring",
+                "Helicopter",
+                "Applause",
+                "Gunshot",
+            ];
+            const BASE_PALETTES = [
+                "#8B0000",
+                "#FF0000",
+                "#FF8C00",
+                "#FFFF00",
+                "#008000",
+                "#00CED1",
+                "#0000FF",
+                "#8A2BE2",
+                "#CD853F",
+                "#FFB6C1",
+                "#FFD700",
+                "#F5F5DC",
+                "#ADFF2F",
+                "#87CEEB",
+                "#6A5ACD",
+                "#D8BFD8",
+                "#00FF00",
+                "#FF00FF",
+            ];
+
+            var objMusics = [
+                {
+                    numTact: 1,
+                    pos: 0,
+                    note: "ЛЯ3",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 1,
+                    pos: 0.5,
+                    note: "ЛЯ3",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 1,
+                    pos: 1,
+                    note: "ДО4",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 1,
+                    pos: 1.5,
+                    note: "ЛЯ3",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 1,
+                    pos: 2,
+                    note: "РЕ4",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 1,
+                    pos: 2.5,
+                    note: "ЛЯ3",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 1,
+                    pos: 3,
+                    note: "МИ4",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 1,
+                    pos: 3.5,
+                    note: "РЕ4",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 2,
+                    pos: 0,
+                    note: "ДО4",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 2,
+                    pos: 0.5,
+                    note: "ДО4",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 2,
+                    pos: 1,
+                    note: "МИ4",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 2,
+                    pos: 1.5,
+                    note: "ДО4",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 2,
+                    pos: 2,
+                    note: "СОЛЬ4",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 2,
+                    pos: 2.5,
+                    note: "ДО4",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 2,
+                    pos: 3,
+                    note: "МИ4",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 2,
+                    pos: 3.5,
+                    note: "ДО4",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 3,
+                    pos: 0,
+                    note: "СОЛЬ3",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 3,
+                    pos: 0.5,
+                    note: "СОЛЬ3",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 3,
+                    pos: 1,
+                    note: "СИ3",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 3,
+                    pos: 1.5,
+                    note: "СОЛЬ3",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 3,
+                    pos: 2,
+                    note: "ДО4",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 3,
+                    pos: 2.5,
+                    note: "СОЛЬ3",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 3,
+                    pos: 3,
+                    note: "РЕ4",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+                {
+                    numTact: 3,
+                    pos: 3.5,
+                    note: "ДО4",
+                    length: 0.38,
+                    idInstrument: 25,
+                    nameInstrument: "Acoustic Guitar (steel)",
+                },
+            ];
+            document.getElementById("editor-area").value = JSON.stringify(
+                objMusics,
+                null,
+                2,
+            );
+
+            var objPianino = {
+                keyWidth: 0,
+                notes: [],
+                countNotes: 85,
+
+                ctx: null,
+                cvs: null,
+                cvsCtx: null,
+                currentPosition: 0,
+                isPlaying: false,
+                isPaused: false,
+                learningMode: false,
+                bpm: 130,
+                pixelsPerQuarter: 120,
+                maxPos: 0,
+                songData: [],
+                activeInstruments: new Set(),
+                instColors: {},
+                octaveOffset: 0, // По умолчанию теперь 12 (Субконтроктава), чтобы добавить 2 нижние октавы
+
+                _baseCodes: [
+                    { id: 0, key: "ShiftLeft" },
+                    { id: 1, key: "KeyA" },
+                    { id: 2, key: "KeyZ" },
+                    { id: 3, key: "KeyS" },
+                    { id: 4, key: "KeyX" },
+                    { id: 5, key: "KeyC" },
+                    { id: 6, key: "KeyF" },
+                    { id: 7, key: "KeyV" },
+                    { id: 8, key: "KeyG" },
+                    { id: 9, key: "KeyB" },
+                    { id: 10, key: "KeyH" },
+                    { id: 11, key: "KeyN" },
+                    { id: 12, key: "Tab" },
+                    { id: 13, key: "Digit1" },
+                    { id: 14, key: "KeyQ" },
+                    { id: 15, key: "Digit2" },
+                    { id: 16, key: "KeyW" },
+                    { id: 17, key: "KeyE" },
+                    { id: 18, key: "Digit4" },
+                    { id: 19, key: "KeyR" },
+                    { id: 20, key: "Digit5" },
+                    { id: 21, key: "KeyT" },
+                    { id: 22, key: "Digit6" },
+                    { id: 23, key: "KeyY" },
+                    { id: 24, key: "KeyU" },
+                    { id: 25, key: "Digit8" },
+                    { id: 26, key: "KeyI" },
+                    { id: 27, key: "Digit9" },
+                    { id: 28, key: "KeyO" },
+                    { id: 29, key: "KeyP" },
+                    { id: 30, key: "Minus" },
+                    { id: 31, key: "BracketLeft" },
+                    { id: 32, key: "Equal" },
+                    { id: 33, key: "BracketRight" },
+                    { id: 34, key: "Backspace" },
+                    { id: 35, key: "Backslash" },
+                    { id: 36, key: "Enter" },
+                ],
+
+                initBPM() {
+                    const bpmInput = document.getElementById("bpm-input");
+                    if (bpmInput) {
+                        bpmInput.value = this.bpm;
+                    }
+                },
+
+                onchangeBPM(val) {
+                    const newBpm = parseInt(val);
+                    if (!isNaN(newBpm) && newBpm > 0) {
+                        this.bpm = newBpm;
+                        //console.log("BPM изменен на:", this.bpm);
+                    }
+                },
+                start() {
+                    // Если музыка закончилась, сбрасываем позицию перед стартом
+                    if (this.currentPosition >= this.maxPos) {
+                        this.stop();
+                    }
+                    if (this.isPaused) {
+                        this.isPaused = false;
+                    }
+                    this.isPlaying = true;
+                },
+
+                pause() {
+                    this.isPlaying = false;
+                    this.isPaused = true;
+                },
+
+                stop() {
+                    this.isPlaying = false;
+                    this.currentPosition = 0;
+                    // Сбрасываем статус прохождения для всех нот
+                    this.songData.forEach((m) => (m.passed = false));
+                },
+                adjustColor(hex, percent) {
+                    let r = parseInt(hex.slice(1, 3), 16),
+                        g = parseInt(hex.slice(3, 5), 16),
+                        b = parseInt(hex.slice(5, 7), 16);
+                    r = Math.floor(r * (1 - percent));
+                    g = Math.floor(g * (1 - percent));
+                    b = Math.floor(b * (1 - percent));
+                    return `rgb(${r},${g},${b})`;
+                },
+
+                fillInstrumentsTable() {
+                    // <div id="tools-container"></div>
+
+                    const tbody = document.getElementById("tools-container");
+                    if (!tbody || !MIDI_INSTRUMENTS) return;
+
+                    // Формируем строки таблицы на основе вашей константы
+                    tbody.innerHTML = MIDI_INSTRUMENTS.map(
+                        (name, index) => `
+                                <tr>
+                                <td style="color: #888;">${index}</td>
+                                <td>${name}</td>
+                                </tr>
+                            `,
+                    ).join("");
+                },
+                init() {
+                    this.cvs = document.getElementById("visual-canvas");
+                    this.cvsCtx = this.cvs.getContext("2d");
+                    this.updateSongData();
+                    this.initBPM();
+                    this.rebuild();
+                    this.resize();
+                    this.animate();
+                    this.fillInstrumentsTable();
+                    window.addEventListener("resize", () => this.resize());
+                },
+
+                setOctaveOffset(val) {
+                    this.octaveOffset = parseInt(val);
+                    this.rebuild();
+                },
+
+                updateSongData() {
+                    this.songData = JSON.parse(
+                        JSON.stringify(objMusics, null, 2),
+                    ).map((m) => {
+                        const absoluteStart = m.numTact * 4 + m.pos;
+                        return {
+                            ...m,
+                            passed: false,
+                            absStart: absoluteStart,
+                            idx: -1,
+                        };
+                    });
+                    this.maxPos =
+                        Math.max(
+                            ...this.songData.map((m) => m.absStart + m.length),
+                            0,
+                        ) || 0;
+                    this.activeInstruments.clear();
+                    const uniqueIds = Array.from(
+                        new Set(this.songData.map((m) => m.idInstrument)),
+                    );
+                    uniqueIds.forEach((id, index) => {
+                        const base =
+                            BASE_PALETTES[index % BASE_PALETTES.length];
+                        this.instColors[id] = {
+                            w: base,
+                            b: this.adjustColor(base, 0.45),
+                        };
+                        this.activeInstruments.add(id);
+                    });
+                    this.renderSettings();
+                },
+
+                rebuild() {
+                    const names = [
+                        "C",
+                        "C#",
+                        "D",
+                        "D#",
+                        "E",
+                        "F",
+                        "F#",
+                        "G",
+                        "G#",
+                        "A",
+                        "A#",
+                        "B",
+                    ];
+                    const map = {
+                        ДО: "C",
+                        РЕБИМОЛЬ: "C#",
+                        РЕ: "D",
+                        МИБИМОЛЬ: "D#",
+                        МИ: "E",
+                        ФА: "F",
+                        СОЛЬБИМОЛЬ: "F#",
+                        СОЛЬ: "G",
+                        ЛЯБИМОЛЬ: "G#",
+                        ЛЯ: "A",
+                        СИБИМОЛЬ: "A#",
+                        СИ: "B",
+                    };
+                    const whites = [0, 2, 4, 5, 7, 9, 11];
+                    this.notes = [];
+
+                    for (let i = 0; i < this.countNotes; i++) {
+                        const abs = this.octaveOffset + i; // Это реальный номер ноты в MIDI
+                        const semi = i % 12;
+
+                        this.notes.push({
+                            id: i,
+                            name: names[semi] + Math.floor(i / 12),
+                            isWhite: whites.includes(semi),
+                            freq: 16.35 * Math.pow(2, i / 12),
+                            // ИЗМЕНЕНИЕ ТУТ: ищем в объекте по номеру ноты abs
+                            code:
+                                this._baseCodes.find(
+                                    (item) => item.id + this.octaveOffset === i,
+                                )?.key ?? "",
+                        });
+                    }
+                    this.songData.forEach((m) => {
+                        //console.log(m);
+                        let pureNote = m.note
+                            .replace(/[0-9]/g, "")
+                            .toUpperCase();
+                        let octave = m.note.replace(/\D/g, "");
+                        m.idx = this.notes.findIndex(
+                            (n) =>
+                                n.name === (map[pureNote] || pureNote) + octave,
+                        );
+                    });
+                    this.renderKb();
+                },
+
+                renderKb() {
+                    const kb = document.getElementById("piano-keyboard");
+                    if (!kb) return;
+
+                    kb.innerHTML = "";
+
+                    // Обновляем ширину холста под контейнер
+                    const container = this.cvs.parentElement;
+                    this.cvs.width = container.clientWidth;
+                    this.cvs.height = container.clientHeight;
+
+                    // Считаем количество белых клавиш для сетки
+                    const whiteNotesCount = this.notes.filter(
+                        (n) => n.isWhite,
+                    ).length;
+
+                    // Ключевой параметр для синхронизации с Canvas
+                    this.keyWidth = this.cvs.width / whiteNotesCount;
+
+                    this.notes.forEach((n) => {
+                        const el = document.createElement("div");
+                        el.className =
+                            "key " + (n.isWhite ? "white-key" : "black-key");
+                        el.id = "k-" + n.id;
+
+                        // Добавляем текст подсказки (hint)
+                        const hint = n.code
+                            ? n.code
+                                  .replace("Key", "")
+                                  .replace("Digit", "")
+
+                                  .replace("ShiftLeft", "SHFT")
+                                  .replace("BracketLeft", "[")
+                                  .replace("BracketRight", "]")
+                                  .replace("Backslash", "\\")
+                                  .replace("Minus", "-")
+                                  .replace("Equal", "=")
+                                  .replace("Backspace", "<-")
+                            : "";
+                        el.innerHTML = `<span class="hint">${hint}</span>`;
+
+                        el.onmousedown = (e) => {
+                            e.preventDefault();
+                            this.play(n.id);
+                        };
+
+                        if (n.isWhite) {
+                            // Устанавливаем динамическую ширину для белых клавиш
+                            el.style.width = this.keyWidth + "px";
+                            kb.appendChild(el);
+                        } else {
+                            // Пропорциональная ширина для черных клавиш
+                            const bW = this.keyWidth * 0.65;
+                            el.style.width = bW + "px";
+                            //el.style.left = -(bW / 2) + "px"; // Центрируем
+
+                            const wrapper = document.createElement("div");
+                            wrapper.className = "black-key-wrapper";
+
+                            wrapper.appendChild(el);
+                            kb.appendChild(wrapper);
+                        }
+                    });
+                },
+
+                renderSettings() {
+                    const container =
+                        document.getElementById("instruments-list");
+                    container.innerHTML = "";
+                    const unique = Array.from(
+                        new Set(this.songData.map((m) => m.idInstrument)),
+                    );
+                    unique
+                        .sort((a, b) => a - b)
+                        .forEach((id) => {
+                            const m = this.songData.find(
+                                (x) => x.idInstrument === id,
+                            );
+                            if (!m) return;
+                            const colors = this.instColors[id] || {
+                                w: "#3498db",
+                                b: "#2c3e50",
+                            };
+                            const div = document.createElement("div");
+                            div.className = "inst-item";
+                            div.innerHTML = `<input type="checkbox" checked onchange="objPianino.toggleInstrument(${id}, this.checked)"> <b style="color:#3498db; width: 40px">#${id}</b> <span style="flex: 1">${m.nameInstrument || "Unknown"}</span><div class="color-previews"><div class="color-preview" style="background: ${colors.w}"></div><div class="color-preview" style="background: ${colors.b}"></div></div>`;
+                            container.appendChild(div);
+                        });
+                },
+
+                toggleInstrument(id, active) {
+                    if (active) this.activeInstruments.add(id);
+                    else this.activeInstruments.delete(id);
+                },
+
+                play(id, idInstrument = 0) {
+                    if (!this.ctx) {
+                        this.ctx = new (
+                            window.AudioContext || window.webkitAudioContext
+                        )();
+                    }
+                    if (this.ctx.state === "suspended") this.ctx.resume();
+
+                    const n = this.notes[id];
+                    if (!n) return;
+
+                    // Логика режима обучения...
+                    if (this.learningMode && this.isPlaying) {
+                        const targetNote = this.songData
+                            .filter((m) => m.idx === id && !m.passed)
+                            .sort((a, b) => a.absStart - b.absStart)[0];
+                        if (targetNote) {
+                            const dist =
+                                targetNote.absStart - this.currentPosition;
+                            if (dist < 1.0) targetNote.passed = true;
+                        }
+                    }
+
+                    const el = document.getElementById("k-" + id);
+                    if (el) {
+                        el.classList.add("active");
+                        setTimeout(() => el.classList.remove("active"), 150);
+                    }
+
+                    const now = this.ctx.currentTime;
+
+                    // Определяем тип волны в зависимости от группы MIDI инструментов
+                    let type = "sine";
+                    if (idInstrument < 8)
+                        type = "triangle"; // Пианино
+                    else if (idInstrument >= 16 && idInstrument < 24)
+                        type = "sawtooth"; // Органы
+                    else if (idInstrument >= 24 && idInstrument < 32)
+                        type = "square"; // Гитары/Бас
+
+                    [
+                        [1, 0.3],
+                        [2, 0.15],
+                    ].forEach(([m, v]) => {
+                        const osc = this.ctx.createOscillator();
+                        const gain = this.ctx.createGain();
+
+                        // console.log(n.freq * m);
+                        osc.type = type; // Установка типа звучания
+                        osc.frequency.setValueAtTime(n.freq * m, now);
+
+                        gain.gain.setValueAtTime(0, now);
+                        gain.gain.linearRampToValueAtTime(v, now + 0.01);
+                        gain.gain.exponentialRampToValueAtTime(
+                            0.001,
+                            now + 0.8,
+                        );
+
+                        osc.connect(gain).connect(this.ctx.destination);
+                        osc.start(now);
+                        osc.stop(now + 1);
+                    });
+                },
+
+                drawVerticalGrid() {
+                    this.cvsCtx.strokeStyle = "#222"; // Цвет линий сетки
+                    this.cvsCtx.beginPath();
+
+                    const whiteNotesCount = this.notes.filter(
+                        (n) => n.isWhite,
+                    ).length;
+
+                    for (let i = 0; i <= whiteNotesCount; i++) {
+                        // Координата X линии — это номер белой клавиши умноженный на динамическую ширину
+                        const x = i * this.keyWidth;
+                        this.cvsCtx.moveTo(x, 0);
+                        this.cvsCtx.lineTo(x, this.cvs.height);
+                    }
+                    this.cvsCtx.stroke();
+                },
+                drawHorizontalTact() {
+                    const ctx = this.cvsCtx;
+                    const w = this.cvs.width;
+                    const h = this.cvs.height;
+
+                    // Параметры такта
+                    const beatsPerTact = 4;
+                    const totalTacts = Math.ceil(this.maxPos / beatsPerTact);
+
+                    for (let t = 0; t <= totalTacts; t++) {
+                        const tactBeatPos = t * beatsPerTact;
+                        // Текущая Y-координата линии
+                        const y =
+                            h -
+                            (tactBeatPos - this.currentPosition) *
+                                this.pixelsPerQuarter;
+
+                        // Рисуем только если линия в видимой зоне
+                        if (y >= -10 && y <= h + 10) {
+                            ctx.beginPath();
+
+                            // --- ЭФФЕКТ ПОДСВЕТКИ ---
+                            // Если линия пересекает зону "удара" (у самого низа, h)
+                            const threshold = 10; // дистанция срабатывания подсветки
+                            if (Math.abs(y - h) < threshold) {
+                                ctx.strokeStyle = "#fff"; // Белый цвет при пересечении
+                                ctx.lineWidth = 3; // Толстая линия
+                                ctx.shadowBlur = 15; // Свечение
+                                ctx.shadowColor = "#fff";
+                            } else {
+                                ctx.strokeStyle = "rgba(100, 100, 100, 0.4)"; // Обычный тусклый цвет
+                                ctx.lineWidth = 1;
+                                ctx.shadowBlur = 0; // Выключаем свечение для обычных линий
+                            }
+
+                            ctx.moveTo(0, y);
+                            ctx.lineTo(w, y);
+                            ctx.stroke();
+
+                            // Сброс тени для текста, чтобы он не размывался
+                            ctx.shadowBlur = 0;
+
+                            // Номер такта
+                            ctx.fillStyle = "rgba(150, 150, 150, 0.5)";
+                            ctx.font = "12px Arial";
+                            ctx.fillText(t + 1, 15, y - 5);
+                        }
+                    }
+                    // Важно сбросить параметры контекста после цикла
+                    ctx.shadowBlur = 0;
+                    ctx.lineWidth = 1;
+                },
+
+                drawSubstrate() {
+                    const ctx = this.cvsCtx;
+                    const h = this.cvs.height;
+                    const whiteKeys = this.notes.filter((n) => n.isWhite);
+
+                    whiteKeys.forEach((n, i) => {
+                        // Проверяем, входит ли нота в группу ДО, РЕ, МИ, ФА (индексы 0,1,2,3 в октаве)
+                        // В полной клавиатуре это зависит от остатка деления на 7
+                        const noteInOctave = i % 7;
+                        const isGreyZone = noteInOctave < 3; // ДО, РЕ, МИ, ФА
+
+                        if (isGreyZone) {
+                            ctx.fillStyle = "rgba(255, 255, 255, 0.05)"; // Очень слабый серый/белый
+                            ctx.fillRect(
+                                //this.paddingLeft + i * this.keyWidth,
+                                0 + i * this.keyWidth,
+                                0,
+                                this.keyWidth,
+                                h,
+                            );
+                        }
+                    });
+                },
+
+                drawMetrics() {
+                    const ctx = this.cvsCtx;
+                    ctx.save(); // Сохраняем состояние контекста
+                    ctx.fillStyle = "rgba(255, 255, 255, 0.7)"; // Светло-серый текст
+                    ctx.font = "14px 'Segoe UI', Arial, sans-serif";
+                    ctx.textAlign = "left";
+
+                    // Вывод BPM и FPS
+                    ctx.fillText(`${Math.round(this.bpm)} BPM`, 15, 25);
+                    ctx.fillText(`${this.fps || 0} FPS`, 15, 45);
+
+                    ctx.restore();
+                },
+
+                animate() {
+                    const ctx = this.cvsCtx;
+                    if (!ctx) return;
+
+                    // --- РАСЧЕТ FPS И DELTA TIME ---
+                    const now = performance.now();
+                    // dt — это доля секунды, прошедшая между кадрами (напр. 0.016 для 60fps)
+                    const dt = this.lastTime
+                        ? (now - this.lastTime) / 1000
+                        : 0.016;
+                    this.lastTime = now;
+
+                    // Обновляем FPS раз в полсекунды, чтобы цифры не "прыгали" слишком быстро
+                    if (!this.fpsNextUpdate || now > this.fpsNextUpdate) {
+                        this.fps = Math.round(1 / dt);
+                        this.fpsNextUpdate = now + 500;
+                    }
+
+                    const h = this.cvs.height,
+                        w = this.cvs.width;
+                    const kb = document.getElementById("piano-keyboard");
+                    if (!kb) return;
+
+                    // 1. ОЧИСТКА И ФОН
+                    ctx.clearRect(0, 0, w, h);
+                    this.drawSubstrate(); // Серый фон ДО-МИ
+                    this.drawVerticalGrid(); // Сетка клавиш
+                    this.drawHorizontalTact(); // Такты
+                    this.drawMetrics(); // Текст BPM/FPS
+
+                    const kbRect = kb.getBoundingClientRect();
+                    let blocked = false;
+
+                    // 2. ОТРИСОВКА НОТ (Всегда, даже на паузе)
+                    this.songData.forEach((m) => {
+                        if (!this.activeInstruments.has(m.idInstrument)) return;
+                        const el = document.getElementById("k-" + m.idx);
+                        if (!el) return;
+
+                        const rect = el.getBoundingClientRect();
+                        const lenPx = m.length * this.pixelsPerQuarter;
+                        // Позиция ноты зависит от currentPosition
+                        const y =
+                            h -
+                            (m.absStart - this.currentPosition) *
+                                this.pixelsPerQuarter -
+                            lenPx;
+
+                        // Режим обучения (пауза, если нота достигла края)
+                        if (
+                            this.learningMode &&
+                            !m.passed &&
+                            y + lenPx >= h - 2
+                        )
+                            blocked = true;
+
+                        if (y + lenPx > 0 && y < h) {
+                            const colors = this.instColors[m.idInstrument] || {
+                                w: "#fff",
+                                b: "#000",
+                            };
+                            ctx.fillStyle = this.notes[m.idx].isWhite
+                                ? colors.w
+                                : colors.b;
+                            ctx.globalAlpha = m.passed ? 0.2 : 1;
+
+                            ctx.beginPath();
+                            ctx.roundRect(
+                                rect.left - kbRect.left,
+                                y,
+                                rect.width,
+                                lenPx - 2,
+                                4,
+                            );
+                            ctx.fill();
+                            ctx.globalAlpha = 1;
+
+                            // Срабатывание звука
+                            if (
+                                this.isPlaying &&
+                                !this.learningMode &&
+                                !m.passed &&
+                                y + lenPx >= h - 2
+                            ) {
+                                m.passed = true;
+                                this.play(m.idx, m.idInstrument);
+                            }
+                        }
+                    });
+
+                    // 3. ДВИЖЕНИЕ ВРЕМЕНИ
+                    if (this.isPlaying && !blocked) {
+                        // ВАЖНО: Коэффициент (this.bpm / 60) дает количество четвертей в СЕКУНДУ.
+                        // Умножаем на dt (время кадра), чтобы получить смещение за этот кадр.
+                        // Если движение кажется медленным, можно добавить множитель скорости.
+                        const speedMultiplier = 1.0;
+                        this.currentPosition +=
+                            (this.bpm / 60) * dt * speedMultiplier;
+
+                        // Обновление прогресс-бара
+                        const percent =
+                            (this.currentPosition / (this.maxPos || 1)) * 100;
+                        const fill = document.getElementById("progress-fill");
+                        if (fill)
+                            fill.style.width = Math.min(100, percent) + "%";
+
+                        if (this.currentPosition > this.maxPos + 2)
+                            this.isPlaying = false;
+                    }
+
+                    requestAnimationFrame(() => this.animate());
+                },
+
+                seek(e) {
+                    if (!this.maxPos) return;
+                    const rect = document
+                        .getElementById("progress-container")
+                        .getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    this.currentPosition = (x / rect.width) * this.maxPos;
+                    this.songData.forEach(
+                        (m) => (m.passed = m.absStart < this.currentPosition),
+                    );
+                },
+
+                importMidi(input) {
+                    if (!input.files || !input.files.length) return;
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        try {
+                            const data = new DataView(e.target.result);
+                            const tpq = data.getUint16(12);
+                            let offset = 14;
+                            const newSong = [];
+                            const activeNotes = {};
+                            const revMap = {
+                                0: "ДО",
+                                1: "РЕБИМОЛЬ",
+                                2: "РЕ",
+                                3: "МИБИМОЛЬ",
+                                4: "МИ",
+                                5: "ФА",
+                                6: "СОЛЬБИМОЛЬ",
+                                7: "СОЛЬ",
+                                8: "ЛЯБИМОЛЬ",
+                                9: "ЛЯ",
+                                10: "СИБИМОЛЬ",
+                                11: "СИ",
+                            };
+                            let currentInst = 0;
+                            while (offset < data.byteLength) {
+                                const chunkType = data.getUint32(offset);
+                                const chunkLen = data.getUint32(offset + 4);
+                                offset += 8;
+                                if (chunkType == 0x4d54726b) {
+                                    let trackEnd = offset + chunkLen;
+                                    let currentTick = 0;
+                                    while (offset < trackEnd) {
+                                        let delta = 0;
+                                        while (true) {
+                                            let b = data.getUint8(offset++);
+                                            delta = (delta << 7) | (b & 0x7f);
+                                            if (!(b & 0x80)) break;
+                                        }
+                                        currentTick += delta;
+                                        let status = data.getUint8(offset++);
+                                        let type = status >> 4;
+                                        if (type === 0x9 || type === 0x8) {
+                                            const note = data.getUint8(
+                                                offset++,
+                                            );
+                                            const vel = data.getUint8(offset++);
+                                            if (type === 0x9 && vel > 0)
+                                                activeNotes[note] = {
+                                                    tick: currentTick,
+                                                    inst: currentInst,
+                                                };
+                                            else if (activeNotes[note]) {
+                                                const start =
+                                                    activeNotes[note].tick;
+                                                newSong.push({
+                                                    numTact: Math.floor(
+                                                        start / (tpq * 4),
+                                                    ),
+                                                    pos: Number(
+                                                        (
+                                                            (start %
+                                                                (tpq * 4)) /
+                                                            tpq
+                                                        ).toFixed(2),
+                                                    ),
+                                                    note:
+                                                        revMap[note % 12] +
+                                                        (Math.floor(note / 12) -
+                                                            1),
+                                                    length: Number(
+                                                        (
+                                                            (currentTick -
+                                                                start) /
+                                                            tpq
+                                                        ).toFixed(2),
+                                                    ),
+                                                    idInstrument:
+                                                        activeNotes[note].inst,
+                                                    nameInstrument:
+                                                        MIDI_INSTRUMENTS[
+                                                            activeNotes[note]
+                                                                .inst
+                                                        ] || "Unknown",
+                                                });
+                                                delete activeNotes[note];
+                                            }
+                                        } else if (type === 0xc)
+                                            currentInst = data.getUint8(
+                                                offset++,
+                                            );
+                                        // else if (status === 0xff) {
+                                        //     offset++;
+                                        //     let len = 0;
+                                        //     while (true) {
+                                        //         let b = data.getUint8(offset++);
+                                        //         len = (len << 7) | (b & 0x7f);
+                                        //         if (!(b & 0x80)) break;
+                                        //     }
+                                        //     offset += len;
+                                        // }
+                                        else if (status === 0xff) {
+                                            const metaType = data.getUint8(
+                                                offset++,
+                                            ); // Тип мета-события
+                                            let len = 0;
+                                            while (true) {
+                                                let b = data.getUint8(offset++);
+                                                len = (len << 7) | (b & 0x7f);
+                                                if (!(b & 0x80)) break;
+                                            }
+
+                                            if (metaType === 0x51) {
+                                                // 0x51 — это Set Tempo
+                                                // Темп закодирован в 3 байтах как микросекунды на четверть (MPQN)
+                                                const m1 =
+                                                    data.getUint8(offset);
+                                                const m2 = data.getUint8(
+                                                    offset + 1,
+                                                );
+                                                const m3 = data.getUint8(
+                                                    offset + 2,
+                                                );
+                                                const mpqn =
+                                                    (m1 << 16) | (m2 << 8) | m3;
+
+                                                // Формула перевода: BPM = 60,000,000 / MPQN
+                                                this.bpm = Math.round(
+                                                    60000000 / mpqn,
+                                                );
+                                                this.initBPM(); // Сразу отображаем новый BPM в поле ввода
+                                            }
+                                            offset += len;
+                                        } else if (status >= 0x80)
+                                            offset +=
+                                                status >= 0xc0 && status <= 0xdf
+                                                    ? 1
+                                                    : 2;
+                                    }
+                                } else offset += chunkLen;
+                            }
+                            newSong.sort(
+                                (a, b) =>
+                                    a.numTact * 4 +
+                                    a.pos -
+                                    (b.numTact * 4 + b.pos),
+                            );
+                            objMusics = newSong;
+                            this.initBPM();
+                            document.getElementById("editor-area").value =
+                                JSON.stringify(newSong, null, 4);
+                            this.updateSongData();
+                            this.rebuild();
+                        } catch (err) {
+                            alert("MIDI Error: " + err.message);
+                        }
+                    };
+                    reader.readAsArrayBuffer(input.files[0]);
+                },
+
+                updateSongFromEditor() {
+                    try {
+                        objMusics = JSON.parse(
+                            document.getElementById("editor-area").value,
+                        );
+                        this.updateSongData();
+                        this.rebuild();
+                        this.currentPosition = 0;
+                        this.isPlaying = false;
+                        // document.getElementById("start-overlay").style.display =
+                        //     "flex";
+                    } catch (e) {
+                        alert("JSON Error!");
+                    }
+                },
+
+                startWithCountdown() {
+                    this.songData.forEach((m) => (m.passed = false));
+                    // document.getElementById("start-overlay").style.display =
+                    //     "none";
+                    this.currentPosition = 0;
+                    this.isPlaying = true;
+                },
+
+                resize() {
+                    const container = this.cvs.parentElement;
+                    this.cvs.width = container.clientWidth;
+                    this.cvs.height = container.clientHeight;
+
+                    this.renderKb();
+                },
+
+                switchTab(tabId, btn) {
+                    // 1. Скрываем все вкладки
+                    document
+                        .querySelectorAll(".tab-content")
+                        .forEach((t) => t.classList.remove("active"));
+                    // 2. Деактивируем все кнопки
+                    document
+                        .querySelectorAll(".tab-btn")
+                        .forEach((b) => b.classList.remove("active"));
+
+                    // 3. Активируем нужную вкладку и кнопку
+                    document.getElementById(tabId).classList.add("active");
+                    btn.classList.add("active");
+
+                    // 4. Если переключились на пианино, обновляем размер канваса
+                    if (tabId === "piano-tab") {
+                        this.resize();
+                    }
+                },
+            };
+
+            window.onload = () => objPianino.init();
+            window.addEventListener("keydown", (e) => {
+                if (["INPUT", "TEXTAREA"].includes(e.target.tagName)) return;
+                const found = objPianino.notes.find((n) => n.code === e.code);
+                if (found && !e.repeat) {
+                    e.preventDefault();
+                    objPianino.play(found.id);
+                }
+            });
+        </script>
+    </body>
+</html>
