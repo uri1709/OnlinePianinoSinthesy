@@ -1,11 +1,7 @@
-Page public:
-https://github.com/uri1709/OnlinePianinoSinthesy
-
-
-Для обучения для игра на клавиатуре qwerty по падающим нотам. 
-
 Опубликованная страница
 https://uri1709.github.io/OnlinePianinoSinthesy/
+
+Для обучения для игра на клавиатуре qwerty по падающим нотам. 
 
 Сделано на основе
 https://virtualpiano.online/pianino/.
