@@ -1,3 +1,7 @@
+Page public:
+https://github.com/uri1709/OnlinePianinoSinthesy
+
+
 Для обучения для игра на клавиатуре qwerty по падающим нотам. 
 
 Опубликованная страница
