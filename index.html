@@ -31,6 +31,7 @@
             }
             .tab-btn.active {
                 background: #3498db;
+                /* background: #27ae60; */
                 color: white;
                 font-weight: bold;
             }
@@ -43,35 +44,67 @@
                 align-items: center;
                 border-bottom: 1px solid #333;
             }
-            .learning-label {
+            /* .learning-label {
                 background: #222;
                 padding: 5px 15px;
                 border-radius: 20px;
                 border: 1px solid #444;
                 cursor: pointer;
                 font-size: 0.85rem;
-                color: #0f0;
                 display: flex;
                 align-items: center;
                 gap: 8px;
-            }
+            } */
+            /* #progress-container {
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 4px;
+                            background: #222;
+                            cursor: pointer;
+                            z-index: 110;
+                        } */
+
             #progress-container {
-                position: absolute;
-                bottom: 0;
-                left: 0;
                 width: 100%;
-                height: 4px;
-                background: #222;
+                height: 20px; /* Уменьшаем высоту до тонкой линии */
+                background: #222; /* Темный фон подложки */
                 cursor: pointer;
-                z-index: 110;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: visible; /* Чтобы текст не обрезался, если он выше линии */
             }
+            /* #progress-fill {
+                            width: 0%;
+                            height: 100%;
+                            background: #2ecc71;
+                            transition: width 0.1s linear;
+                        } */
             #progress-fill {
-                width: 0%;
                 height: 100%;
+                /* Зеленый цвет как на скрине */
+                /* background: #27ae60;  */
                 background: #3498db;
+
+                position: absolute;
+                left: 0;
+                top: 0;
                 transition: width 0.1s linear;
             }
 
+            #time-display {
+                position: relative;
+                z-index: 10; /* Текст поверх зеленой полоски */
+                font-size: 11px;
+                font-family: Arial, sans-serif;
+                color: #ffffff;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Тень для читаемости на любом фоне */
+                pointer-events: none; /* Чтобы клики проходили сквозь текст на шкалу */
+                margin-top: -2px; /* Небольшая корректировка центра */
+            }
             #visualizer-container {
                 flex: 1; /* Растягивает область с нотами на всё свободное место */
                 position: relative;
@@ -91,8 +124,8 @@
                 display: flex;
                 width: 100%;
 
-                /* 15vw означает 15% от ширины экрана. 
-                    Если ширина станет меньше в 2 раза, высота тоже станет меньше в 2 раза. */
+                /* 15vw означает 15% от ширины экрана.
+                                Если ширина станет меньше в 2 раза, высота тоже станет меньше в 2 раза. */
                 height: 15vw; /* Высота теперь 15% от ширины экрана */
 
                 /* Уберите или сильно уменьшите min-height, чтобы она не блокировала сжатие */
@@ -139,6 +172,10 @@
                 background: #3498db !important;
                 transform: translateY(2px);
             }
+            /* .white-key.active {
+                            background: #2ecc71 !important;
+                            transform: translateY(2px);
+                        } */
             .black-key-wrapper {
                 width: 0; /* Обертка не занимает места в потоке */
                 position: relative;
@@ -176,9 +213,10 @@
             .setting-item {
                 margin-bottom: 20px;
                 background: #1a1a1a;
-                padding: 15px;
+                padding: 0px;
                 border-radius: 8px;
                 border: 1px solid #333;
+                align-items: center;
             }
             .inst-item {
                 display: flex;
@@ -214,9 +252,11 @@
                 display: flex;
                 justify-content: center;
                 gap: 15px;
-                margin-bottom: 20px;
+                /* margin-top: 10px;
+                margin-bottom: 10px; */
                 background: #1a1a1a; /* Темный фон как на фото */
                 padding: 20px;
+                /* padding: 0px; */
             }
 
             .ctrl-btn {
@@ -411,24 +451,85 @@
                         margin: 0;
                     "
                 >
-                    <label>Tab играет с: </label>
-                    <select
-                        id="octave-offset-select"
-                        onchange="objPianino.setOctaveOffset(this.value)"
-                        style="
-                            padding: 5px;
-                            background: #333;
-                            color: #fff;
-                            border: 1px solid #555;
-                        "
+                    <div>
+                        <!-- <label
+                            ><input
+                                type="checkbox"
+                                id="learn-mode-check"
+                                onchange="
+                                    objPianino.learningMode = this.checked
+                                "
+                            />🎓 ОБУЧЕНИЕ</label
+                        > -->
+                        <label>Tab играет с: </label>
+                        <select
+                            id="octave-offset-select"
+                            onchange="objPianino.setOctaveOffset(this.value)"
+                            style="
+                                padding: 5px;
+                                background: #333;
+                                color: #fff;
+                                border: 1px solid #555;
+                            "
+                        >
+                            <option value="0" selected>Первая</option>
+                            <option value="12">Вторая</option>
+                            <option value="24">Третья</option>
+                            <option value="36">Четвертая</option>
+                            <option value="48">Пятая</option>
+                            <option value="60">Шестая</option>
+                        </select>
+                        <!-- <label style="font-size: 0.8rem; color: #888"
+                            >BPM:</label
+                        >
+                        <input
+                            type="number"
+                            id="bpm-input"
+                            value="60"
+                            min="20"
+                            max="300"
+                            onchange="objPianino.onchangeBPM(this.value)"
+                            style="
+                                width: 50px;
+                                background: #333;
+                                color: #fff;
+                                border: 1px solid #555;
+                                padding: 5px;
+                                border-radius: 4px;
+                            "
+                        /> -->
+
+                        <!-- <label>Sustain (сек):</label>
+                    <input
+                        type="number"
+                        id="sus-val"
+                        value="1.0"
+                        step="0.1"
+                        style="width: 60px"
+                        onchange="objPianino.susTime = this.value"
+                    /> -->
+                    </div>
+                    <button
+                        class="ctrl-btn"
+                        id="playBtn"
+                        onclick="objPianino.start()"
                     >
-                        <option value="0" selected>Первая</option>
-                        <option value="12">Вторая</option>
-                        <option value="24">Третья</option>
-                        <option value="36">Четвертая</option>
-                        <option value="48">Пятая</option>
-                        <option value="60">Шестая</option>
-                    </select>
+                        <i class="icon-play"></i>
+                    </button>
+                    <button
+                        class="ctrl-btn"
+                        id="pauseBtn"
+                        onclick="objPianino.pause()"
+                    >
+                        <i class="icon-pause"></i>
+                    </button>
+                    <button
+                        class="ctrl-btn"
+                        id="stopBtn"
+                        onclick="objPianino.stop()"
+                    >
+                        <i class="icon-stop"></i>
+                    </button>
                     <label style="font-size: 0.8rem; color: #888">BPM:</label>
                     <input
                         type="number"
@@ -446,7 +547,6 @@
                             border-radius: 4px;
                         "
                     />
-
                     <label
                         ><input
                             type="checkbox"
@@ -454,44 +554,14 @@
                             onchange="objPianino.learningMode = this.checked"
                         />🎓 ОБУЧЕНИЕ</label
                     >
-
-                    <!-- <label>Sustain (сек):</label>
-                    <input
-                        type="number"
-                        id="sus-val"
-                        value="1.0"
-                        step="0.1"
-                        style="width: 60px"
-                        onchange="objPianino.susTime = this.value"
-                    /> -->
                 </div>
-                <button
-                    class="ctrl-btn"
-                    id="playBtn"
-                    onclick="objPianino.start()"
-                >
-                    <i class="icon-play"></i>
-                </button>
-                <button
-                    class="ctrl-btn"
-                    id="pauseBtn"
-                    onclick="objPianino.pause()"
-                >
-                    <i class="icon-pause"></i>
-                </button>
-                <button
-                    class="ctrl-btn"
-                    id="stopBtn"
-                    onclick="objPianino.stop()"
-                >
-                    <i class="icon-stop"></i>
-                </button>
             </div>
             <div id="visualizer-container">
-                <canvas id="visual-canvas"></canvas>
-                <div id="progress-container" onclick="objPianino.seek(event)">
+                <div id="progress-container" onclick="objPianino.seek(event)" ;>
                     <div id="progress-fill"></div>
+                    <div id="time-display">0:00 / 0:00</div>
                 </div>
+                <canvas id="visual-canvas"></canvas>
             </div>
             <div id="piano-keyboard"></div>
         </div>
@@ -507,7 +577,8 @@
                                 style="
                                     flex: 1;
                                     padding: 12px;
-                                    background: #27ae60;
+                                    /* background: #27ae60; */
+                                    background: #3498db;
                                     color: #fff;
                                     border: none;
                                     cursor: pointer;
@@ -1044,6 +1115,81 @@
                     // Сбрасываем статус прохождения для всех нот
                     this.songData.forEach((m) => (m.passed = false));
                 },
+
+                // updateProgressBar() {
+                //     const progressFill =
+                //         document.getElementById("progress-fill");
+                //     if (progressFill && this.maxPos > 0) {
+                //         // Вычисляем процент прохождения трека
+                //         const percentage =
+                //             (this.currentPosition / this.maxPos) * 100;
+                //         // Ограничиваем значение от 0 до 100
+                //         const limitedPercentage = Math.min(
+                //             Math.max(percentage, 0),
+                //             100,
+                //         );
+                //         progressFill.style.width = limitedPercentage + "%";
+                //     }
+                // },
+
+                // Вспомогательная функция для форматирования секунд в M:SS
+                // formatTime(totalSeconds) {
+                //     const mins = Math.floor(totalSeconds / 60);
+                //     const secs = Math.floor(totalSeconds % 60);
+                //     return `${mins}:${secs.toString().padStart(2, "0")}`;
+                // },
+                formatTime(totalSeconds) {
+                    if (isNaN(totalSeconds) || totalSeconds < 0) return "00:00";
+                    const mins = Math.floor(totalSeconds / 60);
+                    const secs = Math.floor(totalSeconds % 60);
+                    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+                },
+                // updateProgressBar() {
+                //     const progressFill =
+                //         document.getElementById("progress-fill");
+                //     const timeDisplay = document.getElementById("time-display");
+
+                //     if (this.maxPos > 0) {
+                //         // 1. Обновление полоски
+                //         const percentage =
+                //             (this.currentPosition / this.maxPos) * 100;
+                //         if (progressFill)
+                //             progressFill.style.width =
+                //                 Math.min(percentage, 100) + "%";
+
+                //         // 2. Расчет времени (исходя из того, что 4 единицы pos = 1 такт)
+                //         // Время в секундах = (позиция / (BPM / 60))
+                //         const currentSeconds =
+                //             this.currentPosition * (60 / this.bpm);
+                //         const totalSeconds = this.maxPos * (60 / this.bpm);
+
+                //         if (timeDisplay) {
+                //             timeDisplay.innerText = `${this.formatTime(currentSeconds)} / ${this.formatTime(totalSeconds)}`;
+                //         }
+                //     }
+                // },
+                updateProgressBar() {
+                    const progressFill =
+                        document.getElementById("progress-fill");
+                    const timeDisplay = document.getElementById("time-display");
+
+                    if (this.maxPos > 0) {
+                        const percentage =
+                            (this.currentPosition / this.maxPos) * 100;
+                        if (progressFill)
+                            progressFill.style.width =
+                                Math.min(percentage, 100) + "%";
+
+                        // Расчет времени на основе BPM (такты в секунды)
+                        const currentSeconds =
+                            (this.currentPosition * 60) / this.bpm;
+                        const totalSeconds = (this.maxPos * 60) / this.bpm;
+
+                        if (timeDisplay) {
+                            timeDisplay.innerText = `${this.formatTime(currentSeconds)} / ${this.formatTime(totalSeconds)}`;
+                        }
+                    }
+                },
                 adjustColor(hex, percent) {
                     let r = parseInt(hex.slice(1, 3), 16),
                         g = parseInt(hex.slice(3, 5), 16),
@@ -1576,21 +1722,44 @@
 
                         if (this.currentPosition > this.maxPos + 2)
                             this.isPlaying = false;
+
+                        this.updateProgressBar();
                     }
 
                     requestAnimationFrame(() => this.animate());
                 },
 
                 seek(e) {
-                    if (!this.maxPos) return;
-                    const rect = document
-                        .getElementById("progress-container")
-                        .getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    this.currentPosition = (x / rect.width) * this.maxPos;
-                    this.songData.forEach(
-                        (m) => (m.passed = m.absStart < this.currentPosition),
-                    );
+                    // if (!this.maxPos) return;
+                    // const rect = document
+                    //     .getElementById("progress-container")
+                    //     .getBoundingClientRect();
+                    // const x = e.clientX - rect.left;
+                    // this.currentPosition = (x / rect.width) * this.maxPos;
+                    // this.songData.forEach(
+                    //     (m) => (m.passed = m.absStart < this.currentPosition),
+                    // );
+
+                    const container =
+                        document.getElementById("progress-container");
+                    if (!container || this.maxPos <= 0) return;
+
+                    // Определяем положение клика относительно ширины контейнера
+                    const rect = container.getBoundingClientRect();
+                    const clickX = event.clientX - rect.left;
+                    const width = rect.width;
+
+                    // Вычисляем новую позицию в треке (в долях/тактах)
+                    const ratio = clickX / width;
+                    this.currentPosition = ratio * this.maxPos;
+
+                    // Сбрасываем флаги 'passed' у нот, чтобы они могли проиграться снова
+                    this.songData.forEach((m) => {
+                        m.passed = m.absStart < this.currentPosition;
+                    });
+
+                    // Сразу визуально обновляем шкалу
+                    this.updateProgressBar();
                 },
 
                 importMidi(input) {
