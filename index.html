@@ -139,6 +139,8 @@
                 /* Запрещаем клавиатуре забирать лишнее место у нот */
                 flex-shrink: 0;
                 flex-grow: 0;
+
+                /* margin-top: 20px; */
             }
             .key {
                 cursor: pointer;
@@ -1666,7 +1668,8 @@
                         if (
                             this.learningMode &&
                             !m.passed &&
-                            y + lenPx >= h - 2
+                            // y + lenPx >= h - 2
+                            y + lenPx >= h - 20
                         )
                             blocked = true;
 
@@ -1696,7 +1699,8 @@
                                 this.isPlaying &&
                                 !this.learningMode &&
                                 !m.passed &&
-                                y + lenPx >= h - 2
+                                //y + lenPx >= h - 2
+                                y + lenPx >= h - 20
                             ) {
                                 m.passed = true;
                                 this.play(m.idx, m.idInstrument);
