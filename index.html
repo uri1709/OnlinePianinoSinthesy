@@ -1740,9 +1740,6 @@
                             // Вместо остановки сбрасываем всё к началу
                             this.currentPosition = 0;
                             this.songData.forEach((m) => (m.passed = false));
-                        } else {
-                            this.stop();
-                            return; // Выход из анимации, если не зациклено
                         }
                     }
 
