@@ -1669,7 +1669,8 @@
                             this.learningMode &&
                             !m.passed &&
                             // y + lenPx >= h - 2
-                            y + lenPx >= h - 20
+                            // y + lenPx >= h - 20
+                            y + lenPx >= h - lenPx / 2
                         )
                             blocked = true;
 
@@ -1700,7 +1701,8 @@
                                 !this.learningMode &&
                                 !m.passed &&
                                 //y + lenPx >= h - 2
-                                y + lenPx >= h - 20
+                                // y + lenPx >= h - 20
+                                y + lenPx >= h - lenPx / 2
                             ) {
                                 m.passed = true;
                                 this.play(m.idx, m.idInstrument);
