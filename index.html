@@ -511,9 +511,10 @@
                     <div style="padding: 20px">
                         <div>
                             <button
-                                onclick=""
+                                onclick="objPianino.updateSongFromEditor()"
                                 style="
                                     flex: 1;
+                                    margin: 2px;
                                     padding: 12px;
                                     /* background: #27ae60; */
                                     background: #3498db;
@@ -541,6 +542,7 @@
                                 "
                                 style="
                                     flex: 1;
+                                    margin: 2px;
                                     padding: 12px;
                                     background: #3498db;
                                     color: #fff;
@@ -551,6 +553,55 @@
                                 "
                             >
                                 ЗАГРУЗИТЬ MIDI
+                            </button>
+
+                            <!-- Кнопка сохранения -->
+                            <button
+                                onclick="saveMusicToJSON()"
+                                style="
+                                    flex: 1;
+                                    margin: 2px;
+                                    padding: 12px;
+                                    /* background: #27ae60; */
+                                    background: #3498db;
+                                    color: #fff;
+                                    border: none;
+                                    cursor: pointer;
+                                    font-weight: bold;
+                                    border-radius: 4px;
+                                "
+                            >
+                                СОХРАНИТЬ JSON
+                            </button>
+
+                            <!-- Кнопка загрузки -->
+                            <input
+                                type="file"
+                                id="json-upload"
+                                accept=".json"
+                                style="display: none"
+                                onchange="loadMusicFromJSON(this)"
+                            />
+                            <button
+                                onclick="
+                                    document
+                                        .getElementById('json-upload')
+                                        .click()
+                                "
+                                style="
+                                    flex: 1;
+                                    margin: 2px;
+                                    padding: 12px;
+                                    /* background: #f39c12; */
+                                    background: #3498db;
+                                    color: #fff;
+                                    border: none;
+                                    cursor: pointer;
+                                    font-weight: bold;
+                                    border-radius: 4px;
+                                "
+                            >
+                                ЗАГРУЗИТЬ JSON
                             </button>
 
                             <textarea
@@ -1871,8 +1922,54 @@
                 },
             };
 
-            //{{Глобальный контекст, выполнение кода
+            // Функция сохранения в файл
+            function saveMusicToJSON() {
+                // Собираем актуальные данные из объекта
+                const dataStr = JSON.stringify(objMusic, null, 4);
+                const dataUri =
+                    "data:application/json;charset=utf-8," +
+                    encodeURIComponent(dataStr);
 
+                const exportFileDefaultName = "my_music.json";
+
+                const linkElement = document.createElement("a");
+                linkElement.setAttribute("href", dataUri);
+                linkElement.setAttribute("download", exportFileDefaultName);
+                linkElement.click();
+            }
+
+            // Функция загрузки из файла
+            function loadMusicFromJSON(input) {
+                const file = input.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    try {
+                        const importedData = JSON.parse(e.target.result);
+
+                        // Проверка структуры (наличие bpm и notesSong)
+                        if (importedData.bpm && importedData.notesSong) {
+                            objMusic.bpm = importedData.bpm;
+                            objMusic.notesSong = importedData.notesSong;
+
+                            // Обновляем пианино и текстовое поле редактора
+                            //objPianino.updateSongData();
+                            objPianino.init();
+                            alert("Данные успешно загружены!");
+                        } else {
+                            alert("Ошибка: Неверный формат JSON файла.");
+                        }
+                    } catch (err) {
+                        alert("Ошибка при чтении файла: " + err.message);
+                    }
+                    // Очищаем input, чтобы можно было загрузить тот же файл повторно
+                    input.value = "";
+                };
+                reader.readAsText(file);
+            }
+
+            //{{Глобальный контекст, выполнение кода
             window.onload = () => objPianino.init();
             window.addEventListener("keydown", (e) => {
                 if (["INPUT", "TEXTAREA"].includes(e.target.tagName)) return;
