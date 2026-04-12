@@ -44,27 +44,6 @@
                 align-items: center;
                 border-bottom: 1px solid #333;
             }
-            /* .learning-label {
-                background: #222;
-                padding: 5px 15px;
-                border-radius: 20px;
-                border: 1px solid #444;
-                cursor: pointer;
-                font-size: 0.85rem;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-            } */
-            /* #progress-container {
-                            position: absolute;
-                            bottom: 0;
-                            left: 0;
-                            width: 100%;
-                            height: 4px;
-                            background: #222;
-                            cursor: pointer;
-                            z-index: 110;
-                        } */
 
             #progress-container {
                 width: 100%;
@@ -77,16 +56,10 @@
                 justify-content: center;
                 overflow: visible; /* Чтобы текст не обрезался, если он выше линии */
             }
-            /* #progress-fill {
-                            width: 0%;
-                            height: 100%;
-                            background: #2ecc71;
-                            transition: width 0.1s linear;
-                        } */
+
             #progress-fill {
                 height: 100%;
                 /* Зеленый цвет как на скрине */
-                /* background: #27ae60;  */
                 background: #3498db;
 
                 position: absolute;
@@ -174,15 +147,13 @@
                 background: #3498db !important;
                 transform: translateY(2px);
             }
-            /* .white-key.active {
-                            background: #2ecc71 !important;
-                            transform: translateY(2px);
-                        } */
+
             .black-key-wrapper {
                 width: 0; /* Обертка не занимает места в потоке */
                 position: relative;
                 z-index: 10;
             }
+
             .black-key {
                 position: absolute;
                 /* Ширина черной клавиши в процентах от белой или фиксированная */
@@ -200,8 +171,8 @@
             }
             .black-key.active {
                 background: #e74c3c !important;
-                /* transform: translateY(2px); */
             }
+
             .hint {
                 font-size: 0.6rem;
                 margin-bottom: 8px;
@@ -213,8 +184,6 @@
                 padding: 0px;
             }
             .setting-item {
-                /* margin-bottom: 0px; */
-                /* padding: 0px; */
                 background: #1a1a1a;
                 border-radius: 8px;
                 border: 1px solid #333;
@@ -254,11 +223,8 @@
                 display: flex;
                 justify-content: center;
                 gap: 15px;
-                /* margin-top: 10px;
-                margin-bottom: 10px; */
                 background: #1a1a1a; /* Темный фон как на фото */
                 padding: 10px;
-                /* padding: 0px; */
             }
 
             .ctrl-btn {
@@ -454,15 +420,6 @@
                     "
                 >
                     <div>
-                        <!-- <label
-                            ><input
-                                type="checkbox"
-                                id="learn-mode-check"
-                                onchange="
-                                    objPianino.learningMode = this.checked
-                                "
-                            />🎓 ОБУЧЕНИЕ</label
-                        > -->
                         <label>Tab играет с: </label>
                         <select
                             id="octave-offset-select"
@@ -481,35 +438,6 @@
                             <option value="48">Пятая</option>
                             <option value="60">Шестая</option>
                         </select>
-                        <!-- <label style="font-size: 0.8rem; color: #888"
-                            >BPM:</label
-                        >
-                        <input
-                            type="number"
-                            id="bpm-input"
-                            value="60"
-                            min="20"
-                            max="300"
-                            onchange="objPianino.onchangeBPM(this.value)"
-                            style="
-                                width: 50px;
-                                background: #333;
-                                color: #fff;
-                                border: 1px solid #555;
-                                padding: 5px;
-                                border-radius: 4px;
-                            "
-                        /> -->
-
-                        <!-- <label>Sustain (сек):</label>
-                    <input
-                        type="number"
-                        id="sus-val"
-                        value="1.0"
-                        step="0.1"
-                        style="width: 60px"
-                        onchange="objPianino.susTime = this.value"
-                    /> -->
                     </div>
                     <button
                         class="ctrl-btn"
@@ -1019,15 +947,10 @@
                     nameInstrument: "Acoustic Guitar (steel)",
                 },
             ];
-            document.getElementById("editor-area").value = JSON.stringify(
-                objMusic,
-                null,
-                2,
-            );
 
             var objPianino = {
                 keyWidth: 0,
-                notes: [],
+                keysPianino: [],
 
                 countNotes: 85,
 
@@ -1045,7 +968,7 @@
                 bpm: 130,
                 pixelsPerQuarter: 120,
                 maxPos: 0,
-                songData: [],
+                notesSong: [],
                 activeInstruments: new Set(),
                 instColors: {},
                 octaveOffset: 0, // По умолчанию теперь 12 (Субконтроктава), чтобы добавить 2 нижние октавы
@@ -1124,61 +1047,15 @@
                     this.isPlaying = false;
                     this.currentPosition = 0;
                     // Сбрасываем статус прохождения для всех нот
-                    this.songData.forEach((m) => (m.passed = false));
+                    this.notesSong.forEach((m) => (m.passed = false));
                 },
 
-                // updateProgressBar() {
-                //     const progressFill =
-                //         document.getElementById("progress-fill");
-                //     if (progressFill && this.maxPos > 0) {
-                //         // Вычисляем процент прохождения трека
-                //         const percentage =
-                //             (this.currentPosition / this.maxPos) * 100;
-                //         // Ограничиваем значение от 0 до 100
-                //         const limitedPercentage = Math.min(
-                //             Math.max(percentage, 0),
-                //             100,
-                //         );
-                //         progressFill.style.width = limitedPercentage + "%";
-                //     }
-                // },
-
-                // Вспомогательная функция для форматирования секунд в M:SS
-                // formatTime(totalSeconds) {
-                //     const mins = Math.floor(totalSeconds / 60);
-                //     const secs = Math.floor(totalSeconds % 60);
-                //     return `${mins}:${secs.toString().padStart(2, "0")}`;
-                // },
                 formatTime(totalSeconds) {
                     if (isNaN(totalSeconds) || totalSeconds < 0) return "00:00";
                     const mins = Math.floor(totalSeconds / 60);
                     const secs = Math.floor(totalSeconds % 60);
                     return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
                 },
-                // updateProgressBar() {
-                //     const progressFill =
-                //         document.getElementById("progress-fill");
-                //     const timeDisplay = document.getElementById("time-display");
-
-                //     if (this.maxPos > 0) {
-                //         // 1. Обновление полоски
-                //         const percentage =
-                //             (this.currentPosition / this.maxPos) * 100;
-                //         if (progressFill)
-                //             progressFill.style.width =
-                //                 Math.min(percentage, 100) + "%";
-
-                //         // 2. Расчет времени (исходя из того, что 4 единицы pos = 1 такт)
-                //         // Время в секундах = (позиция / (BPM / 60))
-                //         const currentSeconds =
-                //             this.currentPosition * (60 / this.bpm);
-                //         const totalSeconds = this.maxPos * (60 / this.bpm);
-
-                //         if (timeDisplay) {
-                //             timeDisplay.innerText = `${this.formatTime(currentSeconds)} / ${this.formatTime(totalSeconds)}`;
-                //         }
-                //     }
-                // },
                 updateProgressBar() {
                     const progressFill =
                         document.getElementById("progress-fill");
@@ -1229,6 +1106,9 @@
                     ).join("");
                 },
                 init() {
+                    document.getElementById("editor-area").value =
+                        JSON.stringify(objMusic, null, 2);
+
                     this.cvs = document.getElementById("visual-canvas");
                     this.cvsCtx = this.cvs.getContext("2d");
 
@@ -1249,7 +1129,7 @@
                 },
 
                 updateSongData() {
-                    this.songData = JSON.parse(
+                    this.notesSong = JSON.parse(
                         JSON.stringify(objMusic, null, 2),
                     ).map((m) => {
                         const absoluteStart = m.numTact * 4 + m.pos;
@@ -1262,12 +1142,12 @@
                     });
                     this.maxPos =
                         Math.max(
-                            ...this.songData.map((m) => m.absStart + m.length),
+                            ...this.notesSong.map((m) => m.absStart + m.length),
                             0,
                         ) || 0;
                     this.activeInstruments.clear();
                     const uniqueIds = Array.from(
-                        new Set(this.songData.map((m) => m.idInstrument)),
+                        new Set(this.notesSong.map((m) => m.idInstrument)),
                     );
                     uniqueIds.forEach((id, index) => {
                         const base =
@@ -1311,13 +1191,13 @@
                         СИ: "B",
                     };
                     const whites = [0, 2, 4, 5, 7, 9, 11];
-                    this.notes = [];
+                    this.keysPianino = [];
 
                     for (let i = 0; i < this.countNotes; i++) {
                         const abs = this.octaveOffset + i; // Это реальный номер ноты в MIDI
                         const semi = i % 12;
 
-                        this.notes.push({
+                        this.keysPianino.push({
                             id: i,
                             name: names[semi] + Math.floor(i / 12),
                             isWhite: whites.includes(semi),
@@ -1329,13 +1209,13 @@
                                 )?.key ?? "",
                         });
                     }
-                    this.songData.forEach((m) => {
+                    this.notesSong.forEach((m) => {
                         //console.log(m);
                         let pureNote = m.note
                             .replace(/[0-9]/g, "")
                             .toUpperCase();
                         let octave = m.note.replace(/\D/g, "");
-                        m.idx = this.notes.findIndex(
+                        m.idx = this.keysPianino.findIndex(
                             (n) =>
                                 n.name === (map[pureNote] || pureNote) + octave,
                         );
@@ -1355,14 +1235,14 @@
                     this.cvs.height = this.cvsHeight;
 
                     // Считаем количество белых клавиш для сетки
-                    const whiteNotesCount = this.notes.filter(
+                    const whiteNotesCount = this.keysPianino.filter(
                         (n) => n.isWhite,
                     ).length;
 
                     // Ключевой параметр для синхронизации с Canvas
                     this.keyWidth = this.cvs.width / whiteNotesCount;
 
-                    this.notes.forEach((n) => {
+                    this.keysPianino.forEach((n) => {
                         const el = document.createElement("div");
                         el.className =
                             "key " + (n.isWhite ? "white-key" : "black-key");
@@ -1397,7 +1277,6 @@
                             // Пропорциональная ширина для черных клавиш
                             const bW = this.keyWidth * 0.65;
                             el.style.width = bW + "px";
-                            //el.style.left = -(bW / 2) + "px"; // Центрируем
 
                             const wrapper = document.createElement("div");
                             wrapper.className = "black-key-wrapper";
@@ -1413,12 +1292,12 @@
                         document.getElementById("instruments-list");
                     container.innerHTML = "";
                     const unique = Array.from(
-                        new Set(this.songData.map((m) => m.idInstrument)),
+                        new Set(this.notesSong.map((m) => m.idInstrument)),
                     );
                     unique
                         .sort((a, b) => a - b)
                         .forEach((id) => {
-                            const m = this.songData.find(
+                            const m = this.notesSong.find(
                                 (x) => x.idInstrument === id,
                             );
                             if (!m) return;
@@ -1446,12 +1325,12 @@
                     }
                     if (this.ctx.state === "suspended") this.ctx.resume();
 
-                    const n = this.notes[id];
+                    const n = this.keysPianino[id];
                     if (!n) return;
 
                     // Логика режима обучения...
                     if (this.learningMode && this.isPlaying) {
-                        const targetNote = this.songData
+                        const targetNote = this.notesSong
                             .filter((m) => m.idx === id && !m.passed)
                             .sort((a, b) => a.absStart - b.absStart)[0];
                         if (targetNote) {
@@ -1506,7 +1385,7 @@
                     this.cvsCtx.strokeStyle = "#222"; // Цвет линий сетки
                     this.cvsCtx.beginPath();
 
-                    const whiteNotesCount = this.notes.filter(
+                    const whiteNotesCount = this.keysPianino.filter(
                         (n) => n.isWhite,
                     ).length;
 
@@ -1574,7 +1453,7 @@
                 drawSubstrate() {
                     const ctx = this.cvsCtx;
                     const h = this.cvsHeight;
-                    const whiteKeys = this.notes.filter((n) => n.isWhite);
+                    const whiteKeys = this.keysPianino.filter((n) => n.isWhite);
 
                     whiteKeys.forEach((n, i) => {
                         // Проверяем, входит ли нота в группу ДО, РЕ, МИ, ФА (индексы 0,1,2,3 в октаве)
@@ -1652,15 +1531,14 @@
                         this.cvsHeight / this.pixelsPerQuarter;
 
                     // Фильтруем массив нот перед отрисовкой
-                    const visibleNotes = this.songData.filter((m) => {
+                    const visibleNotesSong = this.notesSong.filter((m) => {
                         return (
                             m.absStart + m.length > visibleStartTime &&
                             m.absStart < visibleEndTime
                         );
                     });
 
-                    // this.songData.forEach((m) => {
-                    visibleNotes.forEach((m) => {
+                    visibleNotesSong.forEach((m) => {
                         if (!this.activeInstruments.has(m.idInstrument)) return;
                         const el = document.getElementById("k-" + m.idx);
                         if (!el) return;
@@ -1678,8 +1556,6 @@
                         if (
                             this.learningMode &&
                             !m.passed &&
-                            // y + lenPx >= h - 2
-                            // y + lenPx >= h - 20
                             y + lenPx >= h - lenPx / 2
                         )
                             blocked = true;
@@ -1689,7 +1565,7 @@
                                 w: "#fff",
                                 b: "#000",
                             };
-                            ctx.fillStyle = this.notes[m.idx].isWhite
+                            ctx.fillStyle = this.keysPianino[m.idx].isWhite
                                 ? colors.w
                                 : colors.b;
                             ctx.globalAlpha = m.passed ? 0.2 : 1;
@@ -1710,8 +1586,6 @@
                                 this.isPlaying &&
                                 !this.learningMode &&
                                 !m.passed &&
-                                //y + lenPx >= h - 2
-                                // y + lenPx >= h - 20
                                 y + lenPx >= h - lenPx / 2
                             ) {
                                 m.passed = true;
@@ -1739,7 +1613,7 @@
                         if (this.loopMode) {
                             // Вместо остановки сбрасываем всё к началу
                             this.currentPosition = 0;
-                            this.songData.forEach((m) => (m.passed = false));
+                            this.notesSong.forEach((m) => (m.passed = false));
                         }
                     }
 
@@ -1747,16 +1621,6 @@
                 },
 
                 seek(e) {
-                    // if (!this.maxPos) return;
-                    // const rect = document
-                    //     .getElementById("progress-container")
-                    //     .getBoundingClientRect();
-                    // const x = e.clientX - rect.left;
-                    // this.currentPosition = (x / rect.width) * this.maxPos;
-                    // this.songData.forEach(
-                    //     (m) => (m.passed = m.absStart < this.currentPosition),
-                    // );
-
                     const container =
                         document.getElementById("progress-container");
                     if (!container || this.maxPos <= 0) return;
@@ -1771,7 +1635,7 @@
                     this.currentPosition = ratio * this.maxPos;
 
                     // Сбрасываем флаги 'passed' у нот, чтобы они могли проиграться снова
-                    this.songData.forEach((m) => {
+                    this.notesSong.forEach((m) => {
                         m.passed = m.absStart < this.currentPosition;
                     });
 
@@ -1948,17 +1812,14 @@
                         this.rebuild();
                         this.currentPosition = 0;
                         this.isPlaying = false;
-                        // document.getElementById("start-overlay").style.display =
-                        //     "flex";
                     } catch (e) {
                         alert("JSON Error!");
                     }
                 },
 
                 startWithCountdown() {
-                    this.songData.forEach((m) => (m.passed = false));
-                    // document.getElementById("start-overlay").style.display =
-                    //     "none";
+                    this.notesSong.forEach((m) => (m.passed = false));
+
                     this.currentPosition = 0;
                     this.isPlaying = true;
                 },
@@ -2000,15 +1861,20 @@
                 },
             };
 
+            //{{Глобальный контекст, выполнение кода
+
             window.onload = () => objPianino.init();
             window.addEventListener("keydown", (e) => {
                 if (["INPUT", "TEXTAREA"].includes(e.target.tagName)) return;
-                const found = objPianino.notes.find((n) => n.code === e.code);
+                const found = objPianino.keysPianino.find(
+                    (n) => n.code === e.code,
+                );
                 if (found && !e.repeat) {
                     e.preventDefault();
                     objPianino.play(found.id);
                 }
             });
+            //}}Глобальный контекст, выполнение кода
         </script>
     </body>
 </html>
