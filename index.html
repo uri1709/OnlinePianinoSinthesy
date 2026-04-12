@@ -556,6 +556,14 @@
                             onchange="objPianino.learningMode = this.checked"
                         />🎓 ОБУЧЕНИЕ</label
                     >
+                    <label>
+                        <input
+                            type="checkbox"
+                            id="loop-mode-check"
+                            onchange="objPianino.loopMode = this.checked"
+                        />
+                        ЗАЦИКЛИТЬ
+                    </label>
                 </div>
             </div>
             <div id="visualizer-container">
@@ -817,7 +825,7 @@
                 "#FF00FF",
             ];
 
-            var objMusics = [
+            var objMusic = [
                 {
                     numTact: 1,
                     pos: 0,
@@ -1012,7 +1020,7 @@
                 },
             ];
             document.getElementById("editor-area").value = JSON.stringify(
-                objMusics,
+                objMusic,
                 null,
                 2,
             );
@@ -1033,6 +1041,7 @@
                 isPlaying: false,
                 isPaused: false,
                 learningMode: false,
+                loopMode: false, //зациклить
                 bpm: 130,
                 pixelsPerQuarter: 120,
                 maxPos: 0,
@@ -1173,6 +1182,7 @@
                 updateProgressBar() {
                     const progressFill =
                         document.getElementById("progress-fill");
+
                     const timeDisplay = document.getElementById("time-display");
 
                     if (this.maxPos > 0) {
@@ -1240,7 +1250,7 @@
 
                 updateSongData() {
                     this.songData = JSON.parse(
-                        JSON.stringify(objMusics, null, 2),
+                        JSON.stringify(objMusic, null, 2),
                     ).map((m) => {
                         const absoluteStart = m.numTact * 4 + m.pos;
                         return {
@@ -1719,17 +1729,21 @@
                         this.currentPosition +=
                             (this.bpm / 60) * dt * speedMultiplier;
 
-                        // Обновление прогресс-бара
-                        const percent =
-                            (this.currentPosition / (this.maxPos || 1)) * 100;
-                        const fill = document.getElementById("progress-fill");
-                        if (fill)
-                            fill.style.width = Math.min(100, percent) + "%";
-
                         if (this.currentPosition > this.maxPos + 2)
                             this.isPlaying = false;
 
                         this.updateProgressBar();
+                    }
+
+                    if (this.currentPosition >= this.maxPos) {
+                        if (this.loopMode) {
+                            // Вместо остановки сбрасываем всё к началу
+                            this.currentPosition = 0;
+                            this.songData.forEach((m) => (m.passed = false));
+                        } else {
+                            this.stop();
+                            return; // Выход из анимации, если не зациклено
+                        }
                     }
 
                     requestAnimationFrame(() => this.animate());
@@ -1915,7 +1929,7 @@
                                     a.pos -
                                     (b.numTact * 4 + b.pos),
                             );
-                            objMusics = newSong;
+                            objMusic = newSong;
                             this.initBPM();
                             document.getElementById("editor-area").value =
                                 JSON.stringify(newSong, null, 4);
@@ -1930,7 +1944,7 @@
 
                 updateSongFromEditor() {
                     try {
-                        objMusics = JSON.parse(
+                        objMusic = JSON.parse(
                             document.getElementById("editor-area").value,
                         );
                         this.updateSongData();
