@@ -382,6 +382,27 @@
                 position: sticky; /* Шапка всегда сверху при скролле */
                 top: 0;
             }
+
+            body,
+            .piano-app {
+                /* 100vh — запасной вариант, если JS не сработает */
+                height: 100vh;
+                /* Используем переменную, которую вычислим в JS */
+                height: calc(var(--vh, 1vh) * 100);
+                overflow: hidden;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* Убедитесь, что сама клавиатура имеет гибкую высоту или прижата к низу */
+            .keyboard-section {
+                flex-shrink: 0; /* Не дает клавиатуре сжиматься */
+                margin-bottom: env(
+                    safe-area-inset-bottom
+                ); /* Учет "челок" и полосок навигации */
+            }
         </style>
     </head>
     <body>
@@ -1717,17 +1738,535 @@
                     this.updateProgressBar();
                 },
 
+                // importMidi(input) {
+                //     if (!input.files || !input.files.length) return;
+                //     const reader = new FileReader();
+                //     reader.onload = (e) => {
+                //         try {
+                //             const data = new DataView(e.target.result);
+                //             const tpq = data.getUint16(12);
+                //             let offset = 14;
+                //             const newNotesSong = [];
+                //             let newBpm = 100;
+                //             const activeNotes = {};
+                //             const revMap = {
+                //                 0: "ДО",
+                //                 1: "РЕБИМОЛЬ",
+                //                 2: "РЕ",
+                //                 3: "МИБИМОЛЬ",
+                //                 4: "МИ",
+                //                 5: "ФА",
+                //                 6: "СОЛЬБИМОЛЬ",
+                //                 7: "СОЛЬ",
+                //                 8: "ЛЯБИМОЛЬ",
+                //                 9: "ЛЯ",
+                //                 10: "СИБИМОЛЬ",
+                //                 11: "СИ",
+                //             };
+                //             let currentInst = 0;
+                //             while (offset < data.byteLength) {
+                //                 const chunkType = data.getUint32(offset);
+                //                 const chunkLen = data.getUint32(offset + 4);
+                //                 offset += 8;
+                //                 if (chunkType == 0x4d54726b) {
+                //                     let trackEnd = offset + chunkLen;
+                //                     let currentTick = 0;
+                //                     while (offset < trackEnd) {
+                //                         let delta = 0;
+                //                         while (true) {
+                //                             let b = data.getUint8(offset++);
+                //                             delta = (delta << 7) | (b & 0x7f);
+                //                             if (!(b & 0x80)) break;
+                //                         }
+                //                         currentTick += delta;
+                //                         let status = data.getUint8(offset++);
+                //                         let type = status >> 4;
+                //                         if (type === 0x9 || type === 0x8) {
+                //                             const note = data.getUint8(
+                //                                 offset++,
+                //                             );
+                //                             const vel = data.getUint8(offset++);
+                //                             if (type === 0x9 && vel > 0)
+                //                                 activeNotes[note] = {
+                //                                     tick: currentTick,
+                //                                     inst: currentInst,
+                //                                 };
+                //                             else if (activeNotes[note]) {
+                //                                 const start =
+                //                                     activeNotes[note].tick;
+                //                                 newNotesSong.push({
+                //                                     numTact: Math.floor(
+                //                                         start / (tpq * 4),
+                //                                     ),
+                //                                     pos: Number(
+                //                                         (
+                //                                             (start %
+                //                                                 (tpq * 4)) /
+                //                                             tpq
+                //                                         ).toFixed(2),
+                //                                     ),
+                //                                     note:
+                //                                         revMap[note % 12] +
+                //                                         (Math.floor(note / 12) -
+                //                                             1),
+                //                                     length: Number(
+                //                                         (
+                //                                             (currentTick -
+                //                                                 start) /
+                //                                             tpq
+                //                                         ).toFixed(2),
+                //                                     ),
+                //                                     idInstrument:
+                //                                         activeNotes[note].inst,
+                //                                     nameInstrument:
+                //                                         MIDI_INSTRUMENTS[
+                //                                             activeNotes[note]
+                //                                                 .inst
+                //                                         ] || "Unknown",
+                //                                 });
+                //                                 delete activeNotes[note];
+                //                             }
+                //                         } else if (type === 0xc)
+                //                             currentInst = data.getUint8(
+                //                                 offset++,
+                //                             );
+                //                         // else if (status === 0xff) {
+                //                         //     offset++;
+                //                         //     let len = 0;
+                //                         //     while (true) {
+                //                         //         let b = data.getUint8(offset++);
+                //                         //         len = (len << 7) | (b & 0x7f);
+                //                         //         if (!(b & 0x80)) break;
+                //                         //     }
+                //                         //     offset += len;
+                //                         // }
+                //                         else if (status === 0xff) {
+                //                             const metaType = data.getUint8(
+                //                                 offset++,
+                //                             ); // Тип мета-события
+                //                             let len = 0;
+                //                             while (true) {
+                //                                 let b = data.getUint8(offset++);
+                //                                 len = (len << 7) | (b & 0x7f);
+                //                                 if (!(b & 0x80)) break;
+                //                             }
+
+                //                             if (metaType === 0x51) {
+                //                                 // 0x51 — это Set Tempo
+                //                                 // Темп закодирован в 3 байтах как микросекунды на четверть (MPQN)
+                //                                 const m1 =
+                //                                     data.getUint8(offset);
+                //                                 const m2 = data.getUint8(
+                //                                     offset + 1,
+                //                                 );
+                //                                 const m3 = data.getUint8(
+                //                                     offset + 2,
+                //                                 );
+                //                                 const mpqn =
+                //                                     (m1 << 16) | (m2 << 8) | m3;
+
+                //                                 // Формула перевода: BPM = 60,000,000 / MPQN
+                //                                 newBpm = Math.round(
+                //                                     60000000 / mpqn,
+                //                                 );
+                //                                 //this.initBPM(); // Сразу отображаем новый BPM в поле ввода
+                //                             }
+                //                             offset += len;
+                //                         } else if (status >= 0x80)
+                //                             offset +=
+                //                                 status >= 0xc0 && status <= 0xdf
+                //                                     ? 1
+                //                                     : 2;
+                //                     }
+                //                 } else offset += chunkLen;
+                //             }
+                //             newNotesSong.sort(
+                //                 (a, b) =>
+                //                     a.numTact * 4 +
+                //                     a.pos -
+                //                     (b.numTact * 4 + b.pos),
+                //             );
+
+                //             objMusic.notesSong = newNotesSong;
+                //             objMusic.bpm = newBpm;
+                //             // this.bpm = newBpm;
+                //             // this.initInputBpm();
+                //             this.updateSongData();
+                //             this.rebuild();
+                //         } catch (err) {
+                //             alert("MIDI Error: " + err.message);
+                //         }
+                //     };
+                //     reader.readAsArrayBuffer(input.files[0]);
+                // },
+                // importMidi(input) {
+                //     if (!input.files || !input.files.length) return;
+                //     const reader = new FileReader();
+                //     reader.onload = (e) => {
+                //         try {
+                //             const data = new DataView(e.target.result);
+                //             // Проверка заголовка MThd
+                //             if (data.getUint32(0) !== 0x4d546864)
+                //                 throw new Error("Неверный формат MIDI");
+
+                //             const tpq = data.getUint16(12); // Ticks Per Quarter Note
+                //             let offset = 14;
+                //             const newNotesSong = [];
+                //             let newBpm = 120;
+                //             const revMap = {
+                //                 0: "ДО",
+                //                 1: "РЕБИМОЛЬ",
+                //                 2: "РЕ",
+                //                 3: "МИБИМОЛЬ",
+                //                 4: "МИ",
+                //                 5: "ФА",
+                //                 6: "СОЛЬБИМОЛЬ",
+                //                 7: "СОЛЬ",
+                //                 8: "ЛЯБИМОЛЬ",
+                //                 9: "ЛЯ",
+                //                 10: "СИБИМОЛЬ",
+                //                 11: "СИ",
+                //             };
+
+                //             while (offset < data.byteLength) {
+                //                 const chunkType = data.getUint32(offset);
+                //                 const chunkLen = data.getUint32(offset + 4);
+                //                 offset += 8;
+
+                //                 if (chunkType === 0x4d54726b) {
+                //                     // MTrk (трек)
+                //                     let trackEnd = offset + chunkLen;
+                //                     let currentTick = 0;
+                //                     let lastStatus = 0;
+                //                     const activeNotes = {};
+                //                     let currentInst = 0;
+
+                //                     while (offset < trackEnd) {
+                //                         // 1. Читаем Delta Time
+                //                         let delta = 0;
+                //                         while (true) {
+                //                             let b = data.getUint8(offset++);
+                //                             delta = (delta << 7) | (b & 0x7f);
+                //                             if (!(b & 0x80)) break;
+                //                         }
+                //                         currentTick += delta;
+
+                //                         // 2. Определяем статус (с учетом Running Status)
+                //                         let status = data.getUint8(offset);
+                //                         if (status < 0x80) {
+                //                             status = lastStatus;
+                //                         } else {
+                //                             lastStatus = status;
+                //                             offset++;
+                //                         }
+
+                //                         const type = status >> 4;
+                //                         const channel = status & 0x0f;
+
+                //                         if (type === 0x9 || type === 0x8) {
+                //                             // Note On / Off
+                //                             const note = data.getUint8(
+                //                                 offset++,
+                //                             );
+                //                             const vel = data.getUint8(offset++);
+
+                //                             if (type === 0x9 && vel > 0) {
+                //                                 activeNotes[note] = {
+                //                                     tick: currentTick,
+                //                                     inst: currentInst,
+                //                                 };
+                //                             } else if (activeNotes[note]) {
+                //                                 const start =
+                //                                     activeNotes[note].tick;
+                //                                 newNotesSong.push({
+                //                                     numTact: Math.floor(
+                //                                         start / (tpq * 4),
+                //                                     ), //
+                //                                     pos: Number(
+                //                                         (
+                //                                             (start %
+                //                                                 (tpq * 4)) /
+                //                                             tpq
+                //                                         ).toFixed(2),
+                //                                     ), //
+                //                                     note:
+                //                                         revMap[note % 12] +
+                //                                         (Math.floor(note / 12) -
+                //                                             1),
+                //                                     length: Number(
+                //                                         (
+                //                                             (currentTick -
+                //                                                 start) /
+                //                                             tpq
+                //                                         ).toFixed(2),
+                //                                     ),
+                //                                     idInstrument:
+                //                                         activeNotes[note].inst,
+                //                                     nameInstrument:
+                //                                         MIDI_INSTRUMENTS[
+                //                                             activeNotes[note]
+                //                                                 .inst
+                //                                         ] || "Unknown",
+                //                                 });
+                //                                 delete activeNotes[note];
+                //                             }
+                //                         } else if (type === 0xc) {
+                //                             // Program Change
+                //                             currentInst = data.getUint8(
+                //                                 offset++,
+                //                             );
+                //                         } else if (status === 0xff) {
+                //                             // Meta Event
+                //                             const metaType = data.getUint8(
+                //                                 offset++,
+                //                             );
+                //                             let len = 0;
+                //                             while (true) {
+                //                                 let b = data.getUint8(offset++);
+                //                                 len = (len << 7) | (b & 0x7f);
+                //                                 if (!(b & 0x80)) break;
+                //                             }
+                //                             if (metaType === 0x51) {
+                //                                 // Set Tempo
+                //                                 const mpqn =
+                //                                     (data.getUint8(offset) <<
+                //                                         16) |
+                //                                     (data.getUint8(
+                //                                         offset + 1,
+                //                                     ) <<
+                //                                         8) |
+                //                                     data.getUint8(offset + 2);
+                //                                 newBpm = Math.round(
+                //                                     60000000 / mpqn,
+                //                                 );
+                //                             }
+                //                             offset += len;
+                //                         } else if (
+                //                             type === 0xa ||
+                //                             type === 0xb ||
+                //                             type === 0xe
+                //                         ) {
+                //                             offset += 2;
+                //                         } else if (type === 0xd) {
+                //                             offset += 1;
+                //                         }
+                //                     }
+                //                 } else {
+                //                     offset += chunkLen;
+                //                 }
+                //             }
+
+                //             // Сортировка по времени
+                //             newNotesSong.sort(
+                //                 (a, b) =>
+                //                     a.numTact * 4 +
+                //                     a.pos -
+                //                     (b.numTact * 4 + b.pos),
+                //             );
+
+                //             objMusic.notesSong = newNotesSong;
+                //             objMusic.bpm = newBpm;
+                //             this.updateSongData();
+                //             this.rebuild();
+                //         } catch (err) {
+                //             console.error(err);
+                //             alert("MIDI Error: " + err.message);
+                //         }
+                //     };
+                //     reader.readAsArrayBuffer(input.files[0]);
+                // },
+
+                /*************  ✨ Windsurf Command ⭐  *************/
+                /**
+                 * Импортирует MIDI файл и обновляет данные песни.
+                 * @param {File} input - выбранный MIDI файл.
+                 */
+                /*******  1b34976d-2891-461f-a93c-9cd56199249a  *******/
+                // importMidi(input) {
+                //     if (!input.files || !input.files.length) return;
+                //     const reader = new FileReader();
+                //     reader.onload = (e) => {
+                //         try {
+                //             const data = new DataView(e.target.result);
+                //             if (data.getUint32(0) !== 0x4d546864)
+                //                 throw new Error("Это не MIDI файл");
+
+                //             const tpq = data.getUint16(12); // В вашем случае это 120
+                //             let offset = 14;
+                //             const newNotesSong = [];
+                //             let newBpm = 120;
+                //             const revMap = {
+                //                 0: "ДО",
+                //                 1: "РЕБИМОЛЬ",
+                //                 2: "РЕ",
+                //                 3: "МИБИМОЛЬ",
+                //                 4: "МИ",
+                //                 5: "ФА",
+                //                 6: "СОЛЬБИМОЛЬ",
+                //                 7: "СОЛЬ",
+                //                 8: "ЛЯБИМОЛЬ",
+                //                 9: "ЛЯ",
+                //                 10: "СИБИМОЛЬ",
+                //                 11: "СИ",
+                //             };
+
+                //             while (offset < data.byteLength) {
+                //                 const chunkType = data.getUint32(offset);
+                //                 const chunkLen = data.getUint32(offset + 4);
+                //                 offset += 8;
+
+                //                 if (chunkType === 0x4d54726b) {
+                //                     // MTrk
+                //                     let trackEnd = offset + chunkLen;
+                //                     let currentTick = 0;
+                //                     let lastStatus = 0;
+                //                     const activeNotes = {};
+                //                     let currentInst = 0;
+
+                //                     while (offset < trackEnd) {
+                //                         // Читаем Delta Time (VLQ)
+                //                         let delta = 0;
+                //                         while (true) {
+                //                             let b = data.getUint8(offset++);
+                //                             delta = (delta << 7) | (b & 0x7f);
+                //                             if (!(b & 0x80)) break;
+                //                         }
+                //                         currentTick += delta;
+
+                //                         let status = data.getUint8(offset);
+                //                         if (status < 0x80) {
+                //                             status = lastStatus;
+                //                         } else {
+                //                             lastStatus = status;
+                //                             offset++;
+                //                         }
+
+                //                         const type = status >> 4;
+
+                //                         if (type === 0x9 || type === 0x8) {
+                //                             // Ноты
+                //                             const note = data.getUint8(
+                //                                 offset++,
+                //                             );
+                //                             const vel = data.getUint8(offset++);
+                //                             if (type === 0x9 && vel > 0) {
+                //                                 activeNotes[note] = {
+                //                                     tick: currentTick,
+                //                                     inst: currentInst,
+                //                                 };
+                //                             } else if (activeNotes[note]) {
+                //                                 const start =
+                //                                     activeNotes[note].tick;
+                //                                 newNotesSong.push({
+                //                                     numTact: Math.floor(
+                //                                         start / (tpq * 4),
+                //                                     ),
+                //                                     pos: Number(
+                //                                         (
+                //                                             (start %
+                //                                                 (tpq * 4)) /
+                //                                             tpq
+                //                                         ).toFixed(2),
+                //                                     ),
+                //                                     note:
+                //                                         revMap[note % 12] +
+                //                                         (Math.floor(note / 12) -
+                //                                             1),
+                //                                     length: Number(
+                //                                         (
+                //                                             (currentTick -
+                //                                                 start) /
+                //                                             tpq
+                //                                         ).toFixed(2),
+                //                                     ),
+                //                                     idInstrument:
+                //                                         activeNotes[note].inst,
+                //                                     nameInstrument:
+                //                                         "Instrument " +
+                //                                         activeNotes[note].inst,
+                //                                 });
+                //                                 delete activeNotes[note];
+                //                             }
+                //                         }
+                //                         // ОБРАБОТКА SYSEX (те самые F0 из дампа)
+                //                         else if (
+                //                             status === 0xf0 ||
+                //                             status === 0xf7
+                //                         ) {
+                //                             let len = 0;
+                //                             while (true) {
+                //                                 let b = data.getUint8(offset++);
+                //                                 len = (len << 7) | (b & 0x7f);
+                //                                 if (!(b & 0x80)) break;
+                //                             }
+                //                             offset += len; // Просто пропускаем эти байты!
+                //                         } else if (status === 0xff) {
+                //                             // Meta
+                //                             const metaType = data.getUint8(
+                //                                 offset++,
+                //                             );
+                //                             let len = 0;
+                //                             while (true) {
+                //                                 let b = data.getUint8(offset++);
+                //                                 len = (len << 7) | (b & 0x7f);
+                //                                 if (!(b & 0x80)) break;
+                //                             }
+                //                             if (metaType === 0x51) {
+                //                                 const mpqn =
+                //                                     (data.getUint8(offset) <<
+                //                                         16) |
+                //                                     (data.getUint8(
+                //                                         offset + 1,
+                //                                     ) <<
+                //                                         8) |
+                //                                     data.getUint8(offset + 2);
+                //                                 newBpm = Math.round(
+                //                                     60000000 / mpqn,
+                //                                 );
+                //                             }
+                //                             offset += len;
+                //                         } else if (
+                //                             type === 0xc ||
+                //                             type === 0xd
+                //                         ) {
+                //                             offset += 1;
+                //                         } else {
+                //                             offset += 2;
+                //                         }
+                //                     }
+                //                 } else {
+                //                     offset += chunkLen;
+                //                 }
+                //             }
+
+                //             objMusic.notesSong = newNotesSong;
+                //             objMusic.bpm = newBpm;
+                //             this.updateSongData();
+                //             alert("Импорт завершен!");
+                //         } catch (err) {
+                //             console.error(err);
+                //             alert("Ошибка: " + err.message);
+                //         }
+                //     };
+                //     reader.readAsArrayBuffer(input.files[0]);
+                // },
+
                 importMidi(input) {
                     if (!input.files || !input.files.length) return;
                     const reader = new FileReader();
                     reader.onload = (e) => {
                         try {
                             const data = new DataView(e.target.result);
+                            if (data.getUint32(0) !== 0x4d546864)
+                                throw new Error("Не MIDI файл");
+
                             const tpq = data.getUint16(12);
                             let offset = 14;
                             const newNotesSong = [];
-                            let newBpm = 100;
-                            const activeNotes = {};
+                            let newBpm = 120;
+
+                            // Храним инструменты для каждого из 16 каналов (по умолчанию 0 - Piano)
+                            const channelInstruments = new Array(16).fill(0);
                             const revMap = {
                                 0: "ДО",
                                 1: "РЕБИМОЛЬ",
@@ -1742,14 +2281,18 @@
                                 10: "СИБИМОЛЬ",
                                 11: "СИ",
                             };
-                            let currentInst = 0;
+
                             while (offset < data.byteLength) {
                                 const chunkType = data.getUint32(offset);
                                 const chunkLen = data.getUint32(offset + 4);
                                 offset += 8;
-                                if (chunkType == 0x4d54726b) {
+
+                                if (chunkType === 0x4d54726b) {
                                     let trackEnd = offset + chunkLen;
                                     let currentTick = 0;
+                                    let lastStatus = 0;
+                                    const activeNotes = {}; // Ключ теперь будет "нота_канал"
+
                                     while (offset < trackEnd) {
                                         let delta = 0;
                                         while (true) {
@@ -1758,21 +2301,42 @@
                                             if (!(b & 0x80)) break;
                                         }
                                         currentTick += delta;
-                                        let status = data.getUint8(offset++);
-                                        let type = status >> 4;
+
+                                        let status = data.getUint8(offset);
+                                        if (status < 0x80) {
+                                            status = lastStatus;
+                                        } else {
+                                            lastStatus = status;
+                                            offset++;
+                                        }
+
+                                        const type = status >> 4;
+                                        const channel = status & 0x0f;
+
                                         if (type === 0x9 || type === 0x8) {
-                                            const note = data.getUint8(
+                                            // Ноты
+                                            const noteNum = data.getUint8(
                                                 offset++,
                                             );
                                             const vel = data.getUint8(offset++);
-                                            if (type === 0x9 && vel > 0)
-                                                activeNotes[note] = {
+                                            const noteKey =
+                                                noteNum + "_" + channel; // Уникальный ключ для канала
+
+                                            if (type === 0x9 && vel > 0) {
+                                                activeNotes[noteKey] = {
                                                     tick: currentTick,
-                                                    inst: currentInst,
+                                                    inst:
+                                                        channel === 9
+                                                            ? 128
+                                                            : channelInstruments[
+                                                                  channel
+                                                              ], // 9 канал - ударные
                                                 };
-                                            else if (activeNotes[note]) {
+                                            } else if (activeNotes[noteKey]) {
                                                 const start =
-                                                    activeNotes[note].tick;
+                                                    activeNotes[noteKey].tick;
+                                                const instId =
+                                                    activeNotes[noteKey].inst;
                                                 newNotesSong.push({
                                                     numTact: Math.floor(
                                                         start / (tpq * 4),
@@ -1785,8 +2349,10 @@
                                                         ).toFixed(2),
                                                     ),
                                                     note:
-                                                        revMap[note % 12] +
-                                                        (Math.floor(note / 12) -
+                                                        revMap[noteNum % 12] +
+                                                        (Math.floor(
+                                                            noteNum / 12,
+                                                        ) -
                                                             1),
                                                     length: Number(
                                                         (
@@ -1795,85 +2361,84 @@
                                                             tpq
                                                         ).toFixed(2),
                                                     ),
-                                                    idInstrument:
-                                                        activeNotes[note].inst,
+                                                    idInstrument: instId,
                                                     nameInstrument:
                                                         MIDI_INSTRUMENTS[
-                                                            activeNotes[note]
-                                                                .inst
-                                                        ] || "Unknown",
+                                                            instId
+                                                        ] ||
+                                                        "Instrument " + instId,
                                                 });
-                                                delete activeNotes[note];
+                                                delete activeNotes[noteKey];
                                             }
-                                        } else if (type === 0xc)
-                                            currentInst = data.getUint8(
-                                                offset++,
-                                            );
-                                        // else if (status === 0xff) {
-                                        //     offset++;
-                                        //     let len = 0;
-                                        //     while (true) {
-                                        //         let b = data.getUint8(offset++);
-                                        //         len = (len << 7) | (b & 0x7f);
-                                        //         if (!(b & 0x80)) break;
-                                        //     }
-                                        //     offset += len;
-                                        // }
-                                        else if (status === 0xff) {
-                                            const metaType = data.getUint8(
-                                                offset++,
-                                            ); // Тип мета-события
+                                        } else if (type === 0xc) {
+                                            // Смена инструмента на канале
+                                            channelInstruments[channel] =
+                                                data.getUint8(offset++);
+                                        } else if (
+                                            status === 0xf0 ||
+                                            status === 0xf7
+                                        ) {
+                                            // SysEx
                                             let len = 0;
                                             while (true) {
                                                 let b = data.getUint8(offset++);
                                                 len = (len << 7) | (b & 0x7f);
                                                 if (!(b & 0x80)) break;
                                             }
-
+                                            offset += len;
+                                        } else if (status === 0xff) {
+                                            // Meta
+                                            const metaType = data.getUint8(
+                                                offset++,
+                                            );
+                                            let len = 0;
+                                            while (true) {
+                                                let b = data.getUint8(offset++);
+                                                len = (len << 7) | (b & 0x7f);
+                                                if (!(b & 0x80)) break;
+                                            }
                                             if (metaType === 0x51) {
-                                                // 0x51 — это Set Tempo
-                                                // Темп закодирован в 3 байтах как микросекунды на четверть (MPQN)
-                                                const m1 =
-                                                    data.getUint8(offset);
-                                                const m2 = data.getUint8(
-                                                    offset + 1,
-                                                );
-                                                const m3 = data.getUint8(
-                                                    offset + 2,
-                                                );
                                                 const mpqn =
-                                                    (m1 << 16) | (m2 << 8) | m3;
-
-                                                // Формула перевода: BPM = 60,000,000 / MPQN
+                                                    (data.getUint8(offset) <<
+                                                        16) |
+                                                    (data.getUint8(
+                                                        offset + 1,
+                                                    ) <<
+                                                        8) |
+                                                    data.getUint8(offset + 2);
                                                 newBpm = Math.round(
                                                     60000000 / mpqn,
                                                 );
-                                                //this.initBPM(); // Сразу отображаем новый BPM в поле ввода
                                             }
                                             offset += len;
-                                        } else if (status >= 0x80)
-                                            offset +=
-                                                status >= 0xc0 && status <= 0xdf
-                                                    ? 1
-                                                    : 2;
+                                        } else if (
+                                            type === 0xa ||
+                                            type === 0xb ||
+                                            type === 0xe
+                                        ) {
+                                            offset += 2;
+                                        } else if (type === 0xd) {
+                                            offset += 1;
+                                        }
                                     }
-                                } else offset += chunkLen;
+                                } else {
+                                    offset += chunkLen;
+                                }
                             }
-                            newNotesSong.sort(
-                                (a, b) =>
-                                    a.numTact * 4 +
-                                    a.pos -
-                                    (b.numTact * 4 + b.pos),
-                            );
 
                             objMusic.notesSong = newNotesSong;
                             objMusic.bpm = newBpm;
-                            // this.bpm = newBpm;
-                            // this.initInputBpm();
                             this.updateSongData();
                             this.rebuild();
+
+                            objPianino.updateSongFromEditor();
+                            alert(
+                                "Импорт завершен! Найдено нот: " +
+                                    newNotesSong.length,
+                            );
                         } catch (err) {
-                            alert("MIDI Error: " + err.message);
+                            console.error(err);
+                            alert("Ошибка MIDI: " + err.message);
                         }
                     };
                     reader.readAsArrayBuffer(input.files[0]);
@@ -1971,6 +2536,7 @@
                             // Обновляем пианино и текстовое поле редактора
                             //objPianino.updateSongData();
                             objPianino.init();
+
                             alert("Данные успешно загружены!");
                         } else {
                             alert("Ошибка: Неверный формат JSON файла.");
