@@ -467,7 +467,7 @@
                         value="60"
                         min="20"
                         max="300"
-                        onchange="objPianino.onchangeBPM(this.value)"
+                        onchange="objPianino.onchangeInputBpm(this.value)"
                         style="
                             width: 50px;
                             background: #333;
@@ -753,200 +753,203 @@
                 "#FF00FF",
             ];
 
-            var objMusic = [
-                {
-                    numTact: 1,
-                    pos: 0,
-                    note: "ЛЯ3",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 1,
-                    pos: 0.5,
-                    note: "ЛЯ3",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 1,
-                    pos: 1,
-                    note: "ДО4",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 1,
-                    pos: 1.5,
-                    note: "ЛЯ3",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 1,
-                    pos: 2,
-                    note: "РЕ4",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 1,
-                    pos: 2.5,
-                    note: "ЛЯ3",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 1,
-                    pos: 3,
-                    note: "МИ4",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 1,
-                    pos: 3.5,
-                    note: "РЕ4",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 2,
-                    pos: 0,
-                    note: "ДО4",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 2,
-                    pos: 0.5,
-                    note: "ДО4",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 2,
-                    pos: 1,
-                    note: "МИ4",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 2,
-                    pos: 1.5,
-                    note: "ДО4",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 2,
-                    pos: 2,
-                    note: "СОЛЬ4",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 2,
-                    pos: 2.5,
-                    note: "ДО4",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 2,
-                    pos: 3,
-                    note: "МИ4",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 2,
-                    pos: 3.5,
-                    note: "ДО4",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 3,
-                    pos: 0,
-                    note: "СОЛЬ3",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 3,
-                    pos: 0.5,
-                    note: "СОЛЬ3",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 3,
-                    pos: 1,
-                    note: "СИ3",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 3,
-                    pos: 1.5,
-                    note: "СОЛЬ3",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 3,
-                    pos: 2,
-                    note: "ДО4",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 3,
-                    pos: 2.5,
-                    note: "СОЛЬ3",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 3,
-                    pos: 3,
-                    note: "РЕ4",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-                {
-                    numTact: 3,
-                    pos: 3.5,
-                    note: "ДО4",
-                    length: 0.38,
-                    idInstrument: 25,
-                    nameInstrument: "Acoustic Guitar (steel)",
-                },
-            ];
+            var objMusic = {
+                bpm: 130,
+                notesSong: [
+                    {
+                        numTact: 1,
+                        pos: 0,
+                        note: "ЛЯ3",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 1,
+                        pos: 0.5,
+                        note: "ЛЯ3",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 1,
+                        pos: 1,
+                        note: "ДО4",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 1,
+                        pos: 1.5,
+                        note: "ЛЯ3",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 1,
+                        pos: 2,
+                        note: "РЕ4",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 1,
+                        pos: 2.5,
+                        note: "ЛЯ3",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 1,
+                        pos: 3,
+                        note: "МИ4",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 1,
+                        pos: 3.5,
+                        note: "РЕ4",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 2,
+                        pos: 0,
+                        note: "ДО4",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 2,
+                        pos: 0.5,
+                        note: "ДО4",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 2,
+                        pos: 1,
+                        note: "МИ4",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 2,
+                        pos: 1.5,
+                        note: "ДО4",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 2,
+                        pos: 2,
+                        note: "СОЛЬ4",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 2,
+                        pos: 2.5,
+                        note: "ДО4",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 2,
+                        pos: 3,
+                        note: "МИ4",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 2,
+                        pos: 3.5,
+                        note: "ДО4",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 3,
+                        pos: 0,
+                        note: "СОЛЬ3",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 3,
+                        pos: 0.5,
+                        note: "СОЛЬ3",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 3,
+                        pos: 1,
+                        note: "СИ3",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 3,
+                        pos: 1.5,
+                        note: "СОЛЬ3",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 3,
+                        pos: 2,
+                        note: "ДО4",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 3,
+                        pos: 2.5,
+                        note: "СОЛЬ3",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 3,
+                        pos: 3,
+                        note: "РЕ4",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                    {
+                        numTact: 3,
+                        pos: 3.5,
+                        note: "ДО4",
+                        length: 0.38,
+                        idInstrument: 25,
+                        nameInstrument: "Acoustic Guitar (steel)",
+                    },
+                ],
+            };
 
             var objPianino = {
                 keyWidth: 0,
@@ -1013,14 +1016,14 @@
                     { id: 36, key: "Enter" },
                 ],
 
-                initBPM() {
+                initInputBpm() {
                     const bpmInput = document.getElementById("bpm-input");
                     if (bpmInput) {
                         bpmInput.value = this.bpm;
                     }
                 },
 
-                onchangeBPM(val) {
+                onchangeInputBpm(val) {
                     const newBpm = parseInt(val);
                     if (!isNaN(newBpm) && newBpm > 0) {
                         this.bpm = newBpm;
@@ -1106,16 +1109,12 @@
                     ).join("");
                 },
                 init() {
-                    document.getElementById("editor-area").value =
-                        JSON.stringify(objMusic, null, 2);
-
                     this.cvs = document.getElementById("visual-canvas");
                     this.cvsCtx = this.cvs.getContext("2d");
 
                     this.initCtxWidthHeight();
-
                     this.updateSongData();
-                    this.initBPM();
+                    this.initInputBpm();
                     this.rebuild();
                     this.resize();
                     this.animate();
@@ -1129,9 +1128,15 @@
                 },
 
                 updateSongData() {
-                    this.notesSong = JSON.parse(
-                        JSON.stringify(objMusic, null, 2),
-                    ).map((m) => {
+                    const strJSONNotesSong = JSON.stringify(
+                        objMusic.notesSong,
+                        null,
+                        4,
+                    );
+                    document.getElementById("editor-area").value =
+                        strJSONNotesSong;
+
+                    this.notesSong = JSON.parse(strJSONNotesSong).map((m) => {
                         const absoluteStart = m.numTact * 4 + m.pos;
                         return {
                             ...m,
@@ -1140,6 +1145,9 @@
                             idx: -1,
                         };
                     });
+                    this.bpm = objMusic.bpm || 130;
+                    this.initInputBpm();
+
                     this.maxPos =
                         Math.max(
                             ...this.notesSong.map((m) => m.absStart + m.length),
@@ -1651,7 +1659,8 @@
                             const data = new DataView(e.target.result);
                             const tpq = data.getUint16(12);
                             let offset = 14;
-                            const newSong = [];
+                            const newNotesSong = [];
+                            let newBpm = 100;
                             const activeNotes = {};
                             const revMap = {
                                 0: "ДО",
@@ -1698,7 +1707,7 @@
                                             else if (activeNotes[note]) {
                                                 const start =
                                                     activeNotes[note].tick;
-                                                newSong.push({
+                                                newNotesSong.push({
                                                     numTact: Math.floor(
                                                         start / (tpq * 4),
                                                     ),
@@ -1770,10 +1779,10 @@
                                                     (m1 << 16) | (m2 << 8) | m3;
 
                                                 // Формула перевода: BPM = 60,000,000 / MPQN
-                                                this.bpm = Math.round(
+                                                newBpm = Math.round(
                                                     60000000 / mpqn,
                                                 );
-                                                this.initBPM(); // Сразу отображаем новый BPM в поле ввода
+                                                //this.initBPM(); // Сразу отображаем новый BPM в поле ввода
                                             }
                                             offset += len;
                                         } else if (status >= 0x80)
@@ -1784,16 +1793,17 @@
                                     }
                                 } else offset += chunkLen;
                             }
-                            newSong.sort(
+                            newNotesSong.sort(
                                 (a, b) =>
                                     a.numTact * 4 +
                                     a.pos -
                                     (b.numTact * 4 + b.pos),
                             );
-                            objMusic = newSong;
-                            this.initBPM();
-                            document.getElementById("editor-area").value =
-                                JSON.stringify(newSong, null, 4);
+
+                            objMusic.notesSong = newNotesSong;
+                            objMusic.bpm = newBpm;
+                            // this.bpm = newBpm;
+                            // this.initInputBpm();
                             this.updateSongData();
                             this.rebuild();
                         } catch (err) {
@@ -1805,7 +1815,7 @@
 
                 updateSongFromEditor() {
                     try {
-                        objMusic = JSON.parse(
+                        objMusic.notesSong = JSON.parse(
                             document.getElementById("editor-area").value,
                         );
                         this.updateSongData();
