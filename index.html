@@ -431,9 +431,9 @@
                                 border: 1px solid #555;
                             "
                         >
-                            <option value="0" selected>Первая</option>
+                            <option value="0">Первая</option>
                             <option value="12">Вторая</option>
-                            <option value="24">Третья</option>
+                            <option value="24" selected>Третья</option>
                             <option value="36">Четвертая</option>
                             <option value="48">Пятая</option>
                             <option value="60">Шестая</option>
@@ -806,6 +806,17 @@
 
             var objMusic = {
                 bpm: 130,
+                // notesSong: [
+                //     {
+                //         numTact: 1,
+                //         pos: 0,
+                //         note: "ЛЯ3",
+                //         length: 4,
+                //         idInstrument: 25,
+                //         nameInstrument: "Acoustic Guitar (steel)",
+                //     },
+                // ],
+
                 notesSong: [
                     {
                         numTact: 1,
@@ -1025,7 +1036,7 @@
                 notesSong: [],
                 activeInstruments: new Set(),
                 instColors: {},
-                octaveOffset: 0, // По умолчанию теперь 12 (Субконтроктава), чтобы добавить 2 нижние октавы
+                octaveOffset: 24, // 0,12,24,36,48,60
 
                 _baseCodes: [
                     { id: 0, key: "ShiftLeft" },
@@ -1253,7 +1264,8 @@
                     this.keysPianino = [];
 
                     for (let i = 0; i < this.countNotes; i++) {
-                        const abs = this.octaveOffset + i; // Это реальный номер ноты в MIDI
+                        // const abs = this.octaveOffset + i; // Это реальный номер ноты в MIDI
+                        const abs = i; // Это реальный номер ноты в MIDI
                         const semi = i % 12;
 
                         this.keysPianino.push({
@@ -1615,7 +1627,8 @@
                         if (
                             this.learningMode &&
                             !m.passed &&
-                            y + lenPx >= h - lenPx / 2
+                            // y + lenPx >= h - lenPx / 2
+                            y + lenPx >= h - 21
                         )
                             blocked = true;
 
@@ -1645,7 +1658,9 @@
                                 this.isPlaying &&
                                 !this.learningMode &&
                                 !m.passed &&
-                                y + lenPx >= h - lenPx / 2
+                                // y + lenPx >= h - lenPx / 2
+                                // y + lenPx >= h - lenPx + 20
+                                y + lenPx >= h - 21
                             ) {
                                 m.passed = true;
                                 this.play(m.idx, m.idInstrument);
