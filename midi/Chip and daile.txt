@@ -1,0 +1,1082 @@
+[
+    {
+        "numTact": 0,
+        "pos": 0.5,
+        "note": "МИБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 0,
+        "pos": 1,
+        "note": "МИБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 0,
+        "pos": 2,
+        "note": "МИБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 0,
+        "pos": 2.5,
+        "note": "МИБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 1,
+        "pos": 0,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 1,
+        "pos": 1,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 1,
+        "pos": 1.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 1,
+        "pos": 2,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 1,
+        "pos": 2.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 1,
+        "pos": 3,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 1,
+        "pos": 3.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 2,
+        "pos": 0,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 2,
+        "pos": 0.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 2,
+        "pos": 1,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 2,
+        "pos": 1.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 2,
+        "pos": 2,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 2,
+        "pos": 2.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 2,
+        "pos": 3,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 2,
+        "pos": 3.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 3,
+        "pos": 0,
+        "note": "СОЛЬ4",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 3,
+        "pos": 1.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 4,
+        "pos": 0,
+        "note": "СОЛЬ4",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 4,
+        "pos": 1.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 5,
+        "pos": 1,
+        "note": "СОЛЬ4",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 5,
+        "pos": 2,
+        "note": "СИБИМОЛЬ4",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 5,
+        "pos": 2.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 5,
+        "pos": 3.5,
+        "note": "ДО5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 6,
+        "pos": 0.5,
+        "note": "СИБИМОЛЬ4",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 6,
+        "pos": 1.5,
+        "note": "ЛЯ4",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 6,
+        "pos": 3,
+        "note": "СОЛЬБИМОЛЬ4",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 7,
+        "pos": 0,
+        "note": "СОЛЬ4",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 7,
+        "pos": 1.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 8,
+        "pos": 0,
+        "note": "СОЛЬ4",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 8,
+        "pos": 1.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 9,
+        "pos": 1,
+        "note": "СОЛЬ4",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 9,
+        "pos": 2,
+        "note": "СИБИМОЛЬ4",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 9,
+        "pos": 2.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 9,
+        "pos": 3.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 10,
+        "pos": 0.5,
+        "note": "ДО5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 10,
+        "pos": 1.5,
+        "note": "ДО5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 10,
+        "pos": 2.5,
+        "note": "СИБИМОЛЬ4",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 10,
+        "pos": 3,
+        "note": "ДО5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 11,
+        "pos": 0,
+        "note": "МИБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 11,
+        "pos": 1,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 11,
+        "pos": 1.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 11,
+        "pos": 2.5,
+        "note": "СИБИМОЛЬ4",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 11,
+        "pos": 3.5,
+        "note": "МИБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 12,
+        "pos": 0.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 12,
+        "pos": 1.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 12,
+        "pos": 3.5,
+        "note": "СИБИМОЛЬ4",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 13,
+        "pos": 0,
+        "note": "ДО5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 13,
+        "pos": 0.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 13,
+        "pos": 1.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 13,
+        "pos": 2.5,
+        "note": "ДО5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 13,
+        "pos": 3.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 14,
+        "pos": 0.5,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 14,
+        "pos": 1,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 14,
+        "pos": 1.5,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 14,
+        "pos": 2,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 14,
+        "pos": 2.5,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 14,
+        "pos": 3.5,
+        "note": "МИ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 15,
+        "pos": 2,
+        "note": "МИ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 15,
+        "pos": 3,
+        "note": "ДО5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 15,
+        "pos": 3.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 16,
+        "pos": 0.5,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 16,
+        "pos": 1,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 16,
+        "pos": 1.5,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 16,
+        "pos": 2,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 16,
+        "pos": 2.5,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 16,
+        "pos": 3.5,
+        "note": "МИ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 17,
+        "pos": 0.5,
+        "note": "СОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 17,
+        "pos": 1,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 17,
+        "pos": 1.5,
+        "note": "МИ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 17,
+        "pos": 2.5,
+        "note": "ДО5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 18,
+        "pos": 0.5,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 18,
+        "pos": 1,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 18,
+        "pos": 1.5,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 18,
+        "pos": 2,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 18,
+        "pos": 2.5,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 18,
+        "pos": 3.5,
+        "note": "СОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 19,
+        "pos": 1,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 19,
+        "pos": 2,
+        "note": "МИБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 19,
+        "pos": 2.5,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 19,
+        "pos": 3.5,
+        "note": "МИБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 20,
+        "pos": 1,
+        "note": "ДО5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 20,
+        "pos": 2,
+        "note": "РЕ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 20,
+        "pos": 3,
+        "note": "МИБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 21,
+        "pos": 0,
+        "note": "СОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 21,
+        "pos": 0.5,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 21,
+        "pos": 1.5,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 21,
+        "pos": 2.5,
+        "note": "МИБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 21,
+        "pos": 3.5,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 22,
+        "pos": 0.5,
+        "note": "ЛЯБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 22,
+        "pos": 1,
+        "note": "ЛЯБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 22,
+        "pos": 1.5,
+        "note": "ЛЯБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 22,
+        "pos": 2,
+        "note": "ЛЯБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 22,
+        "pos": 2.5,
+        "note": "ЛЯБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 22,
+        "pos": 3.5,
+        "note": "СОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 23,
+        "pos": 2,
+        "note": "СОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 23,
+        "pos": 3,
+        "note": "МИБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 23,
+        "pos": 3.5,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 24,
+        "pos": 0.5,
+        "note": "ЛЯБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 24,
+        "pos": 1,
+        "note": "ЛЯБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 24,
+        "pos": 1.5,
+        "note": "ЛЯБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 24,
+        "pos": 2,
+        "note": "ЛЯБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 24,
+        "pos": 2.5,
+        "note": "ЛЯБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 24,
+        "pos": 3.5,
+        "note": "СОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 25,
+        "pos": 0.5,
+        "note": "СИБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 25,
+        "pos": 1,
+        "note": "ЛЯБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 25,
+        "pos": 1.5,
+        "note": "СОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 25,
+        "pos": 2.5,
+        "note": "МИБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 26,
+        "pos": 0.5,
+        "note": "ЛЯБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 26,
+        "pos": 1,
+        "note": "ЛЯБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 26,
+        "pos": 1.5,
+        "note": "ЛЯБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 26,
+        "pos": 2,
+        "note": "ЛЯБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 26,
+        "pos": 2.5,
+        "note": "ЛЯБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 26,
+        "pos": 3.5,
+        "note": "СИБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 27,
+        "pos": 1,
+        "note": "ЛЯБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 27,
+        "pos": 2,
+        "note": "СОЛЬБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 27,
+        "pos": 2.5,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 27,
+        "pos": 3.5,
+        "note": "СОЛЬБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 28,
+        "pos": 1,
+        "note": "МИБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 28,
+        "pos": 2,
+        "note": "ФА5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 28,
+        "pos": 3,
+        "note": "СОЛЬБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 29,
+        "pos": 0,
+        "note": "СИБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 29,
+        "pos": 0.5,
+        "note": "ЛЯБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 29,
+        "pos": 1.5,
+        "note": "ЛЯБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 29,
+        "pos": 2.5,
+        "note": "СОЛЬБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 29,
+        "pos": 3.5,
+        "note": "ЛЯБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 30,
+        "pos": 0.5,
+        "note": "СИ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 30,
+        "pos": 1,
+        "note": "СИ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 30,
+        "pos": 1.5,
+        "note": "СИ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 30,
+        "pos": 2,
+        "note": "СИ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 30,
+        "pos": 2.5,
+        "note": "СИ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    },
+    {
+        "numTact": 30,
+        "pos": 3.5,
+        "note": "СИБИМОЛЬ5",
+        "length": 0.25,
+        "idInstrument": 84,
+        "nameInstrument": "Lead 5 (charang)"
+    }
+]

@@ -2,7 +2,7 @@
 <html lang="ru">
     <head>
         <meta charset="UTF-8" />
-        <title>Piano Studio Pro v8.9.9 (Extended)</title>
+        <title>Piano Studio Pro</title>
         <style>
             body {
                 font-family: "Segoe UI", sans-serif;
@@ -98,7 +98,7 @@
                 width: 100%;
 
                 /* 15vw означает 15% от ширины экрана.
-                                Если ширина станет меньше в 2 раза, высота тоже станет меньше в 2 раза. */
+                                            Если ширина станет меньше в 2 раза, высота тоже станет меньше в 2 раза. */
                 height: 15vw; /* Высота теперь 15% от ширины экрана */
 
                 /* Уберите или сильно уменьшите min-height, чтобы она не блокировала сжатие */
@@ -403,6 +403,148 @@
                     safe-area-inset-bottom
                 ); /* Учет "челок" и полосок навигации */
             }
+
+            /* Контейнер управления */
+            .edit-controls {
+                display: flex;
+                align-items: center;
+                background: rgba(255, 255, 255, 0.05);
+                padding: 5px 15px;
+                border-radius: 20px;
+                margin-left: 10px;
+            }
+
+            /* Стили переключателя (Toggle Switch) */
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 40px;
+                height: 20px;
+                margin-right: 10px;
+            }
+
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #444;
+                transition: 0.4s;
+                border-radius: 20px;
+            }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 14px;
+                width: 14px;
+                left: 3px;
+                bottom: 3px;
+                background-color: white;
+                transition: 0.4s;
+                border-radius: 50%;
+            }
+
+            input:checked + .slider {
+                background-color: #2196f3;
+            }
+            input:checked + .slider:before {
+                transform: translateX(20px);
+            }
+
+            .label-text {
+                font-size: 14px;
+                color: #fff;
+                user-select: none;
+            }
+
+            /* Подсветка канваса в режиме редактирования */
+            /*#visual-canvas.edit-active {
+                            cursor: crosshair;
+                            box-shadow: inset 0 0 20px rgba(33, 150, 243, 0.2);
+                            background-color: #111;
+                        }*/ /* Чуть светлее фон */
+
+            /* Добавьте к существующему CSS */
+            #visual-canvas.edit-active {
+                /* Добавляем полосу прокрутки визуально, чтобы подчеркнуть возможность скролла */
+                border-right: 4px solid #2196f3;
+                transition: background 0.2s;
+
+                /* --- ДОБАВИТЬ ЭТУ СТРОКУ --- */
+                cursor: none !important;
+                /* cursor: crosshair; */
+            }
+
+            /* Подсказка при наведении на канвас в режиме правки */
+            #visual-canvas.edit-active:hover::after {
+                content: "Scroll to navigate / Click to draw";
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                color: #2196f3;
+                font-size: 10px;
+                background: rgba(0, 0, 0, 0.6);
+                padding: 2px 5px;
+                pointer-events: none;
+            }
+
+            /* Скрывает стандартный курсор мыши внутри canvas */
+            /* canvas {
+                cursor: none; 
+            } */
+
+            .table-container {
+                max-height: 450px;
+                overflow-y: auto;
+                margin-top: 15px;
+                border: 1px solid #444;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                background: #111;
+                font-size: 0.9rem;
+            }
+            th,
+            td {
+                border: 1px solid #444;
+                padding: 8px;
+                text-align: center;
+            }
+            th {
+                position: sticky;
+                top: 0;
+                background: #333;
+                z-index: 5;
+            }
+            td input {
+                background: transparent;
+                border: none;
+                color: #00ff00;
+                width: 95%;
+                text-align: center;
+                font-family: monospace;
+            }
+            td input.input-key {
+                background: #111;
+                border: 1px solid #444;
+                cursor: pointer;
+                font-weight: bold;
+            }
+            td input.input-key:focus {
+                border-color: #00ff00;
+                background: #002200;
+                outline: none;
+            }
         </style>
     </head>
     <body>
@@ -513,6 +655,62 @@
                         />
                         ЗАЦИКЛИТЬ
                     </label>
+
+                    <!-- Блок режима редактирования -->
+                    <div class="edit-controls">
+                        <label class="switch">
+                            <input type="checkbox" id="edit-mode-check" />
+                            <span class="slider"></span>
+                        </label>
+                        <span class="label-text">Режим редактирования</span>
+
+                        <!-- Вспомогательные кнопки (скрыты по умолчанию) -->
+                        <div
+                            id="edit-tools"
+                            style="display: none; margin-left: 15px"
+                        >
+                            <select
+                                id="note-step"
+                                title="Шаг сетки (прилипание)"
+                            >
+                                <option value="0.125">1/8</option>
+                                <option value="0.25" selected>1/4</option>
+                                <option value="0.5">1/2</option>
+                                <option value="1">1</option>
+                            </select>
+                            <span
+                                style="
+                                    font-size: 12px;
+                                    color: #ccc;
+                                    margin-left: 10px;
+                                "
+                            >
+                                ЛКМ: Создать/Тянуть | ПКМ: Удалить
+                            </span>
+                        </div>
+                    </div>
+
+                    <button
+                        class="ctrl-btn"
+                        id="fullscreenBtn"
+                        onclick="toggleFullScreen()"
+                        title="Полноэкранный режим"
+                    >
+                        <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#ccc"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"
+                            />
+                        </svg>
+                    </button>
                 </div>
             </div>
             <div id="visualizer-container">
@@ -670,10 +868,61 @@
         <div id="settings-tab" class="tab-content">
             <div style="padding: 0 30px">
                 <h2 style="color: #3498db">Настройки клавиатуры</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Имя (idName)</th>
+                                <th>Частота (Hz)</th>
+                                <th>Клавиша (e.code)</th>
+                                <th>Действие</th>
+                            </tr>
+                        </thead>
+                        <tbody id="notes-table-body"></tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
         <script>
+            // В начале вашего скрипта или в свойства класса
+            const editCheck = document.getElementById("edit-mode-check");
+            const editTools = document.getElementById("edit-tools");
+            const canvasEl = document.getElementById("visual-canvas");
+
+            let isEditMode = false;
+
+            // Слушатель переключателя
+            editCheck.addEventListener("change", (e) => {
+                isEditMode = e.target.checked;
+
+                if (isEditMode) {
+                    editTools.style.display = "inline-flex";
+                    canvasEl.classList.add("edit-active");
+                } else {
+                    editTools.style.display = "none";
+                    canvasEl.classList.remove("edit-active");
+                }
+            });
+
+            // Логика блокировки: вызывайте это в вашей функции обновления UI (где кнопки Play/Stop)
+            function updateEditButtonState(isPlaying, isPaused) {
+                // Кнопка доступна ТОЛЬКО если песня полностью остановлена
+                const canEdit = !isPlaying && !isPaused;
+
+                editCheck.disabled = !canEdit;
+                if (!canEdit) {
+                    editCheck.checked = false;
+                    isEditMode = false;
+                    editTools.style.display = "none";
+                    canvasEl.classList.remove("edit-active");
+                }
+
+                // Визуально приглушаем, если недоступно
+                editCheck.parentElement.style.opacity = canEdit ? "1" : "0.3";
+            }
+
             const MIDI_INSTRUMENTS = [
                 "Acoustic Grand Piano",
                 "Bright Acoustic Piano",
@@ -1035,10 +1284,50 @@
             };
 
             var objPianino = {
+                mapNotes: {
+                    ДО: "C",
+                    РЕБИМОЛЬ: "C#",
+                    РЕ: "D",
+                    МИБИМОЛЬ: "D#",
+                    МИ: "E",
+                    ФА: "F",
+                    СОЛЬБИМОЛЬ: "F#",
+                    СОЛЬ: "G",
+                    ЛЯБИМОЛЬ: "G#",
+                    ЛЯ: "A",
+                    СИБИМОЛЬ: "A#",
+                    СИ: "B",
+                },
+                names: [
+                    "C",
+                    "C#",
+                    "D",
+                    "D#",
+                    "E",
+                    "F",
+                    "F#",
+                    "G",
+                    "G#",
+                    "A",
+                    "A#",
+                    "B",
+                ],
+
+                // Настройки сетки и редактирования
+                stepSnapping: 0.25, // Шаг сетки (1/4 такта)
+                activeNote: null, // Ссылка на редактируемую ноту
+                isDrawing: false, // Флаг процесса рисования
+
                 keyWidth: 0,
                 keysPianino: [],
 
                 countNotes: 85,
+
+                // Переменные для хранения позиции виртуального курсора (в пикселях холста)
+                gridCursorX: 0,
+                gridCursorY: 0,
+                // Флаг, находится ли мышь внутри холста
+                isMouseInCanvas: false,
 
                 cvsWidth: 0,
                 cvsHeight: 0,
@@ -1046,7 +1335,7 @@
                 ctx: null,
                 cvs: null,
                 cvsCtx: null,
-                currentPosition: 0,
+                currentPosition: -4,
                 isPlaying: false,
                 isPaused: false,
                 learningMode: false,
@@ -1106,6 +1395,42 @@
                     }
                 },
 
+                fillTable() {
+                    const body = document.getElementById("notes-table-body");
+                    body.innerHTML = "";
+                    this.keysPianino.forEach((n, i) => {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `
+                        <td>${n.id}</td>
+                        <td><input type="text" value="${n.name}" oninput="objPianino.keysPianino[${i}].name=this.value"></td>
+                        <td><input type="number" value="${n.freq}" oninput="objPianino.notkeysPianinoes[${i}].freq=parseFloat(this.value)"></td>
+                        <td><input id="inp-key-${i}" class="input-key" value="${n.code}" readonly placeholder="Нажми клавишу..." onkeydown="objPianino.captureKey(event, ${i})"></td>
+                        <td><button class="btn btn-clear" onclick="objPianino.clearSingleKey(${i})">Очистить</button></td>
+                    `;
+                        body.appendChild(tr);
+                    });
+                },
+
+                clearSingleKey(i) {
+                    this.keysPianino[i].code = "";
+                    document.getElementById("inp-key-" + i).value = "";
+                },
+
+                captureKey(e, i) {
+                    e.preventDefault();
+                    this.keysPianino[i].code = e.code;
+                    e.target.value = e.code;
+                },
+
+                // Добавьте это как метод внутри objPianino
+                pixelsToTime: function (y) {
+                    // Формула обратная той, что в вашем отрисовщике (rebuild)
+                    // Высота канваса минус Y, делим на масштаб и прибавляем текущую прокрутку
+                    const scale = this.pixelsPerQuarter || 40; // используйте вашу переменную масштаба
+                    const timeFromBottom = (this.cvs.height - y) / scale;
+                    return this.currentPosition + timeFromBottom;
+                },
+
                 onchangeInputBpm(val) {
                     const newBpm = parseInt(val);
                     if (!isNaN(newBpm) && newBpm > 0) {
@@ -1114,6 +1439,17 @@
                     }
                 },
                 start() {
+                    // Если плеер полностью остановлен, стартуем из зоны пре-ролла (-2 такта = -8 четвертей)
+                    if (
+                        this.currentPosition >= this.maxPos ||
+                        this.currentPosition === 0
+                    ) {
+                        this.currentPosition = -4;
+                        this.updateProgressBar();
+
+                        // this.currentPosition = 0;
+                    }
+
                     // Если музыка закончилась, сбрасываем позицию перед стартом
                     if (this.currentPosition >= this.maxPos) {
                         this.stop();
@@ -1131,7 +1467,10 @@
 
                 stop() {
                     this.isPlaying = false;
-                    this.currentPosition = 0;
+                    // this.currentPosition = 0;
+                    this.currentPosition = -4;
+                    this.updateProgressBar();
+
                     // Сбрасываем статус прохождения для всех нот
                     this.notesSong.forEach((m) => (m.passed = false));
                 },
@@ -1176,19 +1515,17 @@
                 },
 
                 fillInstrumentsTable() {
-                    // <div id="tools-container"></div>
-
                     const tbody = document.getElementById("tools-container");
                     if (!tbody || !MIDI_INSTRUMENTS) return;
 
                     // Формируем строки таблицы на основе вашей константы
                     tbody.innerHTML = MIDI_INSTRUMENTS.map(
                         (name, index) => `
-                                <tr>
-                                <td style="color: #888;">${index}</td>
-                                <td>${name}</td>
-                                </tr>
-                            `,
+                                            <tr>
+                                            <td style="color: #888;">${index}</td>
+                                            <td>${name}</td>
+                                            </tr>
+                                        `,
                     ).join("");
                 },
                 init() {
@@ -1200,8 +1537,153 @@
                     this.initInputBpm();
                     this.rebuild();
                     this.resize();
-                    this.animate();
                     this.fillInstrumentsTable();
+                    this.fillTable();
+
+                    this.animate();
+
+                    // Добавьте это внутри метода init() объекта objPianino
+                    // или просто замените старый блок в скрипте:
+                    canvasEl.addEventListener(
+                        "wheel",
+                        (e) => {
+                            //if (!isEditMode) return;
+                            e.preventDefault();
+
+                            const scrollStep = 0.5; // Шаг прокрутки (в тактах)
+
+                            // В вашем коде за позицию отвечает currentPosition
+                            // if (e.deltaY > 0) {
+                            //     objPianino.currentPosition += scrollStep;
+                            // } else {
+                            //     objPianino.currentPosition = Math.max(
+                            //         0,
+                            //         objPianino.currentPosition - scrollStep,
+                            //     );
+                            // }
+                            if (e.deltaY > -4) {
+                                objPianino.currentPosition += scrollStep;
+                            } else {
+                                objPianino.currentPosition = Math.max(
+                                    -4,
+                                    objPianino.currentPosition - scrollStep,
+                                );
+                            }
+
+                            // В вашем коде перерисовка называется rebuild()
+                            objPianino.rebuild();
+                            objPianino.updateProgressBar(); // Чтобы ползунок времени тоже двигался
+                        },
+                        //{ passive: false },
+                    );
+
+                    // Вставляем внутри objPianino.init()
+                    // Используем стрелочные функции, чтобы this всегда указывал на objPianino
+
+                    // 1. ОТМЕНА КОНТЕКСТНОГО МЕНЮ (чтобы ПКМ работала как ластик)
+                    this.cvs.addEventListener("contextmenu", (e) =>
+                        e.preventDefault(),
+                    );
+
+                    // 2. НАЖАТИЕ МЫШИ
+                    this.cvs.addEventListener("mousedown", (e) => {
+                        if (!isEditMode) return;
+
+                        const rect = this.cvs.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+
+                        const clickedNoteIndex = Math.floor(
+                            (x / this.cvs.width) * this.countNotes,
+                        );
+                        const keyData = this.keysPianino[clickedNoteIndex];
+                        if (!keyData || !keyData.name) return;
+
+                        const latinName = keyData.name.replace(/[0-9]/g, "");
+                        const octave = keyData.name.replace(/[^0-9]/g, "");
+                        const russianNoteName = Object.keys(this.mapNotes).find(
+                            (key) => this.mapNotes[key] === latinName,
+                        );
+                        const finalNoteName =
+                            (russianNoteName || "ДО") + octave;
+
+                        absoluteTime =
+                            Math.round(
+                                this.pixelsToTime(y) / this.stepSnapping,
+                            ) * this.stepSnapping;
+
+                        // Система ОТ 1: Делим абсолютное время на 4 четверти и сдвигаем на +1 такт
+                        const calculatedNumTact = Math.floor(absoluteTime / 4);
+
+                        // Локальная позиция внутри этого такта (от 0 до 3.75)
+                        const localPos = absoluteTime % 4;
+
+                        if (e.button === 0) {
+                            // ЛКМ - Создание ноты
+                            const newNote = {
+                                note: finalNoteName,
+                                pos: localPos, // Локальное смещение в такте
+                                length: this.stepSnapping,
+                                idInstrument: 25,
+                                nameInstrument: "Acoustic Guitar (steel)",
+                                numTact: calculatedNumTact, // Номер такта (1, 2, 3...)
+                            };
+
+                            // 1. Добавляем в глобальный объект музыки
+                            objMusic.notesSong.push(newNote);
+
+                            // 2. Синхронизируем данные
+                            this.updateSongData();
+
+                            // 3. Привязываем активную ноту для растягивания
+                            this.activeNote =
+                                this.notesSong[this.notesSong.length - 1];
+                            this.isDrawing = true;
+                        } else if (e.button === 2) {
+                            // ПКМ - Удаление ноты
+                            objMusic.notesSong = objMusic.notesSong.filter(
+                                (n) => {
+                                    return !(
+                                        n.note === finalNoteName &&
+                                        n.numTact === calculatedNumTact &&
+                                        Math.abs(n.pos - localPos) < 0.2
+                                    );
+                                },
+                            );
+                            this.updateSongData();
+                        }
+
+                        this.rebuild();
+                    });
+
+                    // Отслеживаем движение мыши строго НАД ХОЛСТОМ
+                    this.cvs.addEventListener("mousemove", (e) => {
+                        if (!isEditMode) return;
+
+                        this.isMouseInCanvas = true;
+                        const rect = this.cvs.getBoundingClientRect();
+                        const mouseX = e.clientX - rect.left;
+                        const mouseY = e.clientY - rect.top;
+
+                        this.gridCursorX = mouseX;
+                        this.gridCursorY = mouseY;
+
+                        this.rebuild();
+                    });
+
+                    // 4. ОТПУСКАНИЕ МЫШИ
+                    window.addEventListener("mouseup", () => {
+                        if (this.isDrawing) {
+                            this.isDrawing = false;
+                            this.activeNote = null;
+
+                            // После завершения рисования обновляем текст в редакторе
+                            this.updateSongData();
+                            // ЗАТЕМ принудительно перерисовываем, чтобы ноты не исчезали
+                            this.rebuild();
+                        }
+                    });
+
                     window.addEventListener("resize", () => this.resize());
                 },
 
@@ -1253,45 +1735,16 @@
                 },
 
                 rebuild() {
-                    const names = [
-                        "C",
-                        "C#",
-                        "D",
-                        "D#",
-                        "E",
-                        "F",
-                        "F#",
-                        "G",
-                        "G#",
-                        "A",
-                        "A#",
-                        "B",
-                    ];
-                    const map = {
-                        ДО: "C",
-                        РЕБИМОЛЬ: "C#",
-                        РЕ: "D",
-                        МИБИМОЛЬ: "D#",
-                        МИ: "E",
-                        ФА: "F",
-                        СОЛЬБИМОЛЬ: "F#",
-                        СОЛЬ: "G",
-                        ЛЯБИМОЛЬ: "G#",
-                        ЛЯ: "A",
-                        СИБИМОЛЬ: "A#",
-                        СИ: "B",
-                    };
                     const whites = [0, 2, 4, 5, 7, 9, 11];
                     this.keysPianino = [];
 
                     for (let i = 0; i < this.countNotes; i++) {
-                        // const abs = this.octaveOffset + i; // Это реальный номер ноты в MIDI
                         const abs = i; // Это реальный номер ноты в MIDI
                         const semi = i % 12;
 
                         this.keysPianino.push({
                             id: i,
-                            name: names[semi] + Math.floor(i / 12),
+                            name: this.names[semi] + Math.floor(i / 12),
                             isWhite: whites.includes(semi),
                             freq: 16.35 * Math.pow(2, i / 12),
                             // ИЗМЕНЕНИЕ ТУТ: ищем в объекте по номеру ноты abs
@@ -1309,9 +1762,12 @@
                         let octave = m.note.replace(/\D/g, "");
                         m.idx = this.keysPianino.findIndex(
                             (n) =>
-                                n.name === (map[pureNote] || pureNote) + octave,
+                                n.name ===
+                                (this.mapNotes[pureNote] || pureNote) + octave,
                         );
                     });
+
+                    // 1. Отрисовка вашей клавиатуры и текущих нот
                     this.renderKb();
                 },
 
@@ -1498,7 +1954,7 @@
                     const beatsPerTact = 4;
                     const totalTacts = Math.ceil(this.maxPos / beatsPerTact);
 
-                    for (let t = 0; t <= totalTacts; t++) {
+                    for (let t = -5; t <= totalTacts; t++) {
                         const tactBeatPos = t * beatsPerTact;
                         // Текущая Y-координата линии
                         const y =
@@ -1513,11 +1969,32 @@
                             // --- ЭФФЕКТ ПОДСВЕТКИ ---
                             // Если линия пересекает зону "удара" (у самого низа, h)
                             const threshold = 10; // дистанция срабатывания подсветки
-                            if (Math.abs(y - h) < threshold) {
+
+                            //{{
+                            if (t === 0) {
+                                // Настройки стиля линии (Яркий неоново-зеленый цвет)
+                                // ctx.strokeStyle = "#2ecc71";
                                 ctx.strokeStyle = "#fff"; // Белый цвет при пересечении
-                                ctx.lineWidth = 3; // Толстая линия
-                                ctx.shadowBlur = 15; // Свечение
-                                ctx.shadowColor = "#fff";
+                                ctx.lineWidth = 1.0; // Плотная, хорошо заметная линия
+                                // ctx.globalAlpha = 0.9;
+                                // ctx.setLineDash([]); // Гарантируем сплошную линию без пунктиров
+
+                                // // Рисуем текстовый маркер "START (0:00)" чуть выше линии для красоты
+                                // ctx.fillStyle = "#2ecc71";
+                                // ctx.font = "bold 13px sans-serif";
+                                // ctx.fillText(
+                                //     "START (0:00)",
+                                //     15,
+                                //     startLineY - 8,
+                                // );
+
+                                //}}
+                                // } else if (Math.abs(y - h) < threshold) {
+                                //     ctx.strokeStyle = "#fff"; // Белый цвет при пересечении
+                                //     ctx.lineWidth = 3; // Толстая линия
+                                //     ctx.shadowBlur = 15; // Свечение
+                                //     ctx.shadowColor = "#fff";
+                                //     console.log("линия подсвечивания");
                             } else {
                                 ctx.strokeStyle = "rgba(100, 100, 100, 0.4)"; // Обычный тусклый цвет
                                 ctx.lineWidth = 1;
@@ -1580,6 +2057,60 @@
                     ctx.restore();
                 },
 
+                // Добавьте этот метод внутрь объекта objPianino
+                drawEditCursor() {
+                    const ctx = this.cvsCtx;
+                    // Проверяем глобальный флаг редактора и присутствие мыши на холсте
+                    if (
+                        typeof isEditMode !== "undefined" &&
+                        isEditMode &&
+                        this.isMouseInCanvas &&
+                        ctx
+                    ) {
+                        ctx.save();
+
+                        console.log(
+                            this.gridCursorX,
+                            this.gridCursorY,
+                            this.cvsHeight,
+                        );
+
+                        // Задаем сочный и контрастный цвет для прицела
+                        ctx.strokeStyle = "#ff0000";
+                        ctx.lineWidth = 1.5;
+                        ctx.globalAlpha = 1.0;
+                        ctx.setLineDash([]); // Отключаем любые пунктиры
+
+                        // Рисуем вертикальную направляющую (по центру клавиши)
+                        ctx.beginPath();
+                        ctx.moveTo(this.gridCursorX, 0);
+                        ctx.lineTo(this.gridCursorX, this.cvs.height);
+                        ctx.stroke();
+
+                        // Рисуем горизонтальную направляющую (по центру 16-й ноты)
+                        ctx.beginPath();
+                        ctx.moveTo(0, this.gridCursorY);
+                        ctx.lineTo(this.cvs.width, this.gridCursorY);
+                        ctx.stroke();
+
+                        // Рисуем аккуратную центральную точку на пересечении осей
+                        ctx.fillStyle = "#ff0000";
+                        ctx.beginPath();
+                        ctx.arc(
+                            this.gridCursorX,
+                            this.gridCursorY,
+                            4,
+                            0,
+                            Math.PI * 2,
+                        );
+                        ctx.fill();
+
+                        ctx.restore();
+                    }
+                },
+
+                // Добавьте этот метод внутрь объекта objPianino
+
                 /*render*/
                 animate() {
                     const ctx = this.cvsCtx;
@@ -1610,6 +2141,7 @@
                     this.drawVerticalGrid(); // Сетка клавиш
                     this.drawHorizontalTact(); // Такты
                     this.drawMetrics(); // Текст BPM/FPS
+                    this.drawEditCursor(); // Прицел
 
                     const kbRect = kb.getBoundingClientRect();
                     let blocked = false;
@@ -1737,519 +2269,6 @@
                     // Сразу визуально обновляем шкалу
                     this.updateProgressBar();
                 },
-
-                // importMidi(input) {
-                //     if (!input.files || !input.files.length) return;
-                //     const reader = new FileReader();
-                //     reader.onload = (e) => {
-                //         try {
-                //             const data = new DataView(e.target.result);
-                //             const tpq = data.getUint16(12);
-                //             let offset = 14;
-                //             const newNotesSong = [];
-                //             let newBpm = 100;
-                //             const activeNotes = {};
-                //             const revMap = {
-                //                 0: "ДО",
-                //                 1: "РЕБИМОЛЬ",
-                //                 2: "РЕ",
-                //                 3: "МИБИМОЛЬ",
-                //                 4: "МИ",
-                //                 5: "ФА",
-                //                 6: "СОЛЬБИМОЛЬ",
-                //                 7: "СОЛЬ",
-                //                 8: "ЛЯБИМОЛЬ",
-                //                 9: "ЛЯ",
-                //                 10: "СИБИМОЛЬ",
-                //                 11: "СИ",
-                //             };
-                //             let currentInst = 0;
-                //             while (offset < data.byteLength) {
-                //                 const chunkType = data.getUint32(offset);
-                //                 const chunkLen = data.getUint32(offset + 4);
-                //                 offset += 8;
-                //                 if (chunkType == 0x4d54726b) {
-                //                     let trackEnd = offset + chunkLen;
-                //                     let currentTick = 0;
-                //                     while (offset < trackEnd) {
-                //                         let delta = 0;
-                //                         while (true) {
-                //                             let b = data.getUint8(offset++);
-                //                             delta = (delta << 7) | (b & 0x7f);
-                //                             if (!(b & 0x80)) break;
-                //                         }
-                //                         currentTick += delta;
-                //                         let status = data.getUint8(offset++);
-                //                         let type = status >> 4;
-                //                         if (type === 0x9 || type === 0x8) {
-                //                             const note = data.getUint8(
-                //                                 offset++,
-                //                             );
-                //                             const vel = data.getUint8(offset++);
-                //                             if (type === 0x9 && vel > 0)
-                //                                 activeNotes[note] = {
-                //                                     tick: currentTick,
-                //                                     inst: currentInst,
-                //                                 };
-                //                             else if (activeNotes[note]) {
-                //                                 const start =
-                //                                     activeNotes[note].tick;
-                //                                 newNotesSong.push({
-                //                                     numTact: Math.floor(
-                //                                         start / (tpq * 4),
-                //                                     ),
-                //                                     pos: Number(
-                //                                         (
-                //                                             (start %
-                //                                                 (tpq * 4)) /
-                //                                             tpq
-                //                                         ).toFixed(2),
-                //                                     ),
-                //                                     note:
-                //                                         revMap[note % 12] +
-                //                                         (Math.floor(note / 12) -
-                //                                             1),
-                //                                     length: Number(
-                //                                         (
-                //                                             (currentTick -
-                //                                                 start) /
-                //                                             tpq
-                //                                         ).toFixed(2),
-                //                                     ),
-                //                                     idInstrument:
-                //                                         activeNotes[note].inst,
-                //                                     nameInstrument:
-                //                                         MIDI_INSTRUMENTS[
-                //                                             activeNotes[note]
-                //                                                 .inst
-                //                                         ] || "Unknown",
-                //                                 });
-                //                                 delete activeNotes[note];
-                //                             }
-                //                         } else if (type === 0xc)
-                //                             currentInst = data.getUint8(
-                //                                 offset++,
-                //                             );
-                //                         // else if (status === 0xff) {
-                //                         //     offset++;
-                //                         //     let len = 0;
-                //                         //     while (true) {
-                //                         //         let b = data.getUint8(offset++);
-                //                         //         len = (len << 7) | (b & 0x7f);
-                //                         //         if (!(b & 0x80)) break;
-                //                         //     }
-                //                         //     offset += len;
-                //                         // }
-                //                         else if (status === 0xff) {
-                //                             const metaType = data.getUint8(
-                //                                 offset++,
-                //                             ); // Тип мета-события
-                //                             let len = 0;
-                //                             while (true) {
-                //                                 let b = data.getUint8(offset++);
-                //                                 len = (len << 7) | (b & 0x7f);
-                //                                 if (!(b & 0x80)) break;
-                //                             }
-
-                //                             if (metaType === 0x51) {
-                //                                 // 0x51 — это Set Tempo
-                //                                 // Темп закодирован в 3 байтах как микросекунды на четверть (MPQN)
-                //                                 const m1 =
-                //                                     data.getUint8(offset);
-                //                                 const m2 = data.getUint8(
-                //                                     offset + 1,
-                //                                 );
-                //                                 const m3 = data.getUint8(
-                //                                     offset + 2,
-                //                                 );
-                //                                 const mpqn =
-                //                                     (m1 << 16) | (m2 << 8) | m3;
-
-                //                                 // Формула перевода: BPM = 60,000,000 / MPQN
-                //                                 newBpm = Math.round(
-                //                                     60000000 / mpqn,
-                //                                 );
-                //                                 //this.initBPM(); // Сразу отображаем новый BPM в поле ввода
-                //                             }
-                //                             offset += len;
-                //                         } else if (status >= 0x80)
-                //                             offset +=
-                //                                 status >= 0xc0 && status <= 0xdf
-                //                                     ? 1
-                //                                     : 2;
-                //                     }
-                //                 } else offset += chunkLen;
-                //             }
-                //             newNotesSong.sort(
-                //                 (a, b) =>
-                //                     a.numTact * 4 +
-                //                     a.pos -
-                //                     (b.numTact * 4 + b.pos),
-                //             );
-
-                //             objMusic.notesSong = newNotesSong;
-                //             objMusic.bpm = newBpm;
-                //             // this.bpm = newBpm;
-                //             // this.initInputBpm();
-                //             this.updateSongData();
-                //             this.rebuild();
-                //         } catch (err) {
-                //             alert("MIDI Error: " + err.message);
-                //         }
-                //     };
-                //     reader.readAsArrayBuffer(input.files[0]);
-                // },
-                // importMidi(input) {
-                //     if (!input.files || !input.files.length) return;
-                //     const reader = new FileReader();
-                //     reader.onload = (e) => {
-                //         try {
-                //             const data = new DataView(e.target.result);
-                //             // Проверка заголовка MThd
-                //             if (data.getUint32(0) !== 0x4d546864)
-                //                 throw new Error("Неверный формат MIDI");
-
-                //             const tpq = data.getUint16(12); // Ticks Per Quarter Note
-                //             let offset = 14;
-                //             const newNotesSong = [];
-                //             let newBpm = 120;
-                //             const revMap = {
-                //                 0: "ДО",
-                //                 1: "РЕБИМОЛЬ",
-                //                 2: "РЕ",
-                //                 3: "МИБИМОЛЬ",
-                //                 4: "МИ",
-                //                 5: "ФА",
-                //                 6: "СОЛЬБИМОЛЬ",
-                //                 7: "СОЛЬ",
-                //                 8: "ЛЯБИМОЛЬ",
-                //                 9: "ЛЯ",
-                //                 10: "СИБИМОЛЬ",
-                //                 11: "СИ",
-                //             };
-
-                //             while (offset < data.byteLength) {
-                //                 const chunkType = data.getUint32(offset);
-                //                 const chunkLen = data.getUint32(offset + 4);
-                //                 offset += 8;
-
-                //                 if (chunkType === 0x4d54726b) {
-                //                     // MTrk (трек)
-                //                     let trackEnd = offset + chunkLen;
-                //                     let currentTick = 0;
-                //                     let lastStatus = 0;
-                //                     const activeNotes = {};
-                //                     let currentInst = 0;
-
-                //                     while (offset < trackEnd) {
-                //                         // 1. Читаем Delta Time
-                //                         let delta = 0;
-                //                         while (true) {
-                //                             let b = data.getUint8(offset++);
-                //                             delta = (delta << 7) | (b & 0x7f);
-                //                             if (!(b & 0x80)) break;
-                //                         }
-                //                         currentTick += delta;
-
-                //                         // 2. Определяем статус (с учетом Running Status)
-                //                         let status = data.getUint8(offset);
-                //                         if (status < 0x80) {
-                //                             status = lastStatus;
-                //                         } else {
-                //                             lastStatus = status;
-                //                             offset++;
-                //                         }
-
-                //                         const type = status >> 4;
-                //                         const channel = status & 0x0f;
-
-                //                         if (type === 0x9 || type === 0x8) {
-                //                             // Note On / Off
-                //                             const note = data.getUint8(
-                //                                 offset++,
-                //                             );
-                //                             const vel = data.getUint8(offset++);
-
-                //                             if (type === 0x9 && vel > 0) {
-                //                                 activeNotes[note] = {
-                //                                     tick: currentTick,
-                //                                     inst: currentInst,
-                //                                 };
-                //                             } else if (activeNotes[note]) {
-                //                                 const start =
-                //                                     activeNotes[note].tick;
-                //                                 newNotesSong.push({
-                //                                     numTact: Math.floor(
-                //                                         start / (tpq * 4),
-                //                                     ), //
-                //                                     pos: Number(
-                //                                         (
-                //                                             (start %
-                //                                                 (tpq * 4)) /
-                //                                             tpq
-                //                                         ).toFixed(2),
-                //                                     ), //
-                //                                     note:
-                //                                         revMap[note % 12] +
-                //                                         (Math.floor(note / 12) -
-                //                                             1),
-                //                                     length: Number(
-                //                                         (
-                //                                             (currentTick -
-                //                                                 start) /
-                //                                             tpq
-                //                                         ).toFixed(2),
-                //                                     ),
-                //                                     idInstrument:
-                //                                         activeNotes[note].inst,
-                //                                     nameInstrument:
-                //                                         MIDI_INSTRUMENTS[
-                //                                             activeNotes[note]
-                //                                                 .inst
-                //                                         ] || "Unknown",
-                //                                 });
-                //                                 delete activeNotes[note];
-                //                             }
-                //                         } else if (type === 0xc) {
-                //                             // Program Change
-                //                             currentInst = data.getUint8(
-                //                                 offset++,
-                //                             );
-                //                         } else if (status === 0xff) {
-                //                             // Meta Event
-                //                             const metaType = data.getUint8(
-                //                                 offset++,
-                //                             );
-                //                             let len = 0;
-                //                             while (true) {
-                //                                 let b = data.getUint8(offset++);
-                //                                 len = (len << 7) | (b & 0x7f);
-                //                                 if (!(b & 0x80)) break;
-                //                             }
-                //                             if (metaType === 0x51) {
-                //                                 // Set Tempo
-                //                                 const mpqn =
-                //                                     (data.getUint8(offset) <<
-                //                                         16) |
-                //                                     (data.getUint8(
-                //                                         offset + 1,
-                //                                     ) <<
-                //                                         8) |
-                //                                     data.getUint8(offset + 2);
-                //                                 newBpm = Math.round(
-                //                                     60000000 / mpqn,
-                //                                 );
-                //                             }
-                //                             offset += len;
-                //                         } else if (
-                //                             type === 0xa ||
-                //                             type === 0xb ||
-                //                             type === 0xe
-                //                         ) {
-                //                             offset += 2;
-                //                         } else if (type === 0xd) {
-                //                             offset += 1;
-                //                         }
-                //                     }
-                //                 } else {
-                //                     offset += chunkLen;
-                //                 }
-                //             }
-
-                //             // Сортировка по времени
-                //             newNotesSong.sort(
-                //                 (a, b) =>
-                //                     a.numTact * 4 +
-                //                     a.pos -
-                //                     (b.numTact * 4 + b.pos),
-                //             );
-
-                //             objMusic.notesSong = newNotesSong;
-                //             objMusic.bpm = newBpm;
-                //             this.updateSongData();
-                //             this.rebuild();
-                //         } catch (err) {
-                //             console.error(err);
-                //             alert("MIDI Error: " + err.message);
-                //         }
-                //     };
-                //     reader.readAsArrayBuffer(input.files[0]);
-                // },
-
-                /*************  ✨ Windsurf Command ⭐  *************/
-                /**
-                 * Импортирует MIDI файл и обновляет данные песни.
-                 * @param {File} input - выбранный MIDI файл.
-                 */
-                /*******  1b34976d-2891-461f-a93c-9cd56199249a  *******/
-                // importMidi(input) {
-                //     if (!input.files || !input.files.length) return;
-                //     const reader = new FileReader();
-                //     reader.onload = (e) => {
-                //         try {
-                //             const data = new DataView(e.target.result);
-                //             if (data.getUint32(0) !== 0x4d546864)
-                //                 throw new Error("Это не MIDI файл");
-
-                //             const tpq = data.getUint16(12); // В вашем случае это 120
-                //             let offset = 14;
-                //             const newNotesSong = [];
-                //             let newBpm = 120;
-                //             const revMap = {
-                //                 0: "ДО",
-                //                 1: "РЕБИМОЛЬ",
-                //                 2: "РЕ",
-                //                 3: "МИБИМОЛЬ",
-                //                 4: "МИ",
-                //                 5: "ФА",
-                //                 6: "СОЛЬБИМОЛЬ",
-                //                 7: "СОЛЬ",
-                //                 8: "ЛЯБИМОЛЬ",
-                //                 9: "ЛЯ",
-                //                 10: "СИБИМОЛЬ",
-                //                 11: "СИ",
-                //             };
-
-                //             while (offset < data.byteLength) {
-                //                 const chunkType = data.getUint32(offset);
-                //                 const chunkLen = data.getUint32(offset + 4);
-                //                 offset += 8;
-
-                //                 if (chunkType === 0x4d54726b) {
-                //                     // MTrk
-                //                     let trackEnd = offset + chunkLen;
-                //                     let currentTick = 0;
-                //                     let lastStatus = 0;
-                //                     const activeNotes = {};
-                //                     let currentInst = 0;
-
-                //                     while (offset < trackEnd) {
-                //                         // Читаем Delta Time (VLQ)
-                //                         let delta = 0;
-                //                         while (true) {
-                //                             let b = data.getUint8(offset++);
-                //                             delta = (delta << 7) | (b & 0x7f);
-                //                             if (!(b & 0x80)) break;
-                //                         }
-                //                         currentTick += delta;
-
-                //                         let status = data.getUint8(offset);
-                //                         if (status < 0x80) {
-                //                             status = lastStatus;
-                //                         } else {
-                //                             lastStatus = status;
-                //                             offset++;
-                //                         }
-
-                //                         const type = status >> 4;
-
-                //                         if (type === 0x9 || type === 0x8) {
-                //                             // Ноты
-                //                             const note = data.getUint8(
-                //                                 offset++,
-                //                             );
-                //                             const vel = data.getUint8(offset++);
-                //                             if (type === 0x9 && vel > 0) {
-                //                                 activeNotes[note] = {
-                //                                     tick: currentTick,
-                //                                     inst: currentInst,
-                //                                 };
-                //                             } else if (activeNotes[note]) {
-                //                                 const start =
-                //                                     activeNotes[note].tick;
-                //                                 newNotesSong.push({
-                //                                     numTact: Math.floor(
-                //                                         start / (tpq * 4),
-                //                                     ),
-                //                                     pos: Number(
-                //                                         (
-                //                                             (start %
-                //                                                 (tpq * 4)) /
-                //                                             tpq
-                //                                         ).toFixed(2),
-                //                                     ),
-                //                                     note:
-                //                                         revMap[note % 12] +
-                //                                         (Math.floor(note / 12) -
-                //                                             1),
-                //                                     length: Number(
-                //                                         (
-                //                                             (currentTick -
-                //                                                 start) /
-                //                                             tpq
-                //                                         ).toFixed(2),
-                //                                     ),
-                //                                     idInstrument:
-                //                                         activeNotes[note].inst,
-                //                                     nameInstrument:
-                //                                         "Instrument " +
-                //                                         activeNotes[note].inst,
-                //                                 });
-                //                                 delete activeNotes[note];
-                //                             }
-                //                         }
-                //                         // ОБРАБОТКА SYSEX (те самые F0 из дампа)
-                //                         else if (
-                //                             status === 0xf0 ||
-                //                             status === 0xf7
-                //                         ) {
-                //                             let len = 0;
-                //                             while (true) {
-                //                                 let b = data.getUint8(offset++);
-                //                                 len = (len << 7) | (b & 0x7f);
-                //                                 if (!(b & 0x80)) break;
-                //                             }
-                //                             offset += len; // Просто пропускаем эти байты!
-                //                         } else if (status === 0xff) {
-                //                             // Meta
-                //                             const metaType = data.getUint8(
-                //                                 offset++,
-                //                             );
-                //                             let len = 0;
-                //                             while (true) {
-                //                                 let b = data.getUint8(offset++);
-                //                                 len = (len << 7) | (b & 0x7f);
-                //                                 if (!(b & 0x80)) break;
-                //                             }
-                //                             if (metaType === 0x51) {
-                //                                 const mpqn =
-                //                                     (data.getUint8(offset) <<
-                //                                         16) |
-                //                                     (data.getUint8(
-                //                                         offset + 1,
-                //                                     ) <<
-                //                                         8) |
-                //                                     data.getUint8(offset + 2);
-                //                                 newBpm = Math.round(
-                //                                     60000000 / mpqn,
-                //                                 );
-                //                             }
-                //                             offset += len;
-                //                         } else if (
-                //                             type === 0xc ||
-                //                             type === 0xd
-                //                         ) {
-                //                             offset += 1;
-                //                         } else {
-                //                             offset += 2;
-                //                         }
-                //                     }
-                //                 } else {
-                //                     offset += chunkLen;
-                //                 }
-                //             }
-
-                //             objMusic.notesSong = newNotesSong;
-                //             objMusic.bpm = newBpm;
-                //             this.updateSongData();
-                //             alert("Импорт завершен!");
-                //         } catch (err) {
-                //             console.error(err);
-                //             alert("Ошибка: " + err.message);
-                //         }
-                //     };
-                //     reader.readAsArrayBuffer(input.files[0]);
-                // },
 
                 importMidi(input) {
                     if (!input.files || !input.files.length) return;
@@ -2442,6 +2461,8 @@
                         }
                     };
                     reader.readAsArrayBuffer(input.files[0]);
+
+                    //this.currentPosition = -8;
                 },
 
                 updateSongFromEditor() {
@@ -2451,7 +2472,10 @@
                         );
                         this.updateSongData();
                         this.rebuild();
-                        this.currentPosition = 0;
+                        this.currentPosition = -4;
+                        this.updateProgressBar();
+
+                        //this.currentPosition = -4;
                         this.isPlaying = false;
                     } catch (e) {
                         alert("JSON Error!");
@@ -2462,6 +2486,7 @@
                     this.notesSong.forEach((m) => (m.passed = false));
 
                     this.currentPosition = 0;
+                    //this.currentPosition = -4;
                     this.isPlaying = true;
                 },
 
@@ -2473,6 +2498,8 @@
                     // Set the canvas width and height
                     this.cvs.width = this.cvsWidth;
                     this.cvs.height = this.cvsHeight;
+
+                    // ctx = canvasEl ? canvasEl.getContext("2d") : null;
                 },
 
                 resize() {
@@ -2549,8 +2576,40 @@
                 };
                 reader.readAsText(file);
             }
+            function updateRealVH() {
+                // Вычисляем 1% от высоты окна
+                let vh = window.innerHeight * 0.01;
+                // Записываем значение в переменную --vh
+                document.documentElement.style.setProperty("--vh", `${vh}px`);
+            }
+
+            function toggleFullScreen() {
+                if (!document.fullscreenElement) {
+                    document.documentElement
+                        .requestFullscreen()
+                        .catch((err) =>
+                            console.error(`Ошибка: ${err.message}`),
+                        );
+                } else {
+                    document.exitFullscreen();
+                }
+            }
+
+            // Обновление размеров интерфейса при смене режима
+            document.addEventListener("fullscreenchange", () => {
+                if (typeof objPianino !== "undefined") {
+                    if (objPianino.resize) objPianino.resize();
+                    if (objPianino.initCtxWidthHeight)
+                        objPianino.initCtxWidthHeight();
+                }
+            });
 
             //{{Глобальный контекст, выполнение кода
+            // Запускаем при загрузке
+            updateRealVH();
+
+            // Обновляем при повороте экрана или изменении размера
+            window.addEventListener("resize", updateRealVH);
             window.onload = () => objPianino.init();
             window.addEventListener("keydown", (e) => {
                 if (["INPUT", "TEXTAREA"].includes(e.target.tagName)) return;
@@ -2562,6 +2621,7 @@
                     objPianino.play(found.id);
                 }
             });
+
             //}}Глобальный контекст, выполнение кода
         </script>
     </body>
