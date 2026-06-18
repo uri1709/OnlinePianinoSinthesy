@@ -594,12 +594,12 @@
                                 border: 1px solid #555;
                             "
                         >
-                            <option value="0">Первая</option>
-                            <option value="12">Вторая</option>
-                            <option value="24" selected>Третья</option>
-                            <option value="36">Четвертая</option>
-                            <option value="48">Пятая</option>
-                            <option value="60">Шестая</option>
+                            <option value="0">Первой</option>
+                            <option value="12">Второй</option>
+                            <option value="24" selected>Третьей</option>
+                            <option value="36">Четвертой</option>
+                            <option value="48">Пятой</option>
+                            <option value="60">Шестой</option>
                         </select>
                     </div>
                     <button
@@ -1400,9 +1400,21 @@
                     body.innerHTML = "";
                     this.keysPianino.forEach((n, i) => {
                         const tr = document.createElement("tr");
+
+                        const latinName = n.name.replace(/[0-9]/g, "");
+                        const octave = n.name.replace(/[^0-9]/g, "");
+                        const russianNoteName = Object.keys(this.mapNotes).find(
+                            (key) => this.mapNotes[key] === latinName,
+                        );
+
+                        const finalNoteName =
+                            (russianNoteName || "ДО") + octave;
+
+                        // <td><input type="text" value="${n.name}" oninput="objPianino.keysPianino[${i}].name=this.value"></td>
+
                         tr.innerHTML = `
                         <td>${n.id}</td>
-                        <td><input type="text" value="${n.name}" oninput="objPianino.keysPianino[${i}].name=this.value"></td>
+                        <td><input type="text" value="${finalNoteName}" oninput="objPianino.keysPianino[${i}].name=this.value"></td>
                         <td><input type="number" value="${n.freq}" oninput="objPianino.notkeysPianinoes[${i}].freq=parseFloat(this.value)"></td>
                         <td><input id="inp-key-${i}" class="input-key" value="${n.code}" readonly placeholder="Нажми клавишу..." onkeydown="objPianino.captureKey(event, ${i})"></td>
                         <td><button class="btn btn-clear" onclick="objPianino.clearSingleKey(${i})">Очистить</button></td>
@@ -1750,7 +1762,9 @@
                             // ИЗМЕНЕНИЕ ТУТ: ищем в объекте по номеру ноты abs
                             code:
                                 this._baseCodes.find(
-                                    (item) => item.id + this.octaveOffset === i,
+                                    (item) =>
+                                        // item.id + this.octaveOffset === i, // смещенеи на октаву
+                                        item.id + this.octaveOffset === i,
                                 )?.key ?? "",
                         });
                     }
@@ -1769,6 +1783,8 @@
 
                     // 1. Отрисовка вашей клавиатуры и текущих нот
                     this.renderKb();
+
+                    this.fillTable();
                 },
 
                 renderKb() {
