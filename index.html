@@ -753,26 +753,6 @@
                                 style="display: none"
                                 onchange="objPianino.importMidi(this)"
                             />
-                            <button
-                                onclick="
-                                    document
-                                        .getElementById('midi-input')
-                                        .click()
-                                "
-                                style="
-                                    flex: 1;
-                                    margin: 2px;
-                                    padding: 12px;
-                                    background: #3498db;
-                                    color: #fff;
-                                    border: none;
-                                    cursor: pointer;
-                                    font-weight: bold;
-                                    border-radius: 4px;
-                                "
-                            >
-                                ЗАГРУЗИТЬ MIDI
-                            </button>
 
                             <!-- Кнопка сохранения -->
                             <button
@@ -823,6 +803,65 @@
                                 ЗАГРУЗИТЬ JSON
                             </button>
 
+                            <button
+                                onclick="objPianino.exportToMidiFile()"
+                                style="
+                                    flex: 1;
+                                    margin: 2px;
+                                    padding: 12px;
+                                    background: #3498db;
+                                    color: #fff;
+                                    border: none;
+                                    cursor: pointer;
+                                    font-weight: bold;
+                                    border-radius: 4px;
+                                "
+                            >
+                                ВЫГРУЗИТЬ MIDI
+                            </button>
+
+                            <button
+                                onclick="
+                                    document
+                                        .getElementById('midi-input')
+                                        .click()
+                                "
+                                style="
+                                    flex: 1;
+                                    margin: 2px;
+                                    padding: 12px;
+                                    background: #3498db;
+                                    color: #fff;
+                                    border: none;
+                                    cursor: pointer;
+                                    font-weight: bold;
+                                    border-radius: 4px;
+                                "
+                            >
+                                ЗАГРУЗИТЬ MIDI
+                            </button>
+
+                            <div>
+                                <label style="color: #3498db; font-weight: bold"
+                                    >Название песни:</label
+                                >
+                                <input
+                                    type="text"
+                                    id="song-name-input"
+                                    value=""
+                                    style="
+                                        width: 100%;
+                                        padding: 10px;
+                                        background: #222;
+                                        color: #fff;
+                                        border: 1px solid #444;
+                                        border-radius: 4px;
+                                        margin-bottom: 10px;
+                                        box-sizing: border-box;
+                                    "
+                                    onchange="objPianino.NameSong = this.value"
+                                />
+                            </div>
                             <textarea
                                 id="editor-area"
                                 style="
@@ -1075,6 +1114,7 @@
             ];
 
             var objMusic = {
+                NameSong: "Mortal combat", // имя песни
                 bpm: 130,
                 // notesSong: [
                 //     {
@@ -1340,7 +1380,10 @@
                 isPaused: false,
                 learningMode: false,
                 loopMode: false, //зациклить
+
+                NameSong: "Mortal combat", // имя песни
                 bpm: 130,
+
                 pixelsPerQuarter: 120,
                 maxPos: 0,
                 notesSong: [],
@@ -1394,6 +1437,13 @@
                         bpmInput.value = this.bpm;
                     }
                 },
+                initInputNameSong() {
+                    const elNameSong =
+                        document.getElementById("song-name-input");
+                    if (elNameSong) {
+                        elNameSong.value = this.NameSong;
+                    }
+                },
 
                 fillTable() {
                     const body = document.getElementById("notes-table-body");
@@ -1413,12 +1463,12 @@
                         // <td><input type="text" value="${n.name}" oninput="objPianino.keysPianino[${i}].name=this.value"></td>
 
                         tr.innerHTML = `
-                        <td>${n.id}</td>
-                        <td><input type="text" value="${finalNoteName}" oninput="objPianino.keysPianino[${i}].name=this.value"></td>
-                        <td><input type="number" value="${n.freq}" oninput="objPianino.notkeysPianinoes[${i}].freq=parseFloat(this.value)"></td>
-                        <td><input id="inp-key-${i}" class="input-key" value="${n.code}" readonly placeholder="Нажми клавишу..." onkeydown="objPianino.captureKey(event, ${i})"></td>
-                        <td><button class="btn btn-clear" onclick="objPianino.clearSingleKey(${i})">Очистить</button></td>
-                    `;
+                                    <td>${n.id}</td>
+                                    <td><input type="text" value="${finalNoteName}" oninput="objPianino.keysPianino[${i}].name=this.value"></td>
+                                    <td><input type="number" value="${n.freq}" oninput="objPianino.notkeysPianinoes[${i}].freq=parseFloat(this.value)"></td>
+                                    <td><input id="inp-key-${i}" class="input-key" value="${n.code}" readonly placeholder="Нажми клавишу..." onkeydown="objPianino.captureKey(event, ${i})"></td>
+                                    <td><button class="btn btn-clear" onclick="objPianino.clearSingleKey(${i})">Очистить</button></td>
+                                `;
                         body.appendChild(tr);
                     });
                 },
@@ -1450,6 +1500,7 @@
                         //console.log("BPM изменен на:", this.bpm);
                     }
                 },
+
                 start() {
                     // Если плеер полностью остановлен, стартуем из зоны пре-ролла (-2 такта = -8 четвертей)
                     if (
@@ -1533,11 +1584,11 @@
                     // Формируем строки таблицы на основе вашей константы
                     tbody.innerHTML = MIDI_INSTRUMENTS.map(
                         (name, index) => `
-                                            <tr>
-                                            <td style="color: #888;">${index}</td>
-                                            <td>${name}</td>
-                                            </tr>
-                                        `,
+                                                        <tr>
+                                                        <td style="color: #888;">${index}</td>
+                                                        <td>${name}</td>
+                                                        </tr>
+                                                    `,
                     ).join("");
                 },
                 init() {
@@ -1547,6 +1598,7 @@
                     this.initCtxWidthHeight();
                     this.updateSongData();
                     this.initInputBpm();
+                    this.initInputNameSong();
                     this.rebuild();
                     this.resize();
                     this.fillInstrumentsTable();
@@ -1723,7 +1775,9 @@
                         };
                     });
                     this.bpm = objMusic.bpm || 130;
+                    this.NameSong = objMusic.NameSong || "New song";
                     this.initInputBpm();
+                    this.initInputNameSong();
 
                     this.maxPos =
                         Math.max(
@@ -2286,8 +2340,167 @@
                     this.updateProgressBar();
                 },
 
+                exportToMidiFile() {
+                    const bpm = objMusic.bpm || 130;
+                    const ticksPerQuarter = 128; // Разрешение (PPQ)
+
+                    // Переводим ноты из тактовой системы (numTact, pos) в абсолютные тики
+                    // 1 такт равен 4 четвертям. Итого: абсолютная позиция = (numTact - 1) * 4 + pos
+                    let events = [];
+
+                    // Карта перевода русских названий нот в MIDI-номера
+                    const noteToMidiBase = {
+                        ДО: 0,
+                        РЕБИМОЛЬ: 1,
+                        РЕ: 2,
+                        МИБИМОЛЬ: 3,
+                        МИ: 4,
+                        ФА: 5,
+                        СОЛЬБИМОЛЬ: 6,
+                        СОЛЬ: 7,
+                        ЛЯБИМОЛЬ: 8,
+                        ЛЯ: 9,
+                        СИБИМОЛЬ: 10,
+                        СИ: 11,
+                    };
+
+                    objMusic.notesSong.forEach((n) => {
+                        // Парсим имя русской ноты и октаву (например: "ЛЯ3" -> "ЛЯ", "3")
+                        const match = n.note.match(/^([А-Я]+)([0-9]+)$/);
+                        if (!match) return;
+
+                        const noteName = match[1];
+                        const octave = parseInt(match[2], 10);
+
+                        // В MIDI Нота C4 (ДО4) обычно имеет номер 60. Формула: (Октава + 1) * 12 + Смещение ноты
+                        const midiNumber =
+                            (octave + 1) * 12 + noteToMidiBase[noteName];
+
+                        const startQuarter = (n.numTact - 1) * 4 + n.pos;
+                        const endQuarter = startQuarter + (n.length || 1);
+
+                        const startTick = Math.round(
+                            startQuarter * ticksPerQuarter,
+                        );
+                        const endTick = Math.round(
+                            endQuarter * ticksPerQuarter,
+                        );
+
+                        events.push({
+                            type: "on",
+                            tick: startTick,
+                            note: midiNumber,
+                            instrument: n.idInstrument || 0,
+                        });
+                        events.push({
+                            type: "off",
+                            tick: endTick,
+                            note: midiNumber,
+                            instrument: n.idInstrument || 0,
+                        });
+                    });
+
+                    // Сортируем события по времени (тикам)
+                    events.sort((a, b) => a.tick - b.tick);
+
+                    // Собираем трек-данные (MTrk) с дельта-таймами
+                    let trackBytes = [];
+                    let lastTick = 0;
+
+                    // 1. Установка темпа (BPM) в мета-событие
+                    trackBytes.push(0x00, 0xff, 0x51, 0x03);
+                    const microsecondsPerQuarter = Math.round(60000000 / bpm);
+                    trackBytes.push((microsecondsPerQuarter >> 16) & 0xff);
+                    trackBytes.push((microsecondsPerQuarter >> 8) & 0xff);
+                    trackBytes.push(microsecondsPerQuarter & 0xff);
+
+                    // Инициализируем инструмент (если в песне используется определенный)
+                    let currentInstrument = -1;
+
+                    // 2. Запись событий
+                    events.forEach((ev) => {
+                        let delta = ev.tick - lastTick;
+                        lastTick = ev.tick;
+
+                        // Запись Delta-Time в формате Variable Length Quantity (VLQ)
+                        let buffer = [];
+                        let v = delta;
+                        buffer.push(v & 0x7f);
+                        while (v >> 7 > 0) {
+                            v = v >> 7;
+                            buffer.push((v & 0x7f) | 0x80);
+                        }
+                        buffer.reverse().forEach((b) => trackBytes.push(b));
+
+                        // Смена инструмента (Program Change), если изменился
+                        if (ev.instrument !== currentInstrument) {
+                            currentInstrument = ev.instrument;
+                            trackBytes.push(0xc0, currentInstrument); // 0xC0 = Смена программы на 0-м канале
+                            trackBytes.push(0x00); // Нулевой дельта-тайм для следующей ноты
+                        }
+
+                        // Запись Note On / Note Off
+                        if (ev.type === "on") {
+                            trackBytes.push(0x90, ev.note, 0x60); // 0x90 = Note On, 0x60 = Velocity (Громкость 96)
+                        } else {
+                            trackBytes.push(0x80, ev.note, 0x40); // 0x80 = Note Off
+                        }
+                    });
+
+                    // Конец трека (Meta End of Track)
+                    trackBytes.push(0x00, 0xff, 0x2f, 0x00);
+
+                    // Сборка заголовка файла (MThd)
+                    let fileBytes = [
+                        0x4d,
+                        0x54,
+                        0x68,
+                        0x64, // "MThd"
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x06, // Длина заголовка (всегда 6)
+                        0x00,
+                        0x00, // Формат 0 (один трек)
+                        0x00,
+                        0x01, // Количество треков (1)
+                        (ticksPerQuarter >> 8) & 0xff,
+                        ticksPerQuarter & 0xff, // Разрешение (PPQ)
+                    ];
+
+                    // Заголовок трека (MTrk) + длина данных трека
+                    let trackHeader = [
+                        0x4d,
+                        0x54,
+                        0x72,
+                        0x6b, // "MTrk"
+                        (trackBytes.length >> 24) & 0xff,
+                        (trackBytes.length >> 16) & 0xff,
+                        (trackBytes.length >> 8) & 0xff,
+                        trackBytes.length & 0xff,
+                    ];
+
+                    // Финальный массив байт
+                    const finalMidiBytes = new Uint8Array(
+                        fileBytes.concat(trackHeader, trackBytes),
+                    );
+
+                    // Скачивание бинарного файла через Blob
+                    const blob = new Blob([finalMidiBytes], {
+                        type: "audio/midi",
+                    });
+                    const link = document.createElement("a");
+                    link.href = URL.createObjectURL(blob);
+                    link.download = `${objMusic.NameSong || "song"}.mid`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                },
                 importMidi(input) {
                     if (!input.files || !input.files.length) return;
+
+                    const file = input.files[0]; // Сохраняем ссылку на файл для имени по умолчанию
+
                     const reader = new FileReader();
                     reader.onload = (e) => {
                         try {
@@ -2298,6 +2511,7 @@
                             const tpq = data.getUint16(12);
                             let offset = 14;
                             const newNotesSong = [];
+                            let detectedTitle = ""; // Переменная для хранения найденного названия
                             let newBpm = 120;
 
                             // Храним инструменты для каждого из 16 каналов (по умолчанию 0 - Piano)
@@ -2432,7 +2646,39 @@
                                                 len = (len << 7) | (b & 0x7f);
                                                 if (!(b & 0x80)) break;
                                             }
-                                            if (metaType === 0x51) {
+
+                                            // Обработка названия трека / песни (Meta 0x03)
+                                            if (metaType === 0x03 && len > 0) {
+                                                let nameBytes = [];
+                                                for (let i = 0; i < len; i++) {
+                                                    nameBytes.push(
+                                                        data.getUint8(
+                                                            offset + i,
+                                                        ),
+                                                    );
+                                                }
+
+                                                // Декодируем байты строки
+                                                let rawStr =
+                                                    String.fromCharCode.apply(
+                                                        null,
+                                                        nameBytes,
+                                                    );
+                                                try {
+                                                    // Пробуем декодировать из UTF-8 на случай кириллицы
+                                                    detectedTitle =
+                                                        decodeURIComponent(
+                                                            escape(rawStr),
+                                                        );
+                                                } catch (err) {
+                                                    detectedTitle = rawStr;
+                                                }
+                                                detectedTitle =
+                                                    detectedTitle.trim();
+                                            } else if (
+                                                metaType === 0x51 &&
+                                                len === 3
+                                            ) {
                                                 const mpqn =
                                                     (data.getUint8(offset) <<
                                                         16) |
@@ -2463,6 +2709,10 @@
 
                             objMusic.notesSong = newNotesSong;
                             objMusic.bpm = newBpm;
+                            objMusic.NameSong =
+                                detectedTitle ||
+                                file.name.replace(/\.[^/.]+$/, "");
+
                             this.updateSongData();
                             this.rebuild();
 
@@ -2546,52 +2796,116 @@
             };
 
             // Функция сохранения в файл
+            // function saveMusicToJSON() {
+            //     // Собираем актуальные данные из объекта
+            //     const dataStr = JSON.stringify(objMusic, null, 4);
+            //     const dataUri =
+            //         "data:application/json;charset=utf-8," +
+            //         encodeURIComponent(dataStr);
+
+            //     const exportFileDefaultName = "my_music.json";
+
+            //     const linkElement = document.createElement("a");
+            //     linkElement.setAttribute("href", dataUri);
+            //     linkElement.setAttribute("download", exportFileDefaultName);
+            //     linkElement.click();
+            // }
+
             function saveMusicToJSON() {
-                // Собираем актуальные данные из объекта
-                const dataStr = JSON.stringify(objMusic, null, 4);
-                const dataUri =
-                    "data:application/json;charset=utf-8," +
-                    encodeURIComponent(dataStr);
+                // Перед сохранением забираем актуальное имя из input
+                objMusic.NameSong =
+                    document.getElementById("song-name-input").value ||
+                    "Без названия";
 
-                const exportFileDefaultName = "my_music.json";
-
-                const linkElement = document.createElement("a");
-                linkElement.setAttribute("href", dataUri);
-                linkElement.setAttribute("download", exportFileDefaultName);
-                linkElement.click();
+                const dataStr =
+                    "data:text/json;charset=utf-8," +
+                    encodeURIComponent(JSON.stringify(objMusic, null, 2));
+                const downloadAnchor = document.createElement("a");
+                downloadAnchor.setAttribute("href", dataStr);
+                downloadAnchor.setAttribute(
+                    "download",
+                    `${objMusic.NameSong}.json`,
+                );
+                document.body.appendChild(downloadAnchor);
+                downloadAnchor.click();
+                downloadAnchor.remove();
             }
 
             // Функция загрузки из файла
-            function loadMusicFromJSON(input) {
-                const file = input.files[0];
+            // function loadMusicFromJSON(input) {
+            //     const file = input.files[0];
+            //     if (!file) return;
+
+            //     const reader = new FileReader();
+            //     reader.onload = function (e) {
+            //         try {
+            //             const importedData = JSON.parse(e.target.result);
+
+            //             // Проверка структуры (наличие bpm и notesSong)
+            //             if (importedData.bpm && importedData.notesSong) {
+            //                 objMusic.bpm = importedData.bpm;
+            //                 objMusic.notesSong = importedData.notesSong;
+
+            //                 // Обновляем пианино и текстовое поле редактора
+            //                 //objPianino.updateSongData();
+            //                 objPianino.init();
+
+            //                 alert("Данные успешно загружены!");
+            //             } else {
+            //                 alert("Ошибка: Неверный формат JSON файла.");
+            //             }
+            //         } catch (err) {
+            //             alert("Ошибка при чтении файла: " + err.message);
+            //         }
+            //         // Очищаем input, чтобы можно было загрузить тот же файл повторно
+            //         input.value = "";
+            //     };
+            //     reader.readAsText(file);
+            // }
+
+            function loadMusicFromJSON(inputElement) {
+                const file = inputElement.files[0];
                 if (!file) return;
 
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     try {
-                        const importedData = JSON.parse(e.target.result);
+                        const parsed = JSON.parse(e.target.result);
+                        if (parsed && parsed.notesSong) {
+                            objMusic.notesSong = parsed.notesSong;
+                            objMusic.bpm = parsed.bpm || 130;
+                            objMusic.NameSong =
+                                parsed.NameSong ||
+                                file.name.replace(".json", "");
 
-                        // Проверка структуры (наличие bpm и notesSong)
-                        if (importedData.bpm && importedData.notesSong) {
-                            objMusic.bpm = importedData.bpm;
-                            objMusic.notesSong = importedData.notesSong;
+                            // Обновляем UI элементов
+                            document.getElementById("song-name-input").value =
+                                objMusic.NameSong;
+                            if (document.getElementById("bpm-input")) {
+                                document.getElementById("bpm-input").value =
+                                    objMusic.bpm;
+                            }
+                            if (document.getElementById("editor-area")) {
+                                document.getElementById("editor-area").value =
+                                    JSON.stringify(objMusic.notesSong, null, 2);
+                            }
 
-                            // Обновляем пианино и текстовое поле редактора
-                            //objPianino.updateSongData();
-                            objPianino.init();
-
-                            alert("Данные успешно загружены!");
-                        } else {
-                            alert("Ошибка: Неверный формат JSON файла.");
+                            // Переинициализируем трек в плеере
+                            if (
+                                typeof objPianino !== "undefined" &&
+                                objPianino.updateSongFromEditor
+                            ) {
+                                objPianino.updateSongFromEditor();
+                            }
+                            alert("JSON успешно загружен!");
                         }
                     } catch (err) {
-                        alert("Ошибка при чтении файла: " + err.message);
+                        alert("Ошибка чтения JSON файла");
                     }
-                    // Очищаем input, чтобы можно было загрузить тот же файл повторно
-                    input.value = "";
                 };
                 reader.readAsText(file);
             }
+
             function updateRealVH() {
                 // Вычисляем 1% от высоты окна
                 let vh = window.innerHeight * 0.01;
