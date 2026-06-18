@@ -1463,12 +1463,12 @@
                         // <td><input type="text" value="${n.name}" oninput="objPianino.keysPianino[${i}].name=this.value"></td>
 
                         tr.innerHTML = `
-                                    <td>${n.id}</td>
-                                    <td><input type="text" value="${finalNoteName}" oninput="objPianino.keysPianino[${i}].name=this.value"></td>
-                                    <td><input type="number" value="${n.freq}" oninput="objPianino.notkeysPianinoes[${i}].freq=parseFloat(this.value)"></td>
-                                    <td><input id="inp-key-${i}" class="input-key" value="${n.code}" readonly placeholder="Нажми клавишу..." onkeydown="objPianino.captureKey(event, ${i})"></td>
-                                    <td><button class="btn btn-clear" onclick="objPianino.clearSingleKey(${i})">Очистить</button></td>
-                                `;
+                                                <td>${n.id}</td>
+                                                <td><input type="text" value="${finalNoteName}" oninput="objPianino.keysPianino[${i}].name=this.value"></td>
+                                                <td><input type="number" value="${n.freq}" oninput="objPianino.notkeysPianinoes[${i}].freq=parseFloat(this.value)"></td>
+                                                <td><input id="inp-key-${i}" class="input-key" value="${n.code}" readonly placeholder="Нажми клавишу..." onkeydown="objPianino.captureKey(event, ${i})"></td>
+                                                <td><button class="btn btn-clear" onclick="objPianino.clearSingleKey(${i})">Очистить</button></td>
+                                            `;
                         body.appendChild(tr);
                     });
                 },
@@ -1584,11 +1584,11 @@
                     // Формируем строки таблицы на основе вашей константы
                     tbody.innerHTML = MIDI_INSTRUMENTS.map(
                         (name, index) => `
-                                                        <tr>
-                                                        <td style="color: #888;">${index}</td>
-                                                        <td>${name}</td>
-                                                        </tr>
-                                                    `,
+                                                                    <tr>
+                                                                    <td style="color: #888;">${index}</td>
+                                                                    <td>${name}</td>
+                                                                    </tr>
+                                                                `,
                     ).join("");
                 },
                 init() {
@@ -2640,6 +2640,7 @@
                                             const metaType = data.getUint8(
                                                 offset++,
                                             );
+
                                             let len = 0;
                                             while (true) {
                                                 let b = data.getUint8(offset++);
@@ -2647,35 +2648,7 @@
                                                 if (!(b & 0x80)) break;
                                             }
 
-                                            // Обработка названия трека / песни (Meta 0x03)
-                                            if (metaType === 0x03 && len > 0) {
-                                                let nameBytes = [];
-                                                for (let i = 0; i < len; i++) {
-                                                    nameBytes.push(
-                                                        data.getUint8(
-                                                            offset + i,
-                                                        ),
-                                                    );
-                                                }
-
-                                                // Декодируем байты строки
-                                                let rawStr =
-                                                    String.fromCharCode.apply(
-                                                        null,
-                                                        nameBytes,
-                                                    );
-                                                try {
-                                                    // Пробуем декодировать из UTF-8 на случай кириллицы
-                                                    detectedTitle =
-                                                        decodeURIComponent(
-                                                            escape(rawStr),
-                                                        );
-                                                } catch (err) {
-                                                    detectedTitle = rawStr;
-                                                }
-                                                detectedTitle =
-                                                    detectedTitle.trim();
-                                            } else if (
+                                            if (
                                                 metaType === 0x51 &&
                                                 len === 3
                                             ) {
@@ -2692,6 +2665,72 @@
                                                 );
                                             }
                                             offset += len;
+
+                                            // // Читаем длину метаданных (Variable Length Quantity)
+                                            // let metaLen = 0;
+                                            // while (true) {
+                                            //     let b = data.getUint8(offset++);
+                                            //     metaLen =
+                                            //         (metaLen << 7) | (b & 0x7f);
+                                            //     if (!(b & 0x80)) break;
+                                            // }
+
+                                            // // Обработка названия трека / песни (Meta 0x03)
+                                            // if (
+                                            //     metaType === 0x03 &&
+                                            //     metaLen > 0
+                                            // ) {
+                                            //     let nameBytes = [];
+                                            //     for (
+                                            //         let i = 0;
+                                            //         i < metaLen;
+                                            //         i++
+                                            //     ) {
+                                            //         nameBytes.push(
+                                            //             data.getUint8(
+                                            //                 offset + i,
+                                            //             ),
+                                            //         );
+                                            //     }
+
+                                            //     // Декодируем байты строки
+                                            //     let rawStr =
+                                            //         String.fromCharCode.apply(
+                                            //             null,
+                                            //             nameBytes,
+                                            //         );
+                                            //     try {
+                                            //         // Пробуем декодировать из UTF-8 на случай кириллицы
+                                            //         detectedTitle =
+                                            //             decodeURIComponent(
+                                            //                 escape(rawStr),
+                                            //             );
+                                            //     } catch (err) {
+                                            //         detectedTitle = rawStr;
+                                            //     }
+                                            //     detectedTitle =
+                                            //         detectedTitle.trim();
+                                            // }
+                                            // // Обработка изменения темпа (Meta 0x51)
+                                            // else if (
+                                            //     metaType === 0x51 &&
+                                            //     metaLen === 3
+                                            // ) {
+                                            //     const microsecondsPerQuarter =
+                                            //         (data.getUint8(offset) <<
+                                            //             16) |
+                                            //         (data.getUint8(
+                                            //             offset + 1,
+                                            //         ) <<
+                                            //             8) |
+                                            //         data.getUint8(offset + 2);
+                                            //     newBpm = Math.round(
+                                            //         60000000 /
+                                            //             microsecondsPerQuarter,
+                                            //     );
+                                            // }
+
+                                            // offset += metaLen; // Смещаем указатель на длину мета-данных
                                         } else if (
                                             type === 0xa ||
                                             type === 0xb ||
