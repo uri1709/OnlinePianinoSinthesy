@@ -1,0 +1,1542 @@
+{
+  "NameSong": "Муравьева Ирина - Позвони мне, позвони [MIDIfind.com]",
+  "bpm": 80,
+  "notesSong": [
+    {
+      "numTact": 0,
+      "pos": 0,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 0,
+      "pos": 0.25,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 0,
+      "pos": 0.5,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 0,
+      "pos": 0.75,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 0,
+      "pos": 1,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 0,
+      "pos": 1.25,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 0,
+      "pos": 1.5,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 0,
+      "pos": 1.75,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 0,
+      "pos": 2,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 0,
+      "pos": 2.25,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 0,
+      "pos": 2.5,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 0,
+      "pos": 2.75,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 0,
+      "pos": 3,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 0,
+      "pos": 3.25,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 0,
+      "pos": 3.5,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 0,
+      "pos": 3.75,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 1,
+      "pos": 0,
+      "note": "СОЛЬБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 1,
+      "pos": 0.25,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 1,
+      "pos": 0.5,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 1,
+      "pos": 0.75,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 1,
+      "pos": 1,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 1,
+      "pos": 1.25,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 1,
+      "pos": 1.5,
+      "note": "МИБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 1,
+      "pos": 1.75,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 1,
+      "pos": 2,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 1,
+      "pos": 2.25,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 1,
+      "pos": 2.5,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 1,
+      "pos": 2.75,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 1,
+      "pos": 3,
+      "note": "СОЛЬБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 1,
+      "pos": 3.25,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 1,
+      "pos": 3.5,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 1,
+      "pos": 3.75,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 2,
+      "pos": 0,
+      "note": "СОЛЬБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 2,
+      "pos": 0.25,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 2,
+      "pos": 0.5,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 2,
+      "pos": 0.75,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 2,
+      "pos": 1,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 2,
+      "pos": 1.25,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 2,
+      "pos": 1.5,
+      "note": "МИБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 2,
+      "pos": 1.75,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 2,
+      "pos": 2,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 2,
+      "pos": 2.25,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 2,
+      "pos": 2.5,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 2,
+      "pos": 2.75,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 2,
+      "pos": 3,
+      "note": "СОЛЬБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 2,
+      "pos": 3.25,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 2,
+      "pos": 3.5,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 2,
+      "pos": 3.75,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 3,
+      "pos": 0,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 3,
+      "pos": 0.25,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 3,
+      "pos": 0.5,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 3,
+      "pos": 0.75,
+      "note": "МИБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 3,
+      "pos": 1,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 3,
+      "pos": 1.25,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 3,
+      "pos": 1.5,
+      "note": "РЕ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 3,
+      "pos": 1.75,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 3,
+      "pos": 2,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 3,
+      "pos": 2.25,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 3,
+      "pos": 2.5,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 3,
+      "pos": 2.75,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 3,
+      "pos": 3,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 3,
+      "pos": 3.25,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 3,
+      "pos": 3.5,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 3,
+      "pos": 3.75,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 4,
+      "pos": 0,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 4,
+      "pos": 0.25,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 4,
+      "pos": 0.5,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 4,
+      "pos": 0.75,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 4,
+      "pos": 1,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 4,
+      "pos": 1.25,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 4,
+      "pos": 1.5,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 4,
+      "pos": 1.75,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 4,
+      "pos": 2,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 4,
+      "pos": 2.25,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 4,
+      "pos": 2.5,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 4,
+      "pos": 2.75,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 4,
+      "pos": 3,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 4,
+      "pos": 3.25,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 4,
+      "pos": 3.5,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 4,
+      "pos": 3.75,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 5,
+      "pos": 0,
+      "note": "СОЛЬБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 5,
+      "pos": 0.25,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 5,
+      "pos": 0.5,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 5,
+      "pos": 0.75,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 5,
+      "pos": 1,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 5,
+      "pos": 1.25,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 5,
+      "pos": 1.5,
+      "note": "МИБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 5,
+      "pos": 1.75,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 5,
+      "pos": 2,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 5,
+      "pos": 2.25,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 5,
+      "pos": 2.5,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 5,
+      "pos": 2.75,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 5,
+      "pos": 3,
+      "note": "СОЛЬБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 5,
+      "pos": 3.25,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 5,
+      "pos": 3.5,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 5,
+      "pos": 3.75,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 6,
+      "pos": 0,
+      "note": "СОЛЬБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 6,
+      "pos": 0.25,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 6,
+      "pos": 0.5,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 6,
+      "pos": 0.75,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 6,
+      "pos": 1,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 6,
+      "pos": 1.25,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 6,
+      "pos": 1.5,
+      "note": "МИБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 6,
+      "pos": 1.75,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 6,
+      "pos": 2,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 6,
+      "pos": 2.25,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 6,
+      "pos": 2.5,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 6,
+      "pos": 2.75,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 6,
+      "pos": 3,
+      "note": "СОЛЬБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 6,
+      "pos": 3.25,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 6,
+      "pos": 3.5,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 6,
+      "pos": 3.75,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 7,
+      "pos": 0,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 7,
+      "pos": 0.25,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 7,
+      "pos": 0.5,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 7,
+      "pos": 0.75,
+      "note": "МИБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 7,
+      "pos": 1,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 7,
+      "pos": 1.25,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 7,
+      "pos": 1.5,
+      "note": "РЕ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 7,
+      "pos": 1.75,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 7,
+      "pos": 2,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 7,
+      "pos": 2.25,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 7,
+      "pos": 2.5,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 7,
+      "pos": 2.75,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 7,
+      "pos": 3,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 7,
+      "pos": 3.25,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 7,
+      "pos": 3.5,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 7,
+      "pos": 3.75,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 8,
+      "pos": 0,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 8,
+      "pos": 0.25,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 8,
+      "pos": 0.5,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 8,
+      "pos": 0.75,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 8,
+      "pos": 1,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 8,
+      "pos": 1.25,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 8,
+      "pos": 1.5,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 8,
+      "pos": 1.75,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 8,
+      "pos": 2,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 8,
+      "pos": 2.25,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 8,
+      "pos": 2.5,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 8,
+      "pos": 2.75,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 8,
+      "pos": 3,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 8,
+      "pos": 3.25,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 8,
+      "pos": 3.5,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 8,
+      "pos": 3.75,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 9,
+      "pos": 0,
+      "note": "СОЛЬБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 9,
+      "pos": 0.25,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 9,
+      "pos": 0.5,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 9,
+      "pos": 0.75,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 9,
+      "pos": 1,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 9,
+      "pos": 1.25,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 9,
+      "pos": 1.5,
+      "note": "МИБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 9,
+      "pos": 1.75,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 9,
+      "pos": 2,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 9,
+      "pos": 2.25,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 9,
+      "pos": 2.5,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 9,
+      "pos": 2.75,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 9,
+      "pos": 3,
+      "note": "СОЛЬБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 9,
+      "pos": 3.25,
+      "note": "ЛЯБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 9,
+      "pos": 3.5,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 9,
+      "pos": 3.75,
+      "note": "РЕБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 10,
+      "pos": 0,
+      "note": "СОЛЬБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 10,
+      "pos": 0.25,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 10,
+      "pos": 0.5,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 10,
+      "pos": 0.75,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 10,
+      "pos": 1,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 10,
+      "pos": 1.25,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 10,
+      "pos": 1.5,
+      "note": "МИБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 10,
+      "pos": 1.75,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 10,
+      "pos": 2,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 10,
+      "pos": 2.25,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 10,
+      "pos": 2.5,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 10,
+      "pos": 2.75,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 10,
+      "pos": 3,
+      "note": "СОЛЬБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 10,
+      "pos": 3.25,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 10,
+      "pos": 3.5,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 10,
+      "pos": 3.75,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 11,
+      "pos": 0,
+      "note": "МИ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 11,
+      "pos": 0.25,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 11,
+      "pos": 0.5,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 11,
+      "pos": 0.75,
+      "note": "МИБИМОЛЬ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 11,
+      "pos": 1,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 11,
+      "pos": 1.25,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 11,
+      "pos": 1.5,
+      "note": "РЕ4",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 11,
+      "pos": 1.75,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 11,
+      "pos": 2,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 11,
+      "pos": 2.25,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 11,
+      "pos": 2.5,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 11,
+      "pos": 2.75,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 11,
+      "pos": 3,
+      "note": "СИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 11,
+      "pos": 3.25,
+      "note": "МИБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 11,
+      "pos": 3.5,
+      "note": "СИ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    },
+    {
+      "numTact": 11,
+      "pos": 3.75,
+      "note": "СОЛЬБИМОЛЬ3",
+      "length": 0.25,
+      "idInstrument": 25,
+      "nameInstrument": "Acoustic Guitar (steel)"
+    }
+  ]
+}

@@ -4,6 +4,7 @@ const editTools = document.getElementById("edit-tools");
 const canvasEl = document.getElementById("visual-canvas");
 
 let isEditMode = false;
+let scrollDebounceTimer = null; // Таймер задержки старта после скролла
 
 // Слушатель переключателя
 editCheck.addEventListener("change", (e) => {
@@ -391,6 +392,76 @@ var objPianino = {
         });
     },
 
+    // Добавьте этот метод внутрь объекта objPianino
+    drawSongTitle() {
+        const ctx = this.cvsCtx; // Используем контекст из вашего объекта
+        const h = this.cvsHeight;
+        const w = this.cvsWidth;
+
+        // 1. ПОЛУЧАЕМ ТЕКСТ ИЗ ИНПУТА РЕДАКТОРА
+        const nameInput = document.getElementById("song-name-input");
+        const textToShow = nameInput ? nameInput.value.trim() : "";
+
+        // 2. УСЛОВИЕ: Рисуем только если текст есть и текущая позиция <= 2 долей (четвертей)
+        if (textToShow && this.currentPosition <= -2) {
+            ctx.save();
+
+            // Стили текста (Segoe UI, как на вашем скриншоте)
+            ctx.font = "24px 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+
+            // Измеряем ширину, чтобы рамка подстраивалась под длину текста
+            const textMetrics = ctx.measureText(textToShow);
+            const textWidth = textMetrics.width;
+            const textHeight = 24; // Высота шрифта
+
+            const paddingX = 40;
+            const paddingY = 25;
+            const rectWidth = textWidth + paddingX * 2;
+            const rectHeight = textHeight + paddingY * 2;
+
+            // Центрируем плашку по горизонтали (X)
+            const rectX = (w - rectWidth) / 2;
+
+            // 3. РАСЧЕТ ВЕРТИКАЛЬНОЙ ПОЗИЦИИ (Y) ОТНОСИТЕЛЬНО ВТОРОЙ ЧЕТВЕРТИ НУЛЕВОГО ТАКТА
+            // В вашей системе (см. метод drawHorizontalTact): абсолютная позиция = t * beatsPerTact.
+            // Нулевой такт, 2-я четверть — это абсолютная позиция 2.
+            const targetPosition = -2;
+
+            // Вычисляем Y по вашей оригинальной формуле движения сетки
+            const rectY =
+                h -
+                (targetPosition - this.currentPosition) *
+                    this.pixelsPerQuarter -
+                rectHeight;
+
+            // Отрисовываем, только если плашка находится в видимой зоне экрана
+            if (rectY + rectHeight > 0 && rectY < h) {
+                // А. Черный фон плашки с легкой прозрачностью
+                ctx.fillStyle = "rgba(10, 10, 10, 0.95)";
+                ctx.fillRect(rectX, rectY, rectWidth, rectHeight);
+
+                // Б. Тонкая светлая рамка по периметру
+                ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+                ctx.lineWidth = 1;
+                ctx.strokeRect(rectX, rectY, rectWidth, rectHeight);
+
+                // В. Белый текст названия песни
+                ctx.fillStyle = "#ffffff";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+
+                // Пишем текст ровно в центр движущегося прямоугольника
+                ctx.fillText(
+                    textToShow,
+                    rectX + rectWidth / 2,
+                    rectY + rectHeight / 2,
+                );
+            }
+
+            ctx.restore();
+        }
+    },
+
     clearSingleKey(i) {
         this.keysPianino[i].code = "";
         document.getElementById("inp-key-" + i).value = "";
@@ -519,38 +590,71 @@ var objPianino = {
 
         // Добавьте это внутри метода init() объекта objPianino
         // или просто замените старый блок в скрипте:
-        canvasEl.addEventListener(
-            "wheel",
-            (e) => {
-                //if (!isEditMode) return;
-                e.preventDefault();
+        canvasEl.addEventListener("wheel", (e) => {
+            //if (!isEditMode) return;
+            e.preventDefault();
 
-                const scrollStep = 0.5; // Шаг прокрутки (в тактах)
+            // 1. ОЧИЩАЕМ ПРЕДЫДУЩИЙ ТАЙМЕР
+            // Если пользователь продолжает крутить колесико, этот вызов сбросит прошлую задержку,
+            // не давая плееру запуститься раньше времени.
+            if (scrollDebounceTimer) {
+                clearTimeout(scrollDebounceTimer);
+            }
 
-                // В вашем коде за позицию отвечает currentPosition
-                // if (e.deltaY > 0) {
-                //     objPianino.currentPosition += scrollStep;
-                // } else {
-                //     objPianino.currentPosition = Math.max(
-                //         0,
-                //         objPianino.currentPosition - scrollStep,
-                //     );
-                // }
-                if (e.deltaY > -4) {
-                    objPianino.currentPosition += scrollStep;
-                } else {
-                    objPianino.currentPosition = Math.max(
-                        -4,
-                        objPianino.currentPosition - scrollStep,
-                    );
+            // 2. Если это самый первый шаг скролла, запоминаем, играла ли песня
+            // Используем sessionStorage или временное свойство, чтобы не перезаписывать флаг на каждом тике колеса
+            if (objPianino.wasPlayingBeforeScroll === undefined) {
+                objPianino.wasPlayingBeforeScroll = objPianino.isPlaying;
+            }
+
+            // 3. ПОЛНАЯ ЗАМОРОЗКА: принудительно ставим на паузу на время кручения
+            objPianino.isPlaying = false;
+            objPianino.isPaused = true;
+
+            const scrollStep = 0.5; // Шаг прокрутки (в тактах)
+
+            // 4. Вычисляем новую позицию курсора времени
+            if (e.deltaY > -4) {
+                objPianino.currentPosition = Math.max(
+                    -4,
+                    objPianino.currentPosition - scrollStep,
+                );
+            } else {
+                objPianino.currentPosition += scrollStep;
+            }
+
+            // 5. Синхронизируем флаги 'passed' строго под новую позицию курсора
+            if (objPianino.notesSong) {
+                objPianino.notesSong.forEach((note) => {
+                    if (objPianino.currentPosition <= note.absStart) {
+                        note.passed = false; // Возвращаем ноту в игру
+                    } else {
+                        note.passed = true; // Фиксируем пройденной
+                    }
+                });
+            }
+
+            // 6. Перерисовываем интерфейс плеера
+            objPianino.rebuild();
+            objPianino.updateProgressBar();
+
+            // 7. ЗАПУСКАЕМ ЗАДЕРЖКУ НА 0.3 СЕКУНДЫ (300 мс)
+            // Этот код сработает ТОЛЬКО тогда, когда колесико мыши полностью остановится
+            scrollDebounceTimer = setTimeout(() => {
+                // Если песня играла до того, как мы начали скроллить — возвращаем её в режим PLAY
+                if (objPianino.wasPlayingBeforeScroll) {
+                    objPianino.isPlaying = true;
+                    objPianino.isPaused = false;
                 }
 
-                // В вашем коде перерисовка называется rebuild()
-                objPianino.rebuild();
-                objPianino.updateProgressBar(); // Чтобы ползунок времени тоже двигался
-            },
-            //{ passive: false },
-        );
+                // Сбрасываем временную переменную состояния
+                delete objPianino.wasPlayingBeforeScroll;
+
+                console.log(
+                    "Задержка 0.3с прошла, плеер восстановил статус воспроизведения.",
+                );
+            }, 300);
+        });
 
         // Вставляем внутри objPianino.init()
         // Используем стрелочные функции, чтобы this всегда указывал на objPianino
@@ -1062,6 +1166,7 @@ var objPianino = {
         this.drawSubstrate(); // Серый фон ДО-МИ
         this.drawVerticalGrid(); // Сетка клавиш
         this.drawHorizontalTact(); // Такты
+        this.drawSongTitle();
         this.drawMetrics(); // Текст BPM/FPS
         this.drawEditCursor(); // Прицел
 
