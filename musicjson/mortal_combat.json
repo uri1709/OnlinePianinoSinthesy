@@ -1,0 +1,15 @@
+    {
+        NameSong: "Mortal Kombat",
+        bpm: 130,
+        notesSong: [
+            {
+                numTact: 1,
+                pos: 0,
+                note: "ЛЯ3",
+                length: 0.38,
+                idInstrument: 25,
+                nameInstrument: "Acoustic Guitar (steel)"
+            }
+
+        ]
+    }

@@ -186,215 +186,21 @@ const BASE_PALETTES = [
     "#FF00FF",
 ];
 
-var objMusic = {
-    NameSong: "Mortal combat", // имя песни
-    bpm: 130,
-    notesSong: [
-        {
-            numTact: 1,
-            pos: 0,
-            note: "ЛЯ3",
-            length: 4,
-            idInstrument: 25,
-            nameInstrument: "Acoustic Guitar (steel)",
-        },
-    ],
+// var objMusic = {
+//     NameSong: "Mortal combat", // имя песни
+//     bpm: 130,
+//     notesSong: [
+//         {
+//             numTact: 1,
+//             pos: 0,
+//             note: "ЛЯ3",
+//             length: 4,
+//             idInstrument: 25,
+//             nameInstrument: "Acoustic Guitar (steel)",
+//         },
+//     ],
 
-    // notesSong: [
-    //     {
-    //         numTact: 1,
-    //         pos: 0,
-    //         note: "ЛЯ3",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 1,
-    //         pos: 0.5,
-    //         note: "ЛЯ3",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 1,
-    //         pos: 1,
-    //         note: "ДО4",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 1,
-    //         pos: 1.5,
-    //         note: "ЛЯ3",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 1,
-    //         pos: 2,
-    //         note: "РЕ4",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 1,
-    //         pos: 2.5,
-    //         note: "ЛЯ3",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 1,
-    //         pos: 3,
-    //         note: "МИ4",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 1,
-    //         pos: 3.5,
-    //         note: "РЕ4",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 2,
-    //         pos: 0,
-    //         note: "ДО4",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 2,
-    //         pos: 0.5,
-    //         note: "ДО4",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 2,
-    //         pos: 1,
-    //         note: "МИ4",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 2,
-    //         pos: 1.5,
-    //         note: "ДО4",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 2,
-    //         pos: 2,
-    //         note: "СОЛЬ4",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 2,
-    //         pos: 2.5,
-    //         note: "ДО4",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 2,
-    //         pos: 3,
-    //         note: "МИ4",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 2,
-    //         pos: 3.5,
-    //         note: "ДО4",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 3,
-    //         pos: 0,
-    //         note: "СОЛЬ3",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 3,
-    //         pos: 0.5,
-    //         note: "СОЛЬ3",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 3,
-    //         pos: 1,
-    //         note: "СИ3",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 3,
-    //         pos: 1.5,
-    //         note: "СОЛЬ3",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 3,
-    //         pos: 2,
-    //         note: "ДО4",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 3,
-    //         pos: 2.5,
-    //         note: "СОЛЬ3",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 3,
-    //         pos: 3,
-    //         note: "РЕ4",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    //     {
-    //         numTact: 3,
-    //         pos: 3.5,
-    //         note: "ДО4",
-    //         length: 0.38,
-    //         idInstrument: 25,
-    //         nameInstrument: "Acoustic Guitar (steel)",
-    //     },
-    // ],
-};
+// };
 
 var objPianino = {
     mapNotes: {
@@ -510,10 +316,12 @@ var objPianino = {
         if (!selectEl || typeof arrObjMusic === "undefined") return;
 
         selectEl.innerHTML = ""; // Очищаем
+
         arrObjMusic.forEach((song, index) => {
             const option = document.createElement("option");
             option.value = index;
             option.textContent = `${song.NameSong} (${song.bpm} BPM)`;
+
             selectEl.appendChild(option);
         });
     },
@@ -1825,13 +1633,6 @@ function loadMusicFromJSON(inputElement) {
     reader.readAsText(file);
 }
 
-function updateRealVH() {
-    // Вычисляем 1% от высоты окна
-    let vh = window.innerHeight * 0.01;
-    // Записываем значение в переменную --vh
-    document.documentElement.style.setProperty("--vh", `${vh}px`);
-}
-
 function toggleFullScreen() {
     if (!document.fullscreenElement) {
         document.documentElement
@@ -1858,12 +1659,20 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //{{Глобальный контекст, выполнение кода
+
+function updateRealVH() {
+    // Вычисляем 1% от высоты окна
+    let vh = window.innerHeight * 0.01;
+    // Записываем значение в переменную --vh
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+}
+
 // Запускаем при загрузке
 updateRealVH();
 
 // Обновляем при повороте экрана или изменении размера
 window.addEventListener("resize", updateRealVH);
-window.onload = () => objPianino.init();
+// window.onload = () => objPianino.init();
 window.addEventListener("keydown", (e) => {
     if (["INPUT", "TEXTAREA"].includes(e.target.tagName)) return;
     const found = objPianino.keysPianino.find((n) => n.code === e.code);
@@ -1872,5 +1681,36 @@ window.addEventListener("keydown", (e) => {
         objPianino.play(found.id);
     }
 });
+
+async function initApp() {
+    try {
+        // 1. Сначала асинхронно скачиваем все JSON-файлы с песнями
+        await loadSongs();
+
+        // Проверяем, заполнился ли массив arrObjMusic после fetch
+        if (typeof arrObjMusic === "undefined" || arrObjMusic.length === 0) {
+            console.error(
+                "Не удалось запустить приложение: массив песен пуст.",
+            );
+            return;
+        }
+
+        // 2. Инициализируем сам плеер (настройка холста, таблиц, анимации)
+        objPianino.init();
+
+        // 3. Строим выпадающий список <select> на основе загруженного массива
+        objPianino.initSongSelector();
+
+        // 4. Загружаем первую песню по умолчанию из базы в плеер
+        objPianino.selectSongFromDatabase(0);
+
+        console.log(
+            "Приложение успешно инициализировано с динамическими JSON!",
+        );
+    } catch (error) {
+        console.error("Критическая ошибка при старте initApp:", error);
+    }
+}
+document.addEventListener("DOMContentLoaded", initApp);
 
 //}}Глобальный контекст, выполнение кода
