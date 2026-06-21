@@ -1685,15 +1685,16 @@ window.addEventListener("keydown", (e) => {
 async function initApp() {
     try {
         // 1. Сначала асинхронно скачиваем все JSON-файлы с песнями
-        await loadSongs();
-
-        // Проверяем, заполнился ли массив arrObjMusic после fetch
-        if (typeof arrObjMusic === "undefined" || arrObjMusic.length === 0) {
-            console.error(
-                "Не удалось запустить приложение: массив песен пуст.",
-            );
-            return;
-        }
+        // await loadSongs();
+        // Создаем заглушку в памяти, чтобы objPianino.init() не выдал ошибку из-за null
+        arrObjMusic = [
+            {
+                NameSong: "Загрузка песен...",
+                bpm: 120,
+                notesSong: [],
+            },
+        ];
+        objMusic = JSON.parse(JSON.stringify(arrObjMusic[0]));
 
         // 2. Инициализируем сам плеер (настройка холста, таблиц, анимации)
         objPianino.init();
@@ -1709,6 +1710,30 @@ async function initApp() {
         );
     } catch (error) {
         console.error("Критическая ошибка при старте initApp:", error);
+    }
+
+    // --- ПЕРЕХОДИМ К ЗАГРУЗКЕ ПЕСЕН НА ФОНЕ ---
+    try {
+        console.log("3. Запускаем фоновую загрузку JSON-файлов...");
+        await loadSongs();
+
+        // Проверяем, удалось ли скачать хоть один файл
+        if (arrObjMusic && arrObjMusic.length > 0) {
+            console.log(
+                "4. Файлы успешно скачаны! Обновляем селектор и плеер...",
+            );
+
+            // Перестраиваем выпадающий список <select>, чтобы в нем появились новые песни
+            objPianino.initSongSelector();
+
+            // Автоматически загружаем в плеер первую реальную песню из списка
+            objPianino.selectSongFromDatabase(0);
+        }
+    } catch (loadError) {
+        console.warn(
+            "Не удалось загрузить песни на фоне, пианино остается работать в пустом режиме:",
+            loadError,
+        );
     }
 }
 document.addEventListener("DOMContentLoaded", initApp);
