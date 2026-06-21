@@ -5,6 +5,7 @@ const songFiles = [
     "./musicjson/Chip & Dale Rescue Rangers - 123 Title Theme [MIDIfind.com].json",
     "./musicjson/Metallica - The Unforgiven.json",
     "./musicjson/Linkin Park — Numb (Piano Version) [MIDIfind.com].json",
+    "./musicjson/Aha - Take on Me [MIDIfind.com] - cover  1.json",
 ];
 
 // // Массив объектов песен, откуда приложение будет брать данные

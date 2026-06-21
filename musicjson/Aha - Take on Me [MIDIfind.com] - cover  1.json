@@ -1,0 +1,1334 @@
+{
+  "NameSong": "Aha - Take on Me [MIDIfind.com] - cover  1",
+  "bpm": 175,
+  "notesSong": [
+    {
+      "numTact": 13,
+      "pos": 0,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 13,
+      "pos": 0.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 13,
+      "pos": 1,
+      "note": "ФА5",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 13,
+      "pos": 1.5,
+      "note": "РЕ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 13,
+      "pos": 2.5,
+      "note": "РЕ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 13,
+      "pos": 3.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 14,
+      "pos": 0.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 14,
+      "pos": 1.5,
+      "note": "СОЛЬ5",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 14,
+      "pos": 2,
+      "note": "СИ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 14,
+      "pos": 2.5,
+      "note": "СИ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 14,
+      "pos": 3,
+      "note": "ДО6",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 14,
+      "pos": 3.5,
+      "note": "РЕ6",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 15,
+      "pos": 0,
+      "note": "ДО6",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 15,
+      "pos": 0.5,
+      "note": "ДО6",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 15,
+      "pos": 1,
+      "note": "ДО6",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 15,
+      "pos": 1.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 15,
+      "pos": 2.5,
+      "note": "ФА5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 15,
+      "pos": 3.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 16,
+      "pos": 0.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 16,
+      "pos": 1.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 16,
+      "pos": 2,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 16,
+      "pos": 2.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 16,
+      "pos": 3,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 16,
+      "pos": 3.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 17,
+      "pos": 0,
+      "note": "ЛЯ5",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 17,
+      "pos": 0.5,
+      "note": "ЛЯ5",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 17,
+      "pos": 1,
+      "note": "ФА5",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 17,
+      "pos": 1.5,
+      "note": "РЕ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 17,
+      "pos": 2.5,
+      "note": "РЕ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 17,
+      "pos": 3.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 18,
+      "pos": 0.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 18,
+      "pos": 1.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 18,
+      "pos": 2,
+      "note": "СИ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 18,
+      "pos": 2.5,
+      "note": "СИ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 18,
+      "pos": 3,
+      "note": "ДО6",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 18,
+      "pos": 3.5,
+      "note": "РЕ6",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 19,
+      "pos": 0,
+      "note": "ДО6",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 19,
+      "pos": 0.5,
+      "note": "ДО6",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 19,
+      "pos": 1,
+      "note": "ДО6",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 19,
+      "pos": 1.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 19,
+      "pos": 2.5,
+      "note": "ФА5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 19,
+      "pos": 3.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 20,
+      "pos": 0.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 20,
+      "pos": 1.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 20,
+      "pos": 2,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 20,
+      "pos": 2.5,
+      "note": "СОЛЬ5",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 20,
+      "pos": 3,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 20,
+      "pos": 3.5,
+      "note": "СОЛЬ5",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 21,
+      "pos": 0,
+      "note": "ЛЯ5",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 21,
+      "pos": 0.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 21,
+      "pos": 1,
+      "note": "ФА5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 21,
+      "pos": 1.5,
+      "note": "РЕ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 21,
+      "pos": 2.5,
+      "note": "РЕ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 21,
+      "pos": 3.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 22,
+      "pos": 0.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 22,
+      "pos": 1.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 22,
+      "pos": 2,
+      "note": "СИ5",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 22,
+      "pos": 2.5,
+      "note": "СИ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 22,
+      "pos": 3,
+      "note": "ДО6",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 22,
+      "pos": 3.5,
+      "note": "РЕ6",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 23,
+      "pos": 0,
+      "note": "ДО6",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 23,
+      "pos": 0.5,
+      "note": "ДО6",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 23,
+      "pos": 1,
+      "note": "ДО6",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 23,
+      "pos": 1.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 23,
+      "pos": 2.5,
+      "note": "ФА5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 23,
+      "pos": 3.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 24,
+      "pos": 0.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 24,
+      "pos": 1.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 24,
+      "pos": 2,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 24,
+      "pos": 2.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 24,
+      "pos": 3,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 93,
+      "pos": 0,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 93,
+      "pos": 0.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 93,
+      "pos": 1,
+      "note": "ФА5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 93,
+      "pos": 1.5,
+      "note": "РЕ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 93,
+      "pos": 2.5,
+      "note": "РЕ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 93,
+      "pos": 3.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 94,
+      "pos": 0.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 94,
+      "pos": 1.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 94,
+      "pos": 2,
+      "note": "СИ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 94,
+      "pos": 2.5,
+      "note": "СИ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 94,
+      "pos": 3,
+      "note": "ДО6",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 94,
+      "pos": 3.5,
+      "note": "РЕ6",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 95,
+      "pos": 0,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 95,
+      "pos": 0.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 95,
+      "pos": 1,
+      "note": "ФА5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 95,
+      "pos": 1.5,
+      "note": "РЕ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 95,
+      "pos": 2.5,
+      "note": "РЕ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 95,
+      "pos": 3.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 96,
+      "pos": 0.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 96,
+      "pos": 1.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 96,
+      "pos": 2,
+      "note": "СИ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 96,
+      "pos": 2.5,
+      "note": "СИ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 96,
+      "pos": 3,
+      "note": "ДО6",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 96,
+      "pos": 3.5,
+      "note": "РЕ6",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 97,
+      "pos": 0,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 97,
+      "pos": 0.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 97,
+      "pos": 1,
+      "note": "ФА5",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 97,
+      "pos": 1.5,
+      "note": "РЕ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 97,
+      "pos": 2.5,
+      "note": "РЕ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 97,
+      "pos": 3.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 98,
+      "pos": 0.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 98,
+      "pos": 1.5,
+      "note": "СОЛЬ5",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 98,
+      "pos": 2,
+      "note": "СИ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 98,
+      "pos": 2.5,
+      "note": "СИ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 98,
+      "pos": 3,
+      "note": "ДО6",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 98,
+      "pos": 3.5,
+      "note": "РЕ6",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 99,
+      "pos": 0,
+      "note": "ДО6",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 99,
+      "pos": 0.5,
+      "note": "ДО6",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 99,
+      "pos": 1,
+      "note": "ДО6",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 99,
+      "pos": 1.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 99,
+      "pos": 2.5,
+      "note": "ФА5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 99,
+      "pos": 3.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 100,
+      "pos": 0.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 100,
+      "pos": 1.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 100,
+      "pos": 2,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 100,
+      "pos": 2.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 100,
+      "pos": 3,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 100,
+      "pos": 3.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 101,
+      "pos": 0,
+      "note": "ЛЯ5",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 101,
+      "pos": 0.5,
+      "note": "ЛЯ5",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 101,
+      "pos": 1,
+      "note": "ФА5",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 101,
+      "pos": 1.5,
+      "note": "РЕ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 101,
+      "pos": 2.5,
+      "note": "РЕ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 101,
+      "pos": 3.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 102,
+      "pos": 0.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 102,
+      "pos": 1.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 102,
+      "pos": 2,
+      "note": "СИ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 102,
+      "pos": 2.5,
+      "note": "СИ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 102,
+      "pos": 3,
+      "note": "ДО6",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 102,
+      "pos": 3.5,
+      "note": "РЕ6",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 103,
+      "pos": 0,
+      "note": "ДО6",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 103,
+      "pos": 0.5,
+      "note": "ДО6",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 103,
+      "pos": 1,
+      "note": "ДО6",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 103,
+      "pos": 1.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 103,
+      "pos": 2.5,
+      "note": "ФА5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 103,
+      "pos": 3.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 104,
+      "pos": 0.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 104,
+      "pos": 1.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 104,
+      "pos": 2,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 104,
+      "pos": 2.5,
+      "note": "СОЛЬ5",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 104,
+      "pos": 3,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 104,
+      "pos": 3.5,
+      "note": "СОЛЬ5",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 105,
+      "pos": 0,
+      "note": "ЛЯ5",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 105,
+      "pos": 0.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 105,
+      "pos": 1,
+      "note": "ФА5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 105,
+      "pos": 1.5,
+      "note": "РЕ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 105,
+      "pos": 2.5,
+      "note": "РЕ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 105,
+      "pos": 3.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 106,
+      "pos": 0.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 106,
+      "pos": 1.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 106,
+      "pos": 2,
+      "note": "СИ5",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 106,
+      "pos": 2.5,
+      "note": "СИ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 106,
+      "pos": 3,
+      "note": "ДО6",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 106,
+      "pos": 3.5,
+      "note": "РЕ6",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 107,
+      "pos": 0,
+      "note": "ДО6",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 107,
+      "pos": 0.5,
+      "note": "ДО6",
+      "length": 0.13,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 107,
+      "pos": 1,
+      "note": "ДО6",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 107,
+      "pos": 1.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 107,
+      "pos": 2.5,
+      "note": "ФА5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 107,
+      "pos": 3.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 108,
+      "pos": 0.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 108,
+      "pos": 1.5,
+      "note": "ЛЯ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 108,
+      "pos": 2,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 108,
+      "pos": 2.5,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    },
+    {
+      "numTact": 108,
+      "pos": 3,
+      "note": "СОЛЬ5",
+      "length": 0.25,
+      "idInstrument": 81,
+      "nameInstrument": "Lead 2 (sawtooth)"
+    }
+  ]
+}
