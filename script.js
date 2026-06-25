@@ -19,23 +19,6 @@ editCheck.addEventListener("change", (e) => {
     }
 });
 
-// Функция для асинмичной загрузки внешних JS библиотек
-function loadExternalScript(src) {
-    return new Promise((resolve, reject) => {
-        // Проверяем, может библиотека уже была загружена ранее
-        if (window.Soundfont) {
-            resolve();
-            return;
-        }
-        const script = document.createElement("script");
-        script.src = src;
-        script.onload = () => resolve();
-        script.onerror = () =>
-            reject(new Error(`Не удалось загрузить скрипт: ${src}`));
-        document.head.appendChild(script);
-    });
-}
-
 // Логика блокировки: вызывайте это в вашей функции обновления UI (где кнопки Play/Stop)
 function updateEditButtonState(isPlaying, isPaused) {
     // Кнопка доступна ТОЛЬКО если песня полностью остановлена
@@ -244,8 +227,6 @@ var objPianino = {
 
     keyWidth: 0,
     keysPianino: [],
-
-    loadedInstruments: {},
 
     countNotes: 85,
 
@@ -800,8 +781,7 @@ var objPianino = {
                     pos: localPos, // Локальное смещение в такте
                     length: this.stepSnapping,
                     idInstrument: 25,
-                    // nameInstrument: "Acoustic Guitar (steel)",
-                    nameInstrument: MIDI_INSTRUMENTS[25],
+                    nameInstrument: "Acoustic Guitar (steel)",
                     numTact: calculatedNumTact, // Номер такта (1, 2, 3...)
                 };
 
@@ -1022,7 +1002,7 @@ var objPianino = {
                 };
                 const div = document.createElement("div");
                 div.className = "inst-item";
-                div.innerHTML = `<input type="checkbox" checked onchange="objPianino.toggleInstrument(${id}, this.checked)"> <b style="color:#3498db; width: 40px">#${id}</b> <span style="flex: 1">${MIDI_INSTRUMENTS[id] || "Unknown"}</span><div class="color-previews"><div class="color-preview" style="background: ${colors.w}"></div><div class="color-preview" style="background: ${colors.b}"></div></div>`;
+                div.innerHTML = `<input type="checkbox" checked onchange="objPianino.toggleInstrument(${id}, this.checked)"> <b style="color:#3498db; width: 40px">#${id}</b> <span style="flex: 1">${m.nameInstrument || "Unknown"}</span><div class="color-previews"><div class="color-preview" style="background: ${colors.w}"></div><div class="color-preview" style="background: ${colors.b}"></div></div>`;
                 container.appendChild(div);
             });
     },
@@ -1032,162 +1012,7 @@ var objPianino = {
         else this.activeInstruments.delete(id);
     },
 
-    // play(id, idInstrument = 0) {
-    //     if (!this.ctx) {
-    //         this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-    //     }
-    //     if (this.ctx.state === "suspended") this.ctx.resume();
-
-    //     const n = this.keysPianino[id];
-    //     if (!n) return;
-
-    //     // Логика режима обучения...
-    //     if (this.learningMode && this.isPlaying) {
-    //         const targetNote = this.notesSong
-    //             .filter((m) => m.idx === id && !m.passed)
-    //             .sort((a, b) => a.absStart - b.absStart)[0];
-    //         if (targetNote) {
-    //             const dist = targetNote.absStart - this.currentPosition;
-    //             if (dist < 1.0) targetNote.passed = true;
-    //         }
-    //     }
-
-    //     const el = document.getElementById("k-" + id);
-    //     if (el) {
-    //         el.classList.add("active");
-    //         setTimeout(() => el.classList.remove("active"), 150);
-    //     }
-
-    //     const now = this.ctx.currentTime;
-
-    //     // Определяем тип волны в зависимости от группы MIDI инструментов
-    //     let type = "sine";
-    //     if (idInstrument < 8)
-    //         type = "triangle"; // Пианино
-    //     else if (idInstrument >= 16 && idInstrument < 24)
-    //         type = "sawtooth"; // Органы
-    //     else if (idInstrument >= 24 && idInstrument < 32) type = "square"; // Гитары/Бас
-
-    //     [
-    //         [1, 0.3],
-    //         [2, 0.15],
-    //     ].forEach(([m, v]) => {
-    //         const osc = this.ctx.createOscillator();
-    //         const gain = this.ctx.createGain();
-
-    //         // console.log(n.freq * m);
-    //         osc.type = type; // Установка типа звучания
-    //         osc.frequency.setValueAtTime(n.freq * m, now);
-
-    //         gain.gain.setValueAtTime(0, now);
-    //         gain.gain.linearRampToValueAtTime(v, now + 0.01);
-    //         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
-
-    //         osc.connect(gain).connect(this.ctx.destination);
-    //         osc.start(now);
-    //         osc.stop(now + 1);
-    //     });
-    // },
-    // Сам метод play:
-    // play(id, idInstrument = 0) {
-    //     if (!this.ctx) {
-    //         this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-    //     }
-    //     if (this.ctx.state === "suspended") this.ctx.resume();
-
-    //     const n = this.keysPianino[id];
-    //     if (!n) return;
-
-    //     // 1. Стандартная визуальная подсветка клавиши (оставляем вашу логику)
-    //     const el = document.getElementById("k-" + id);
-    //     if (el) {
-    //         el.classList.add("active");
-    //         setTimeout(() => el.classList.remove("active"), 150);
-    //     }
-
-    //     // 2. Имя ноты из вашей клавиатуры (например, "C0", "C#0", "D1")
-    //     const noteName = n.name;
-
-    //     // 3. Форматируем имя инструмента для сервера (например, "acoustic_grand_piano")
-    //     let instrumentName = "acoustic_grand_piano";
-    //     if (
-    //         typeof MIDI_INSTRUMENTS !== "undefined" &&
-    //         MIDI_INSTRUMENTS[idInstrument]
-    //     ) {
-    //         instrumentName = MIDI_INSTRUMENTS[idInstrument]
-    //             .toLowerCase()
-    //             .replace(/[^a-z0-9\s-]/g, "")
-    //             .replace(/\s+/g, "_");
-    //     }
-
-    //     // 4. ПРОВЕРКА: Если асинхронная библиотека УСПЕШНО ЗАГРУЗИЛАСЬ
-    //     if (window.Soundfont) {
-    //         // Если этот инструмент уже скачан в кэш — играем мгновенно
-    //         if (this.loadedInstruments[instrumentName]) {
-    //             this.loadedInstruments[instrumentName].play(
-    //                 noteName,
-    //                 this.ctx.currentTime,
-    //                 { gain: 0.8 },
-    //             );
-    //         } else {
-    //             console.log(`Загрузка аудио-сэмплов для: ${instrumentName}...`);
-    //             window.Soundfont.instrument(this.ctx, instrumentName, {
-    //                 soundfont: "fluidR3_GM",
-    //             })
-    //                 .then((inst) => {
-    //                     this.loadedInstruments[instrumentName] = inst;
-    //                     inst.play(noteName, this.ctx.currentTime, {
-    //                         gain: 0.8,
-    //                     });
-    //                 })
-    //                 .catch((err) => {
-    //                     console.error(
-    //                         "Ошибка загрузки сэмплов, включаем старый звук",
-    //                         err,
-    //                     );
-    //                     this.playOldOscillator(n, idInstrument); // Фолбэк на пищалку
-    //                 });
-    //         }
-    //     } else {
-    //         // 5. ФОЛБЭК: Если библиотека НЕ успела загрузиться — играет ваш старый звук
-    //         this.playOldOscillator(n, idInstrument);
-    //     }
-    // },
-
-    // // Вспомогательный метод для вашего старого электронного звука (чтобы не загромождать основной код)
-    // playOldOscillator(n, idInstrument) {
-    //     let type = "sine";
-    //     if (idInstrument < 8) type = "triangle";
-    //     else if (idInstrument >= 16 && idInstrument < 24) type = "sawtooth";
-    //     else if (idInstrument >= 24 && idInstrument < 32) type = "square";
-
-    //     const osc = this.ctx.createOscillator();
-    //     const gain = this.ctx.createGain();
-    //     osc.type = type;
-    //     osc.frequency.setValueAtTime(n.freq, this.ctx.currentTime);
-    //     gain.gain.setValueAtTime(0, this.ctx.currentTime);
-    //     gain.gain.linearRampToValueAtTime(0.2, this.ctx.currentTime + 0.01);
-    //     gain.gain.exponentialRampToValueAtTime(
-    //         0.001,
-    //         this.ctx.currentTime + 0.6,
-    //     );
-    //     osc.connect(gain).connect(this.ctx.destination);
-    //     osc.start();
-    //     osc.stop(this.ctx.currentTime + 0.6);
-    // },
-
-    // Добавляем третий параметр noteVelocity со значением по умолчанию 80
-    play(id, idInstrument = 0, noteVelocity = 80) {
-        // console.log(id, idInstrument, noteVelocity);
-        // Функция преобразования "Bright Acoustic Piano" в "bright_acoustic_piano"
-        function getInstrumentSlug(id) {
-            if (!MIDI_INSTRUMENTS || !MIDI_INSTRUMENTS[id])
-                return "acoustic_grand_piano";
-            return MIDI_INSTRUMENTS[id]
-                .toLowerCase()
-                .replace(/[^a-z0-9\s-]/g, "")
-                .replace(/\s+/g, "_");
-        }
+    play(id, idInstrument = 0) {
         if (!this.ctx) {
             this.ctx = new (window.AudioContext || window.webkitAudioContext)();
         }
@@ -1196,78 +1021,52 @@ var objPianino = {
         const n = this.keysPianino[id];
         if (!n) return;
 
-        // ... (код обучения и подсветки клавиш остается без изменений) ...
-
-        const noteName = n.name;
-        const instrumentName = getInstrumentSlug(idInstrument);
-
-        // ВЫЧИСЛЯЕМ ГРОМКОСТЬ: переводим стандарт MIDI (0..127) в стандарт Web Audio (0.0..1.0)
-        // Деление на 127 дает точную пропорцию, а умножение на 0.8 — подстраховка, чтобы плеер не хрипел на максимуме.
-        const calculatedGain = (noteVelocity / 127) * 0.8;
-
-        if (window.Soundfont) {
-            if (this.loadedInstruments[instrumentName]) {
-                // Передаем высчитанную громкость в плагин
-                this.loadedInstruments[instrumentName].play(
-                    noteName,
-                    this.ctx.currentTime,
-                    {
-                        gain: calculatedGain,
-                    },
-                );
-            } else {
-                console.log(`Загрузка аудио-сэмплов для: ${instrumentName}...`);
-                window.Soundfont.instrument(this.ctx, instrumentName, {
-                    nameToUrl: (name, soundfont) =>
-                        `https://github.io{soundfont}/${name}-ogg.js`,
-                    soundfont: "fluidR3_GM",
-                })
-                    .then((inst) => {
-                        this.loadedInstruments[instrumentName] = inst;
-                        // Играем с динамической громкостью
-                        inst.play(noteName, this.ctx.currentTime, {
-                            gain: calculatedGain,
-                        });
-                    })
-                    .catch((err) => {
-                        console.error(
-                            "Ошибка загрузки, включаем старый звук",
-                            err,
-                        );
-                        this.playOldOscillator(n, idInstrument, calculatedGain);
-                    });
+        // Логика режима обучения...
+        if (this.learningMode && this.isPlaying) {
+            const targetNote = this.notesSong
+                .filter((m) => m.idx === id && !m.passed)
+                .sort((a, b) => a.absStart - b.absStart)[0];
+            if (targetNote) {
+                const dist = targetNote.absStart - this.currentPosition;
+                if (dist < 1.0) targetNote.passed = true;
             }
-        } else {
-            this.playOldOscillator(n, idInstrument, calculatedGain);
         }
-    },
 
-    // Обновляем аварийную пищалку, чтобы она тоже реагировала на громкость ноты
-    playOldOscillator(n, idInstrument, gainValue) {
+        const el = document.getElementById("k-" + id);
+        if (el) {
+            el.classList.add("active");
+            setTimeout(() => el.classList.remove("active"), 150);
+        }
+
+        const now = this.ctx.currentTime;
+
+        // Определяем тип волны в зависимости от группы MIDI инструментов
         let type = "sine";
-        if (idInstrument < 8) type = "triangle";
-        else if (idInstrument >= 16 && idInstrument < 24) type = "sawtooth";
-        else if (idInstrument >= 24 && idInstrument < 32) type = "square";
+        if (idInstrument < 8)
+            type = "triangle"; // Пианино
+        else if (idInstrument >= 16 && idInstrument < 24)
+            type = "sawtooth"; // Органы
+        else if (idInstrument >= 24 && idInstrument < 32) type = "square"; // Гитары/Бас
 
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        osc.type = type;
-        osc.frequency.setValueAtTime(n.freq, this.ctx.currentTime);
+        [
+            [1, 0.3],
+            [2, 0.15],
+        ].forEach(([m, v]) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
 
-        // Используем переданное значение громкости
-        gain.gain.setValueAtTime(0, this.ctx.currentTime);
-        gain.gain.linearRampToValueAtTime(
-            gainValue,
-            this.ctx.currentTime + 0.01,
-        );
-        gain.gain.exponentialRampToValueAtTime(
-            0.001,
-            this.ctx.currentTime + 0.6,
-        );
+            // console.log(n.freq * m);
+            osc.type = type; // Установка типа звучания
+            osc.frequency.setValueAtTime(n.freq * m, now);
 
-        osc.connect(gain).connect(this.ctx.destination);
-        osc.start();
-        osc.stop(this.ctx.currentTime + 0.6);
+            gain.gain.setValueAtTime(0, now);
+            gain.gain.linearRampToValueAtTime(v, now + 0.01);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+
+            osc.connect(gain).connect(this.ctx.destination);
+            osc.start(now);
+            osc.stop(now + 1);
+        });
     },
 
     drawVerticalGrid() {
@@ -1523,10 +1322,7 @@ var objPianino = {
                     y + lenPx >= h - 21
                 ) {
                     m.passed = true;
-                    // this.play(m.idx, m.idInstrument);
-                    // Внутри метода animate() или вашей логики чтения нот из файла:
-                    // Передаем саму ноту или её громкость:
-                    this.play(m.idx, m.idInstrument, m.velocity);
+                    this.play(m.idx, m.idInstrument);
                 }
             }
         });
@@ -1807,14 +1603,10 @@ var objPianino = {
                                             channel === 9
                                                 ? 128
                                                 : channelInstruments[channel], // 9 канал - ударные
-                                        vel: vel,
                                     };
                                 } else if (activeNotes[noteKey]) {
                                     const start = activeNotes[noteKey].tick;
                                     const instId = activeNotes[noteKey].inst;
-                                    const currentVelocity =
-                                        vel >= 0 && vel <= 127 ? vel : 80;
-
                                     newNotesSong.push({
                                         numTact: Math.floor(start / (tpq * 4)),
                                         pos: Number(
@@ -1833,8 +1625,8 @@ var objPianino = {
                                         ),
                                         idInstrument: instId,
                                         nameInstrument:
-                                            MIDI_INSTRUMENTS[instId],
-                                        velocity: currentVelocity,
+                                            MIDI_INSTRUMENTS[instId] ||
+                                            "Instrument " + instId,
                                     });
                                     delete activeNotes[noteKey];
                                 }
@@ -2109,13 +1901,7 @@ async function initApp() {
     // --- ПЕРЕХОДИМ К ЗАГРУЗКЕ ПЕСЕН НА ФОНЕ ---
     try {
         console.log("3. Запускаем фоновую загрузку JSON-файлов...");
-
         await loadSongs();
-        // Запускаем загрузку песен и загрузку звуковой библиотеки ПАРАЛЛЕЛЬНО
-        // await Promise.all([
-        //     loadSongs(), // Загрузка JSON файлов из songs.js
-        //     loadExternalScript("https://jsdelivr.net"),
-        // ]);
 
         // Проверяем, удалось ли скачать хоть один файл
         if (arrObjMusic && arrObjMusic.length > 0) {
@@ -2134,12 +1920,6 @@ async function initApp() {
             "Не удалось загрузить песни на фоне, пианино остается работать в пустом режиме:",
             loadError,
         );
-    }
-
-    try {
-        await loadExternalScript("https://yastatic.net");
-    } catch (loadError) {
-        console.warn("Не удалось загрузить jsdelivr", loadError);
     }
 }
 document.addEventListener("DOMContentLoaded", initApp);
